@@ -1,54 +1,35 @@
 ---
-title: "Anonymous Privacy Tier"
+title: "Anonymous"
 description: "The lightest privacy tier and the default. Standard routing with metadata-only retention, on the broadest set of models."
 ---
 
-Anonymous is the first rung of the [privacy ladder](/privacy/tiers) and the one most calls use. It is the stored tier `anon`, which is the default tier for every provider. It is the right choice for low-sensitivity work where you want the widest model selection and the least overhead, and where you do not need a proof that a specific sealed environment ran your call.
+Anonymous is the first rung of the [privacy ladder](/privacy/tiers) and the one most calls use. It is the default tier for every provider. It is the right choice for low-sensitivity work where you want the widest model selection and the least overhead, and where you do not need a proof that a specific sealed environment ran your call.
 
-## What is the Anon Privacy Tier
+## What Anonymous Is
 
-`anon` is the baseline posture of the gateway. When you name a model that the catalog reports as `privacy_tier: "anon"` and add no suffix, you are calling it in the Anonymous tier. The routing is standard: the gateway selects a healthy, eligible, cost-effective backend and serves your request without tying it to a strong privacy boundary. Anonymous is what "ordinary" routing means in practice for a model whose stored tier is `anon`.
+Anonymous is the baseline posture of the plugin. When you pick a model whose tier is Anonymous, your call runs in the Anonymous tier. The routing is standard: Nito selects a healthy, eligible, cost-effective backend and serves your request without tying it to a strong privacy boundary. Anonymous is what "ordinary" routing means in practice for a model whose tier is Anonymous.
 
-Because `anon` is the default tier across providers, it is also the broadest. Most of the catalog is reachable at Anonymous. Confidential and Encrypted, by contrast, come from specific providers only, so climbing the ladder always narrows the set of models you can pick from.
+Because Anonymous is the default tier across providers, it is also the broadest. Most of the catalog is reachable at Anonymous. Confidential and Encrypted, by contrast, come from specific providers only, so climbing the ladder always narrows the set of models you can pick from.
 
-## What does Anonymous Privacy Tier Guarantee
+## What Anonymous Guarantees
 
-The guarantee at Anonymous is **metadata-only retention by default**. The gateway keeps operational metadata about the call, not your prompt or the model's reply. Prompts, completions, reasoning, tool payloads, and attachment contents are enumerated in the code as never-persisted, and inference responses are returned with `Cache-Control: no-store`. Where a chat history exists, for example in a browser app, it is stored client-side, not by the gateway.
+The guarantee at Anonymous is **metadata-only retention by default**. Nito keeps operational metadata about the call, not your prompt or the model's reply. Prompts, completions, reasoning, tool payloads, and attachment contents are never persisted, and responses are not stored. Where a chat history exists, it is stored on your side, not by Nito.
 
-What Anonymous does **not** carry is any attestation metadata. By design, an `anon` model carries no attestation, no TEE provider, and no encryption subject; the gateway's invariants reject an `anon` entry that claims any of those. So Anonymous gives you a sound default retention posture, but no hardware-backed proof of where or how your call ran. If you need that proof, you climb to [Confidential](/privacy/tiers/confidential). If you need the upstream provider held to no retention at all, you move to [Private](/privacy/tiers/private).
+What Anonymous does **not** carry is any attestation. By design, an Anonymous model carries no attestation, no sealed-execution provider, and no encryption. So Anonymous gives you a sound default retention posture, but no hardware-backed proof of where or how your call ran. If you need that proof, you climb to [Confidential](/privacy/tiers/confidential). If you need the upstream provider held to no retention at all, you move to [Private](/privacy/tiers/private).
 
-## How to Select Anonymous Privacy Tier
+## How to Select Anonymous
 
-You select Anonymous by naming an `anon`-tier model with no suffix.
+You select Anonymous by picking a model whose tier is Anonymous. You do not add a suffix or a flag: the tier follows the model. Browse the catalog with the `models` command to see each model's privacy reach, then set the one you want with `model` or `--model`.
 
-```bash wrap
-curl https://nito.dev.zprotocol.org/v1/chat/completions \
-  -H "Authorization: Bearer $NITO_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "model": "x-ai/grok-4.5",
-    "messages": [{"role": "user", "content": "Summarize this public article."}]
-  }'
-```
+If a model's tier is Private instead, picking it lands you in [Private](/privacy/tiers/private), because the model's own tier decides which of the two you get. A model's privacy reach is shown when you browse, so you can confirm the tier before you set it.
 
-> **TODO (needs SME):** `https://nito.dev.zprotocol.org` is the devnet URL; confirm the canonical production base URL before public launch.
-
-There is nothing to add to the request body. Anonymous is not requested with a suffix; it is simply what you get when the model's `privacy_tier` is `anon` and you supply no `:confidential` or `:encrypted`. To confirm a model is `anon`, read its catalog entry:
-
-```bash wrap
-curl https://nito.dev.zprotocol.org/v1/models \
-  -H "Authorization: Bearer $NITO_API_KEY"
-```
-
-The entry's `privacy_tier` field tells you the tier you will get with no suffix. If it reads `private`, the same suffix-free call lands you in [Private](/privacy/tiers/private) instead, because the model's own stored tier decides between the two.
-
-## Trade-offs of the Anonymous Privacy Tier
+## Trade-offs
 
 - **Lightest protection.** Anonymous gives you metadata-only retention but no upstream zero-data-retention requirement and no attestation. It is the floor, not a guarantee about a provider's internals.
-- **Broadest availability.** Because `anon` is the default tier for all providers, Anonymous reaches the most models and tends to route to the most backends, which helps latency and availability.
-- **No proof to check.** If the value of a call depends on being able to verify where it ran, Anonymous cannot give you that. Use `:confidential` for an attestation.
+- **Broadest availability.** Because Anonymous is the default tier for all providers, it reaches the most models and tends to route to the most backends, which helps latency and availability.
+- **No proof to check.** If the value of a call depends on being able to verify where it ran, Anonymous cannot give you that. Pick a Confidential model for an attestation.
 
-## When to Choose Anonymous Privacy Tier
+## When to Choose Anonymous
 
 Reach for Anonymous when the request is low-sensitivity and you want speed, choice, and simplicity: public or non-confidential prompts, prototyping, internal tooling, or anything where metadata-only retention is enough and you do not need a verifiable execution boundary. Match the tier to the sensitivity of the call, and save the stronger rungs for the calls that actually need them.
 
@@ -56,26 +37,26 @@ Reach for Anonymous when the request is low-sensitivity and you want speed, choi
 
 <CardGroup cols={3}>
   <Card title="Privacy Overview" icon="shield-check" href="/privacy/overview">
-    What “private” means on Nito.<br />
+    What "private" means on Nito.<br />
   </Card>
 
-  <Card title="Privacy Tiers at a Glance" icon="cubes-stacked" href="/models/privacy-tiers-at-a-glance">
-    Explore Nito's four privacy tiers at a glance.
+  <Card title="Choosing a Model" icon="cubes-stacked" href="/commands/choosing-a-model">
+    Browse models and set the one you want.
   </Card>
 
   <Card title="Privacy Tiers in Depth" icon="cubes-stacked" href="/privacy/tiers">
-    The four privacy tiers in depth, how to select each one.
+    The four privacy tiers in depth, and how the tier follows the model.
   </Card>
 
   <Card title="Private Tier" icon="phone-circle" href="/privacy/tiers/private">
-    Privately served models with zero-data-retention enforced upstream.<br />
+    Privately served models with the upstream provider held to zero data retention.<br />
   </Card>
 
   <Card title="Confidential Tier" icon="phone-circle" href="/privacy/tiers/confidential">
-    Sealed, hardware-isolated execution with an attestation you can fetch and verify.
+    Sealed execution with an attestation you can fetch and verify.
   </Card>
 
-  <Card title="Model ID Convention" icon="id-card" href="/models/model-id-convention">
+  <Card title="Data Retention and Visibility" icon="id-card" href="/privacy/data-retention-and-visibility">
     What Nito retains and what it does not.<br /><br />
   </Card>
 </CardGroup>

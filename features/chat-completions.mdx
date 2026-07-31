@@ -111,7 +111,7 @@ console.log(resp.choices[0].message.content);
 
 </CodeGroup>
 
-To run the same kind of call inside an attested environment, use a model that offers a confidential variant, for example `"model": "openai/gpt-oss-120b:confidential"`. The privacy mode rides on the model string and nothing else. Not every model has a confidential variant (for instance `x-ai/grok-4.5` does not), so fetch `GET /v1/models` and filter for attestation support. See [Per-call privacy modes](/privacy/per-call-privacy-modes) section for more details.
+To run the same kind of call inside an attested environment, use a model that offers a confidential variant, for example `"model": "openai/gpt-oss-120b:confidential"`. The privacy mode rides on the model string and nothing else. Not every model has a confidential variant (for instance `x-ai/grok-4.5` does not), so fetch `GET /v1/models` and filter for attestation support. See [Per-call privacy modes](/privacy/what-each-command-protects) section for more details.
 
 ## The Response Format
 
@@ -177,7 +177,7 @@ Chat completions endpoint is the right default for almost everything text. Use o
     One key, many models, selectable privacy per call.
   </Card>
 
-  <Card title="Per Call Privacy Modes" icon="file-lock" href="/privacy/per-call-privacy-modes">
+  <Card title="Per Call Privacy Modes" icon="file-lock" href="/privacy/what-each-command-protects">
     One key, many models, selectable privacy per call.
   </Card>
 

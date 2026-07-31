@@ -19,7 +19,7 @@ curl https://nito.dev.zprotocol.org/v1/chat/completions \
 
 > **TODO (needs SME):** replace `MODEL_ID` with a confirmed streaming-capable model ID from `GET /v1/models`.
 
-Streaming has one important exception. The `:encrypted` end-to-end encrypted mode does not stream at all: those requests are non-streaming only, by design. If you build a UI on top of `:encrypted`, you cannot show tokens as they arrive, so plan the experience around a single returned response. See [Per-call privacy modes](/privacy/per-call-privacy-modes) for the full constraint list.
+Streaming has one important exception. The `:encrypted` end-to-end encrypted mode does not stream at all: those requests are non-streaming only, by design. If you build a UI on top of `:encrypted`, you cannot show tokens as they arrive, so plan the experience around a single returned response. See [Per-call privacy modes](/privacy/what-each-command-protects) for the full constraint list.
 
 ## Reuse Work with Prompt Caching
 
@@ -71,7 +71,7 @@ The right move is to match the privacy mode to the sensitivity of each call, pay
     A practical guide from use case to model and privacy mode on Nito.
   </Card>
 
-  <Card title="Per-Call Privacy Modes" icon="file-shield" href="/privacy/per-call-privacy-modes">
+  <Card title="Per-Call Privacy Modes" icon="file-shield" href="/privacy/what-each-command-protects">
     How to select a privacy mode per request.<br />
   </Card>
 

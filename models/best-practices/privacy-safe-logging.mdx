@@ -43,7 +43,7 @@ Redact defensively: allowlist the fields you log rather than blocklisting the on
 
 Logging content-free is not just your good habit; it is consistent with how the gateway itself behaves. By default Nito keeps metadata only. Prompts, completions, reasoning, tool payloads, and attachment content are not persisted, telemetry is restricted to a safe-attribute allowlist, and inference responses are returned with `Cache-Control: no-store`. Where a chat history exists in a browser app, it lives on the client side, not in the gateway.
 
-If your own logs capture full content while the gateway deliberately does not, your logs become the weakest link in the chain, the one place the sensitive data actually sits at rest. Keeping your logging metadata-only closes that gap and lets you make a consistent privacy claim to your users. The precise gateway contract is in the [Privacy overview](/privacy/overview) and [Metadata-only default](/privacy/data-retention/metadata-only-default).
+If your own logs capture full content while the gateway deliberately does not, your logs become the weakest link in the chain, the one place the sensitive data actually sits at rest. Keeping your logging metadata-only closes that gap and lets you make a consistent privacy claim to your users. The precise gateway contract is in the [Privacy overview](/privacy/overview) and [Metadata-only default](/privacy/data-retention-and-visibility).
 
 ## A Quick Checklist
 
@@ -64,7 +64,7 @@ If your own logs capture full content while the gateway deliberately does not, y
     What “private” means on Nito.<br />
   </Card>
 
-  <Card title="Metadata-Only Default" icon="signal-stream" href="/privacy/data-retention/metadata-only-default">
+  <Card title="Metadata-Only Default" icon="signal-stream" href="/privacy/data-retention-and-visibility">
     Nito’s baseline retention posture.
   </Card>
 

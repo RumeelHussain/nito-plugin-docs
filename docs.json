@@ -123,29 +123,31 @@
         "groups": [
           {
             "group": "Overview",
-            "pages": [
-              "privacy/privacy-architecture",
-              "privacy/zero-data-retention",
-              "privacy/per-call-privacy-modes"
-            ],
             "root": "privacy/overview",
+            "icon": "shield-check",
             "expanded": true,
-            "icon": "books"
+            "pages": [
+              "privacy/what-each-command-protects",
+              "privacy/data-retention-and-visibility"
+            ]
           },
           {
             "group": "Privacy Tiers",
+            "root": "privacy/tiers/index",
+            "icon": "layer-group",
+            "expanded": true,
             "pages": [
               "privacy/tiers/anonymous",
               "privacy/tiers/private",
               "privacy/tiers/confidential",
               "privacy/tiers/encrypted"
-            ],
-            "root": "privacy/tiers/index",
-            "expanded": true,
-            "icon": "layer-group"
+            ]
           },
           {
             "group": "TEE Attestation",
+            "root": "privacy/tee-attestation/index",
+            "icon": "stamp",
+            "expanded": true,
             "pages": [
               "privacy/tee-attestation/what-a-tee-is",
               "privacy/tee-attestation/attestation-pipeline",
@@ -154,21 +156,7 @@
               "privacy/tee-attestation/address-only-model-binding",
               "privacy/tee-attestation/per-provider-attestation",
               "privacy/tee-attestation/verify-yourself-recipe"
-            ],
-            "root": "privacy/tee-attestation/index",
-            "expanded": true,
-            "icon": "stamp"
-          },
-          {
-            "group": "Data Handling",
-            "root": "privacy/data-handling",
-            "pages": [
-              "privacy/data-visibility",
-              "privacy/data-retention/index",
-              "privacy/data-retention/metadata-only-default"
-            ],
-            "expanded": true,
-            "icon": "database"
+            ]
           }
         ],
         "icon": "shield-check"
