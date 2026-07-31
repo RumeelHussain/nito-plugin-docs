@@ -53,7 +53,7 @@ The layered strategy looks like this, from innermost to outermost:
 3. If retries are exhausted, fall back to an alternate model at the same privacy tier.
 4. If that fails too, surface a clean error to the user, keyed by the request ID so it can be investigated.
 
-Never let any of these steps quietly relax a privacy mode, and never retry the non-retryable `4xx` errors. Correct handling of the full status set is covered in [Error format](/api-reference/overview/error-format).
+Never let any of these steps quietly relax a privacy mode, and never retry the non-retryable `4xx` errors. Correct handling of the full status set is covered in [Error format](/help/troubleshooting).
 
 ## A Quick Checklist
 
@@ -70,15 +70,15 @@ Never let any of these steps quietly relax a privacy mode, and never retry the n
     One key, many models, selectable privacy per call.
   </Card>
 
-  <Card title="Error Format" icon="diamond-exclamation" href="/api-reference/overview/error-format">
+  <Card title="Error Format" icon="diamond-exclamation" href="/help/troubleshooting">
     The canonical Nito error envelope.<br />
   </Card>
 
-  <Card title="Retry Behaviour" icon="arrow-left-rotate" href="/api-reference/errors-and-rate-limits/retry-behavior">
+  <Card title="Retry Behaviour" icon="arrow-left-rotate" href="/help/troubleshooting">
     Which Nito errors are safe to retry, which are not.
   </Card>
 
-  <Card title="Rate Limits" icon="list-radio" href="/api-reference/errors-and-rate-limits/rate-limits">
+  <Card title="Rate Limits" icon="list-radio" href="/plans/free-usage">
     The canonical Nito rate-limit reference.
   </Card>
 </CardGroup>

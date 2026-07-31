@@ -33,7 +33,7 @@ The second TEE-capable provider. Phala uses appid-based attestation, meaning the
 
 ### Image provider (fal)
 
-Serves text-to-image generation only. Image requests are forwarded with storage disabled at the provider (the gateway sets `X-Fal-Store-IO: 0`). This provider backs the [image generations endpoint](/api-reference/multimodal/image-generation); the default image model is a Z-Image model. fal serves image generation only — not chat, and not the `:confidential`/`:encrypted` modes.
+Serves text-to-image generation only. Image requests are forwarded with storage disabled at the provider (the gateway sets `X-Fal-Store-IO: 0`). This provider backs the [image generations endpoint](/features/multimodal); the default image model is a Z-Image model. fal serves image generation only — not chat, and not the `:confidential`/`:encrypted` modes.
 
 ## Privacy enforcement at a glance
 

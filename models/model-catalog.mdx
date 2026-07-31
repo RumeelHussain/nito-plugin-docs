@@ -43,7 +43,7 @@ Note that pricing and context window are not on the entry by default; pricing ap
 
 ## Filtering the Catalog
 
-By default the endpoint returns only chat models. Pass a `type` filter such as `image` to see another kind, or `type=all` to list every kind the catalog carries. Additional query parameters narrow the list further; the full set is in the [models endpoint reference](/api-reference/models-catalog/list-models). In practice you filter on:
+By default the endpoint returns only chat models. Pass a `type` filter such as `image` to see another kind, or `type=all` to list every kind the catalog carries. Additional query parameters narrow the list further; the full set is in the [models endpoint reference](/commands/choosing-a-model). In practice you filter on:
 
 - **`type`** to select a model kind (`chat`, `image`, or `all`). Without it, only chat models are returned.
 - **privacy** to find models that support `:confidential`, by reading `privacy_tier: "confidential"` or `attestation_available: true`.
@@ -85,7 +85,7 @@ Query `GET /v1/models` directly for the list of available models.
     The grammar for naming a model and selecting privacy.<br />
   </Card>
 
-  <Card title="GET /v1/models reference" icon="lock-alt" href="/api-reference/models-catalog/list-models">
+  <Card title="GET /v1/models reference" icon="lock-alt" href="/commands/choosing-a-model">
     Use the /models API endpoint to fetch the list catalog.
   </Card>
 </CardGroup>

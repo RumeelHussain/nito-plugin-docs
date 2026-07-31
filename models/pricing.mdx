@@ -38,7 +38,7 @@ Rates are configured live and read from each model's `pricing` object, so there 
 
 ## Server-Side Tool Pricing
 
-Server-side tools such as web search and web fetch are billed in addition to the model tokens. Their per-use rates (`web_search_request_nanos`, `web_search_result_nanos`, `web_fetch_request_nanos`) are part of the same `pricing` object, read live. See [Tool pricing](/api-reference/server-tools/tool-pricing) for the reference.
+Server-side tools such as web search and web fetch are billed in addition to the model tokens. Their per-use rates (`web_search_request_nanos`, `web_search_result_nanos`, `web_fetch_request_nanos`) are part of the same `pricing` object, read live. See [Tool pricing](/features/server-side-tools) for the reference.
 
 ## Estimating a Call
 
@@ -62,7 +62,7 @@ A rough estimate for a text call is `input_tokens * input_rate + output_tokens *
     Check consumption, credits, and balance.
   </Card>
 
-  <Card title="Tool pricing" icon="toolbox" href="/api-reference/server-tools/tool-pricing">
+  <Card title="Tool pricing" icon="toolbox" href="/features/server-side-tools">
     Server-side tool (web search / fetch) per-use rates.
   </Card>
 </CardGroup>
