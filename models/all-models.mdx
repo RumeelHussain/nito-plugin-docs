@@ -1,79 +1,87 @@
 ---
 title: "Model List"
-description: "A snapshot of the current Nito catalog, grouped by privacy tier. The live list is always what you see when you browse with the models command."
+description: "The current Nito catalog, grouped by privacy tier, with context window, price, and capabilities. The live list is always what you see when you browse."
+mode: "wide"
 ---
 
-This is a snapshot of the catalog, grouped by privacy tier. The catalog changes over time, so treat this as a reference and use [`models`](/commands/choosing-a-model) for the authoritative, live list on your account.
+The models you can reach through the plugin, grouped by privacy tier. This is a **snapshot**; the catalog is discovered live and changes over time, so use [`models`](/commands/choosing-a-model) for the authoritative list on your account.
 
 <Note>
-Snapshot as of **2026-07-31**. The privacy tier is shown per model, because [the tier follows the model you choose](/privacy/tiers). Capabilities (reasoning, vision, web) and per-model pricing vary and are shown live when you browse; see [Pricing](/models/pricing).
+Snapshot of **2026-07-31**. **Price /1M** is USD per one million tokens, shown as **input · output**. The **privacy tier** is shown as its own section, because [the tier follows the model you choose](/privacy/tiers). See [Pricing](/models/pricing) for how cost is structured.
 </Note>
 
-## How to Read This
+Capabilities in the table:
 
-Each model belongs to one privacy tier, which sets how private a call to it is:
+- **reasoning** step-by-step thinking. See [Reasoning](/features/reasoning).
+- **vision** image input. See [Image Input](/features/multimodal/image-input).
+- **web** web search and fetch. See [Web Search](/features/server-side-tools/web-search).
+- **attestable** supports a verifiable attestation. See [The Four Tiers](/privacy/tiers).
 
-- **Anonymous** gives the widest choice and metadata-only retention.
-- **Private** adds an upstream provider held to zero data retention.
-- **Confidential** runs in a sealed environment you can verify. Confidential models are listed with a `:confidential` marker on their name.
+## Anonymous (19 models)
 
-For what each tier guarantees, see [The Four Tiers](/privacy/tiers).
+Widest choice, metadata-only retention. See [Anonymous](/privacy/tiers/anonymous).
 
-## Anonymous
+| No. | Model ID | Context | Price /1M | Capabilities |
+| :-: | :-- | :-: | :-: | :-- |
+| 1 | `anthropic/claude-haiku-4-5` | 200k | \$1.00 · \$5.00 | reasoning, vision, web |
+| 2 | `anthropic/claude-haiku-4.5` | 200k | \$1.00 · \$5.00 | reasoning, vision, web |
+| 3 | `anthropic/claude-opus-4.8` | 1000k | \$5.00 · \$25.00 | reasoning, vision, web |
+| 4 | `anthropic/claude-opus-5` | 1000k | \$5.00 · \$25.00 | reasoning, vision, web |
+| 5 | `anthropic/claude-sonnet-5` | 1000k | \$2.00 · \$10.00 | reasoning, vision, web |
+| 6 | `google/gemini-3.1-flash-lite` | 1049k | \$0.25 · \$1.50 | reasoning, vision, web |
+| 7 | `google/gemini-3.1-pro-preview` | 1049k | \$2.00 · \$12.00 | reasoning, vision, web |
+| 8 | `google/gemini-3.5-flash` | 1049k | \$1.50 · \$9.00 | reasoning, vision, web |
+| 9 | `openai/gpt-5.3-codex` | 400k | \$1.75 · \$14.00 | reasoning, vision, web |
+| 10 | `openai/gpt-5.4-mini` | 400k | \$0.75 · \$4.50 | reasoning, vision, web |
+| 11 | `openai/gpt-5.5` | 1050k | \$5.00 · \$30.00 | reasoning, vision, web |
+| 12 | `openai/gpt-5.6-luna` | 1050k | \$0.10 · \$0.60 | reasoning, vision, web |
+| 13 | `openai/gpt-5.6-luna-pro` | 1050k | \$0.10 · \$0.60 | reasoning, vision, web |
+| 14 | `openai/gpt-5.6-sol` | 1050k | \$5.00 · \$30.00 | reasoning, vision, web |
+| 15 | `openai/gpt-5.6-sol-pro` | 1050k | \$5.00 · \$30.00 | reasoning, vision, web |
+| 16 | `openai/gpt-5.6-terra` | 1050k | \$1.00 · \$6.00 | reasoning, vision, web |
+| 17 | `openai/gpt-5.6-terra-pro` | 1050k | \$1.00 · \$6.00 | reasoning, vision, web |
+| 18 | `openai/o3` | 200k | \$2.00 · \$8.00 | reasoning, vision, web |
+| 19 | `qwen/qwen3.7-max` | 1000k | \$2.80 · \$7.50 | reasoning, web |
 
-```text
-anthropic/claude-haiku-4-5
-anthropic/claude-haiku-4.5
-anthropic/claude-opus-4.8
-anthropic/claude-opus-5
-anthropic/claude-sonnet-5
-google/gemini-3.1-flash-lite
-google/gemini-3.1-pro-preview
-google/gemini-3.5-flash
-openai/gpt-5.3-codex
-openai/gpt-5.4-mini
-openai/gpt-5.5
-openai/gpt-5.6-luna
-openai/gpt-5.6-luna-pro
-openai/gpt-5.6-sol
-openai/gpt-5.6-sol-pro
-openai/gpt-5.6-terra
-openai/gpt-5.6-terra-pro
-openai/o3
-qwen/qwen3.7-max
-```
+## Private (9 models)
 
-## Private
+Everything Anonymous gives you, plus the upstream provider held to zero data retention. See [Private](/privacy/tiers/private).
 
-```text
-minimax/minimax-m3
-moonshotai/kimi-k3
-nousresearch/hermes-4-405b
-nvidia/nemotron-3-ultra-550b-a55b
-qwen/qwen3-235b-a22b-2507
-qwen/qwen3-coder
-qwen/qwen3-vl-235b-a22b-instruct
-x-ai/grok-4.5
-z-ai/glm-5.2
-```
+| No. | Model ID | Context | Price /1M | Capabilities |
+| :-: | :-- | :-: | :-: | :-- |
+| 1 | `minimax/minimax-m3` | 1049k | \$0.30 · \$1.20 | reasoning, vision, web |
+| 2 | `moonshotai/kimi-k3` | 1049k | \$3.00 · \$15.00 | reasoning, vision, web |
+| 3 | `nousresearch/hermes-4-405b` | 131k | \$1.00 · \$3.00 | reasoning, web |
+| 4 | `nvidia/nemotron-3-ultra-550b-a55b` | 512k | \$0.60 · \$3.60 | reasoning, web |
+| 5 | `qwen/qwen3-235b-a22b-2507` | 262k | \$0.09 · \$0.55 | reasoning, web |
+| 6 | `qwen/qwen3-coder` | 262k | \$0.30 · \$1.00 | reasoning, web |
+| 7 | `qwen/qwen3-vl-235b-a22b-instruct` | 262k | \$0.21 · \$1.90 | reasoning, vision, web |
+| 8 | `x-ai/grok-4.5` | 500k | \$2.00 · \$6.00 | reasoning, vision, web |
+| 9 | `z-ai/glm-5.2` | 1049k | \$1.12 · \$3.52 | reasoning, web |
 
-## Confidential
+## Confidential (9 models)
 
-```text
-deepseek-ai/deepseek-v4-flash:confidential
-google/gemma-4-26b-a4b-uncensored:confidential
-google/gemma-4-31b-it:confidential
-moonshotai/kimi-k2.6:confidential
-openai/gpt-oss-120b:confidential
-qwen/qwen3-vl-30b-a3b-instruct:confidential
-qwen/qwen3.5-397b-a17b:confidential
-qwen/qwen3.6-35b-a3b-uncensored:confidential
-z-ai/glm-5.2:confidential
-```
+Sealed execution with a verifiable attestation. Listed with a `:confidential` marker on the model name. See [Confidential](/privacy/tiers/confidential).
+
+| No. | Model ID | Context | Price /1M | Capabilities |
+| :-: | :-- | :-: | :-: | :-- |
+| 1 | `deepseek-ai/deepseek-v4-flash:confidential` | 1049k | \$0.17 · \$0.35 | reasoning, web, attestable |
+| 2 | `google/gemma-4-26b-a4b-uncensored:confidential` | 66k | \$0.15 · \$0.70 | vision, web, attestable |
+| 3 | `google/gemma-4-31b-it:confidential` | 262k | \$0.13 · \$0.40 | reasoning, vision, web, attestable |
+| 4 | `moonshotai/kimi-k2.6:confidential` | 262k | \$0.81 · \$3.85 | reasoning, vision, web, attestable |
+| 5 | `openai/gpt-oss-120b:confidential` | 131k | \$0.15 · \$0.55 | reasoning, web, attestable |
+| 6 | `qwen/qwen3-vl-30b-a3b-instruct:confidential` | 16k | \$0.15 · \$0.55 | reasoning, vision, web, attestable |
+| 7 | `qwen/qwen3.5-397b-a17b:confidential` | 128k | \$0.50 · \$3.30 | reasoning, web, attestable |
+| 8 | `qwen/qwen3.6-35b-a3b-uncensored:confidential` | 131k | \$0.30 · \$1.50 | vision, web, attestable |
+| 9 | `z-ai/glm-5.2:confidential` | 1049k | \$1.40 · \$4.40 | reasoning, web, attestable |
+
+<Note>
+The catalog also carries **Encrypted**-tier models, but Encrypted is **not yet available through the plugin**. Today the plugin reaches up to Confidential. See [Encrypted](/privacy/tiers/encrypted).
+</Note>
 
 ## Using a Model From the List
 
-Set any of these as your default or use it for a single call:
+Set one as your default, or use it for a single call:
 
 <Tabs>
   <Tab title="Claude Code">
@@ -90,4 +98,4 @@ Set any of these as your default or use it for a single call:
   </Tab>
 </Tabs>
 
-Not sure which to pick? See [Choosing a Model](/models/choosing-a-model). To set defaults and switch models, see [Choosing a Model (commands)](/commands/choosing-a-model).
+Not sure which to pick? See [Choosing a Model](/models/choosing-a-model). For how model IDs are named, see [Model ID Convention](/models/model-id-convention). To set defaults and switch models, see [Choosing a Model (commands)](/commands/choosing-a-model).

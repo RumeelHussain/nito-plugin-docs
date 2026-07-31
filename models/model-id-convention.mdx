@@ -1,0 +1,71 @@
+---
+title: "Model ID Convention"
+description: "How model IDs are named in the Nito catalog, and how a model's name tells you its privacy tier."
+---
+
+Every model you pick in the plugin has an **ID**: the exact string you pass to [`model`](/commands/choosing-a-model) or `--model`, and the name you see when you browse with [`models`](/commands/choosing-a-model). Once you can read a model ID, the [Model List](/models/all-models) and every example in these docs become self-explanatory.
+
+## What a Model ID Looks Like
+
+A model ID names a provider and a model:
+
+```text
+<provider>/<model>
+```
+
+For example:
+
+```text
+anthropic/claude-sonnet-5
+openai/gpt-5.5
+google/gemini-3.1-pro-preview
+```
+
+You do not hold accounts with those providers or manage their keys. The ID is just the catalog name Nito uses so you can reach the model through one plugin.
+
+## The `:confidential` Marker
+
+Some models also appear in a **Confidential** variant, whose ID carries a `:confidential` marker at the end:
+
+```text
+z-ai/glm-5.2                 # the Private-tier entry
+z-ai/glm-5.2:confidential    # the Confidential-tier entry
+```
+
+These are two separate catalog entries. You do not invent the marker or staple it onto any model; it is part of the name of a model that offers the Confidential tier, and you select that entry the same way you select any model. Choosing the `:confidential` entry runs your call in a sealed environment you can verify. The [Model List](/models/all-models) shows which models have a Confidential entry.
+
+<Note>
+The catalog also has an **Encrypted** tier, but Encrypted is **not yet available through the plugin**. Today the plugin reaches up to Confidential. See [Encrypted](/privacy/tiers/encrypted).
+</Note>
+
+## The Tier Is Part of the Model
+
+This is the key idea: a model's privacy tier is a property of the model you choose, not a separate switch you flip. The plain entry and the `:confidential` entry are different models at different tiers. Because the tier travels with the model, it cannot drift, and it never silently downgrades: if a model cannot serve a call at its tier, the call fails with a clear message rather than dropping to something weaker. See [Tier Follows the Model](/privacy/tiers).
+
+## Logical Names, Not Backends
+
+The ID you use is a **logical** name: a stable public name that Nito maps to whichever backend can actually run it. You name `x-ai/grok-4.5`; Nito finds a healthy, eligible backend that serves it. You never pin a specific backend yourself, and the name stays the same even as the plumbing behind it changes.
+
+## If You Do Not Name a Model
+
+If you never set a model, the plugin uses a built-in default so your first call works without a model-picker round trip. Naming a model explicitly is recommended once you know your preference, so your results do not change if the default changes. See [Choosing a Model](/commands/choosing-a-model).
+
+## Reading IDs in Practice
+
+- **Browse for exact IDs.** The catalog is discovered live and changes over time, so confirm an ID with [`models`](/commands/choosing-a-model) rather than pasting one from memory.
+- **A `:confidential` marker means the Confidential tier.** No marker means the model's own stored tier (Anonymous or Private).
+- **The tier follows the model.** Pick the entry whose tier matches how sensitive the call is. See [The Four Tiers](/privacy/tiers).
+
+## Related Resources
+
+<CardGroup cols={3}>
+  <Card title="Model List" icon="list" href="/models/all-models">
+    Every current model, grouped by privacy tier.
+  </Card>
+  <Card title="Privacy Tiers at a Glance" icon="lock" href="/models/privacy-tiers-at-a-glance">
+    The four tiers, in brief.
+  </Card>
+  <Card title="Choosing a Model" icon="wand-magic-sparkles" href="/models/choosing-a-model">
+    From task to the right model and tier.
+  </Card>
+</CardGroup>

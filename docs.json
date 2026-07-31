@@ -90,6 +90,8 @@
             "expanded": true,
             "pages": [
               "models/all-models",
+              "models/model-id-convention",
+              "models/privacy-tiers-at-a-glance",
               "models/choosing-a-model",
               "models/model-families",
               "models/pricing"
