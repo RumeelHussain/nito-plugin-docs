@@ -43,44 +43,6 @@
         "icon": "rocket-launch"
       },
       {
-        "tab": "Commands",
-        "groups": [
-          {
-            "group": "Core",
-            "pages": [
-              "commands/ask-and-continue",
-              "commands/choosing-a-model",
-              "commands/fusion"
-            ],
-            "icon": "bolt"
-          },
-          {
-            "group": "Private and Sessions",
-            "pages": [
-              "commands/private",
-              "commands/session"
-            ],
-            "icon": "user-secret"
-          },
-          {
-            "group": "Account and Settings",
-            "pages": [
-              "commands/status-and-account",
-              "commands/context-and-mode"
-            ],
-            "icon": "gear"
-          },
-          {
-            "group": "Reference",
-            "pages": [
-              "commands/command-index"
-            ],
-            "icon": "list"
-          }
-        ],
-        "icon": "wand-magic-sparkles"
-      },
-      {
         "tab": "Models",
         "groups": [
           {
@@ -180,26 +142,42 @@
         "icon": "cubes-stacked"
       },
       {
-        "tab": "Plans and Billing",
+        "tab": "Commands",
         "groups": [
           {
-            "group": "Plans",
+            "group": "Core",
             "pages": [
-              "plans/free-usage",
-              "plans/what-paid-unlocks"
+              "commands/ask-and-continue",
+              "commands/choosing-a-model",
+              "commands/fusion"
             ],
-            "icon": "tags"
+            "icon": "bolt"
           },
           {
-            "group": "Managing",
+            "group": "Private and Sessions",
             "pages": [
-              "plans/checking-usage",
-              "plans/upgrade-and-manage"
+              "commands/private",
+              "commands/session"
             ],
-            "icon": "sliders"
+            "icon": "user-secret"
+          },
+          {
+            "group": "Account and Settings",
+            "pages": [
+              "commands/status-and-account",
+              "commands/context-and-mode"
+            ],
+            "icon": "gear"
+          },
+          {
+            "group": "Reference",
+            "pages": [
+              "commands/command-index"
+            ],
+            "icon": "list"
           }
         ],
-        "icon": "credit-card"
+        "icon": "wand-magic-sparkles"
       },
       {
         "tab": "CLI",
@@ -229,6 +207,28 @@
           }
         ],
         "icon": "terminal"
+      },
+      {
+        "tab": "Plans and Billing",
+        "groups": [
+          {
+            "group": "Plans",
+            "pages": [
+              "plans/free-usage",
+              "plans/what-paid-unlocks"
+            ],
+            "icon": "tags"
+          },
+          {
+            "group": "Managing",
+            "pages": [
+              "plans/checking-usage",
+              "plans/upgrade-and-manage"
+            ],
+            "icon": "sliders"
+          }
+        ],
+        "icon": "credit-card"
       },
       {
         "tab": "Help",
