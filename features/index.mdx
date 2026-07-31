@@ -1,43 +1,43 @@
 ---
 title: "Features"
-description: "Everything you can do with one Nito key, one base URL, and one request. An honest map of what the gateway implements today."
+description: "The model capabilities you can use through the plugin: reasoning, web search and fetch, document parsing, and image input. Most turn on with a flag on your command."
 ---
 
-Every feature here rides on the same frame: one key reaches the whole catalog, the `model` string selects both the model and how private the call is, and Nito handles routing, billing, and attestation underneath. If that frame is not yet familiar, read [How Nito Works](/get-started/how-nito-works) first; this page assumes it.
+The Nito plugin is not just a way to send a prompt. The models behind it can search the web, read a page you name, parse a document you attach, look at an image, and think through a hard problem before answering. This section covers each capability and how to use it from the plugin.
 
-This is a map, not a tutorial. Each capability below links to its own deep page, covering what the gateway implements at this commit.
+Most features ride on top of the commands you already know, [`ask`](/commands/ask-and-continue), [`private`](/commands/private), and [`session`](/commands/session), and you turn them on with a flag. There is nothing extra to install.
 
-## Features Nito Offers
-
-These are live on the gateway and documented in depth.
-
-- [**Chat completions**](/features/chat-completions) the primary text surface. Send messages, name a model, get a reply. OpenAI-compatible shape, served at both `/v1/chat/completions` and `/api/v1/chat/completions`.
-- [**Streaming**](/features/streaming) get the reply as Server-Sent Events token by token, by setting `stream: true`. Not available in Encrypted mode.
-- [**Tool calling**](/features/tool-calling) declare function tools the model can ask to call. Your code runs them and returns the result; the gateway routes the conversation but does not execute your functions.
-- [**Server-side tools**](/features/server-side-tools) tools Nito runs for you mid-generation: web search, web fetch, the file parser, and (xAI only) a code interpreter. You do not wire these up yourself.
-- [**Reasoning**](/features/reasoning) ask a capable model to think first, with controls over effort and summary. Output arrives as `reasoning_details` plus a `reasoning_tokens` usage count.
-- [**Multimodal**](/features/multimodal) image input and PDF/document input alongside text, plus text-to-image generation as a separate endpoint.
-- [**Prompt caching**](/features/prompt-caching) pass provider cache directives (`prompt_cache_key`, `cache_control`) through to cut the cost of long, repeated prompt prefixes. Cache hits show up in `usage`.
-- [**Safe retries**](/features/safe-retries) how to retry safely — failed calls are not billed, and how to guarantee exactly-once at your layer.
-
-Nito also now serves an **Anthropic Messages-Compatible** endpoint at `POST /v1/messages` (and `/v1/messages/count_tokens`) and an **OpenAI Responses-Compatible** endpoint at `POST /v1/responses` (and `/v1/responses/compact`). Each validates its native request shape and maps it into the gateway's canonical chat contracts. You can try them in the [API Playground](/api-playground). Full drop-in guidance is documented in a later pass.
-
-## Related Resources
+## What You Can Do
 
 <CardGroup cols={2}>
-  <Card title="How Nito Works" icon="gears" href="/get-started/how-nito-works">
-    One-key, many-models, selectable-privacy model.
+  <Card title="Reasoning" icon="brain" href="/features/reasoning">
+    Choose a reasoning-capable model and it thinks through a problem before answering.
   </Card>
-
-  <Card title="Chat Completions" icon="message-dots" href="/features/chat-completions">
-    Detailed explanation of the chat completions feature.
+  <Card title="Web Search" icon="magnifying-glass" href="/features/server-side-tools/web-search">
+    Pull fresh information from the web into an answer with `--web-search`.
   </Card>
-
-  <Card title="Privacy Overview" icon="lock-hashtag" href="/privacy/overview">
-    Understand what “private” means on Nito.
+  <Card title="Web Fetch" icon="link" href="/features/server-side-tools/web-fetch">
+    Read a specific URL you name into the model's context with `--web-fetch`.
   </Card>
-
-  <Card title="Nito API Reference" icon="book-open-lines" href="/api-reference">
-    Detailed reference of Nito API endpoints.<br />
+  <Card title="Documents" icon="file-lines" href="/features/multimodal/pdf-input">
+    Attach a PDF or office file with `--file` and ask about it.
+  </Card>
+  <Card title="Image Input" icon="image" href="/features/multimodal/image-input">
+    Attach a picture with `--file` and a vision-capable model reads it.
+  </Card>
+  <Card title="Choosing a Model" icon="cube" href="/commands/choosing-a-model">
+    Capabilities are per model. Browse the catalog and pick one that fits.
   </Card>
 </CardGroup>
+
+## Capabilities Follow the Model
+
+Two of these features, reasoning and image input, are not flags: they are properties of the model you choose. A model either supports reasoning (or vision) or it does not. Browse the catalog with [`models`](/commands/choosing-a-model) to see what each one supports, then pick a model that fits the task. Web search, web fetch, and document parsing work more broadly and are controlled with flags.
+
+## A Note on Sessions
+
+When you open a full Nito [`session`](/commands/session), your host's normal behavior, streaming replies and its own tool use, keeps working, now powered by a Nito model. Those are host-native behaviors rather than plugin flags, so they are covered where the session is: see [Session](/commands/session).
+
+## From the Terminal
+
+Every capability here also works from the `nito` CLI. See [Ask and Fusion from the Terminal](/cli/ask-and-fusion-from-terminal).

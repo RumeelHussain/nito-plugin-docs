@@ -11,7 +11,7 @@ Use the anchors to jump to a family: [Text](#text), [Reasoning](#reasoning), [Vi
 
 ## Text
 
-Text models are the core chat-and-generation family. You send a list of messages, you get a generated reply. This is the [chat completions](/features/chat-completions) surface, and it is what most applications use. Text models vary in size, speed, context window (how much text they can consider at once), and cost. Because those vary, do not assume two text models are interchangeable on price or context; pick one with `GET /v1/models` and the [decision guide](/models/choosing-a-model).
+Text models are the core chat-and-generation family. You send a list of messages, you get a generated reply. This is the [chat completions](/commands/ask-and-continue) surface, and it is what most applications use. Text models vary in size, speed, context window (how much text they can consider at once), and cost. Because those vary, do not assume two text models are interchangeable on price or context; pick one with `GET /v1/models` and the [decision guide](/models/choosing-a-model).
 
 ## Reasoning
 
@@ -45,7 +45,7 @@ Image-generation models run the other direction from vision: text in, image out.
     A decision guide from use case to model.<br />
   </Card>
 
-  <Card title="Chat Completions Feature" icon="message-dots" href="/features/chat-completions">
+  <Card title="Chat Completions Feature" icon="message-dots" href="/commands/ask-and-continue">
     OpenAI-compatible endpoint for chat and text generation.
   </Card>
 

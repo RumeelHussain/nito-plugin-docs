@@ -25,7 +25,7 @@ Streaming has one important exception. The `:encrypted` end-to-end encrypted mod
 
 If every request repeats a long, stable prefix, a system prompt, a big instruction block, or a document the model keeps re-reading, you are paying to process those tokens every time, and paying the latency to process them too. Prompt caching lets the provider remember that prefix so later calls skip most of the work. On Nito this is a passthrough: you set `prompt_cache_key` (up to 256 bytes) or `cache_control`, and the gateway forwards the directive to a provider that supports it.
 
-Put the stable content first and the variable content, the user's actual question, last, so the cacheable boundary is as long as possible. The response `usage` reports `cache_read_input_tokens` so you can confirm the cache is being hit. Full detail is in [Prompt caching](/features/prompt-caching).
+Put the stable content first and the variable content, the user's actual question, last, so the cacheable boundary is as long as possible. The response `usage` reports `cache_read_input_tokens` so you can confirm the cache is being hit. Full detail is in [Prompt caching](/features).
 
 ## Pick the Right-Sized Model
 
@@ -59,11 +59,11 @@ The right move is to match the privacy mode to the sensitivity of each call, pay
     One key, many models, selectable privacy per call.
   </Card>
 
-  <Card title="Streaming" icon="signal-stream" href="/features/streaming">
+  <Card title="Streaming" icon="signal-stream" href="/commands/session">
     What streaming is on Nito and when to use it.<br />
   </Card>
 
-  <Card title="Prompt Caching" icon="file-contract" href="/features/prompt-caching">
+  <Card title="Prompt Caching" icon="file-contract" href="/features">
     Pass provider prompt-cache directives.<br />
   </Card>
 

@@ -1,123 +1,66 @@
 ---
 title: "Reasoning"
-description: "Ask a capable model to think before it answers. Control reasoning effort and summaries, read reasoning output, and budget for the extra tokens."
+description: "Choose a reasoning-capable model and Nito lets it think through a problem before answering, trading extra tokens for better quality on hard questions."
 ---
 
-Some models can think before they answer: they work through a problem internally, then produce a final reply informed by that work. On Nito you turn this on with the `reasoning` field on a chat-completions request, and you control how much effort the model spends and how much of its thinking it shows you. Reasoning trades tokens (and therefore cost and latency) for quality on hard problems. This page covers when to use it, how to configure it, how to read the output, and what it costs.
+Some models can think before they answer: they work through a problem internally, then produce a final reply informed by that work. This improves quality on hard problems, and it costs more tokens and time. This page covers how to get reasoning in the plugin, a worked example, and when it is worth using.
 
-Reasoning is a **per-model** capability. Not every model supports it. Check the model's `supports_reasoning` capability in `GET /v1/models` before relying on it, and select by capability at runtime rather than assuming.
+## Reasoning Is a Property of the Model
 
-## Turning On Reasoning
+In the plugin, reasoning is not a flag you pass. There is no `--reasoning` option. You get reasoning by choosing a reasoning-capable model. The catalog marks which models support reasoning, so browse it and pick one:
 
-Add a `reasoning` object to your chat request:
+<Tabs>
+  <Tab title="Claude Code">
+    ```text
+    /nito:models
+    ```
+  </Tab>
+  <Tab title="Codex">
+    ```text
+    $nito:models
+    ```
+  </Tab>
+</Tabs>
 
-```json wrap
-{
-  "model": "x-ai/grok-4.5",
-  "messages": [
-    {"role": "user", "content": "A bat and a ball cost $1.10. The bat costs $1.00 more than the ball. How much is the ball?"}
-  ],
-  "reasoning": { "enabled": true, "effort": "medium" }
-}
-```
+Once you select a reasoning-capable model, it thinks through your prompt on its own. See [Choosing a model](/commands/choosing-a-model) for how to pick one.
 
-The fields on `reasoning`:
+## A Worked Example
 
-| Field | Values | Meaning |
-| --- | --- | --- |
-| `enabled` | boolean | Turn reasoning on. |
-| `effort` | `low`, `medium`, `high` | How hard the model thinks. More effort means more reasoning tokens. |
-| `summary` | `auto`, `concise`, `detailed` | How much of the model's thinking is summarized back to you. |
-| `max_tokens` | integer | A budget cap on reasoning tokens. |
-| `exclude` | boolean | Run reasoning but omit the reasoning output from the response. |
+Pick a reasoning-capable model and ask it to reason step by step through a problem where the intuitive answer is wrong:
 
-Two defaults are worth remembering. If you enable reasoning without specifying `effort` or a token budget, effort defaults to **`low`**. If you do not specify `summary`, it defaults to **`auto`**, which lets the model choose an appropriate level of detail.
+<Tabs>
+  <Tab title="Claude Code">
+    ```text
+    /nito:ask --model <reasoning-capable-model> Reason step by step, then answer: a bat and a ball cost $1.10, the bat costs $1.00 more than the ball, how much is the ball?
+    ```
+  </Tab>
+  <Tab title="Codex">
+    ```text
+    $nito:ask --model <reasoning-capable-model> Reason step by step, then answer: a bat and a ball cost $1.10, the bat costs $1.00 more than the ball, how much is the ball?
+    ```
+  </Tab>
+</Tabs>
 
-### Setting Effort With a `model-ID` suffix
+You can run the same thing from your terminal with `nito ask`. See [Ask and Fusion from the terminal](/cli/ask-and-fusion-from-terminal).
 
-Reasoning can also be requested through a feature suffix on the model ID, the same mechanism that selects privacy modes. This is handy when you cannot easily set a request body field but can change the model string. The `reasoning` object and the suffix express the same capability; prefer the explicit object when you have it.
+A reasoning-capable model shows its working and lands on the correct answer, **$0.05 (5 cents)**, not the intuitive 10 cents. The intuitive answer fails because if the ball were 10 cents the bat would be $1.10, making the total $1.20. Working it out step by step catches this.
 
-## Sample Full Call with Reasoning
+## When to Use It
 
-> **TODO (needs SME):** the canonical production base URL. Replace `https://nito.dev.zprotocol.org` with the real gateway URL once confirmed. `x-ai/grok-4.5` is an example; fetch `GET /v1/models` for the live catalog and confirm `supports_reasoning`.
-
-```shellscript wrap
-curl https://nito.dev.zprotocol.org/v1/chat/completions \
-  -H "Authorization: Bearer $NITO_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "model": "x-ai/grok-4.5",
-    "messages": [
-      {"role": "user", "content": "Prove that the square root of 2 is irrational."}
-    ],
-    "reasoning": { "enabled": true, "effort": "high", "summary": "detailed" }
-  }'
-```
-
-## Reading the Output
-
-When reasoning runs, the response carries two extra signals.
-
-**`choices[].message.reasoning_details`** is an array describing the model's thinking. Each entry has a `type`, a `summary` (the human-readable account of that piece of reasoning), an `id`, a `format`, and an `index`. This is a summary of the reasoning, governed by the `summary` setting, not necessarily a verbatim transcript of every internal token.
-
-**`usage.reasoning_tokens`** reports how many tokens were spent thinking. This is separate from `completion_tokens`, and it is what makes reasoning cost more.
-
-```json wrap
-{
-  "choices": [
-    {
-      "index": 0,
-      "message": {
-        "role": "assistant",
-        "content": "Assume sqrt(2) = a/b in lowest terms ...",
-        "reasoning_details": [
-          { "type": "reasoning.summary", "summary": "Set up a proof by contradiction.", "id": "reasoning-0", "format": "text", "index": 0 }
-        ]
-      },
-      "finish_reason": "stop"
-    }
-  ],
-  "usage": {
-    "prompt_tokens": 18,
-    "completion_tokens": 140,
-    "reasoning_tokens": 320,
-    "total_tokens": 478
-  }
-}
-```
-
-If you set `exclude: true`, the model still reasons (and you still pay for the reasoning tokens), but `reasoning_details` is omitted from the response. Use this when you want the quality benefit but do not want to handle or display the thinking.
-
-When you stream, reasoning arrives incrementally: chunks carry `reasoning_details` deltas with a non-empty `summary` as the thinking unfolds, ahead of the final content. See [Streaming](/features/streaming).
-
-## Cost and Latency
-
-Reasoning is not free. Reasoning tokens are billed, and `usage.reasoning_tokens` is the count you pay for on top of your prompt and completion tokens. Higher `effort` produces more reasoning tokens, so `high` costs more and takes longer than `low`. Treat effort as a dial: spend it on genuinely hard problems (math, multi-step logic, careful analysis) and leave it off for routine generation where it adds cost without improving the answer. Use `max_tokens` on the `reasoning` object to put a ceiling on how much the model can spend thinking.
-
-## Privacy Interaction
-
-Reasoning works in ordinary, private, and `:confidential` modes. The Encrypted mode (`:encrypted`) **rejects reasoning**, along with streaming, tools, and prompt caching. If your call needs to think and needs the strongest privacy mode, those two requirements conflict today; pick the privacy tier that fits and use a reasoning-capable model within it. See [Per-call privacy modes](/privacy/what-each-command-protects).
+Reasoning trades tokens for quality. It costs more and takes longer, so use it for genuinely hard problems (math, multi-step logic, careful analysis) and leave it off for routine generation where it adds cost without improving the answer. When in doubt, browse the catalog with `models` and match the model to the difficulty of the task. See [Choosing a model](/commands/choosing-a-model).
 
 ## Related Resources
 
 <CardGroup cols={3}>
-  <Card title="Chat Completions" icon="message-captions" href="/features/chat-completions">
-    OpenAI-compatible endpoint for chat and text generation.
+  <Card title="Choosing a Model" icon="gears" href="/commands/choosing-a-model">
+    Browse the catalog and pick a model that fits the task.
   </Card>
 
-  <Card title="Streaming" icon="signal-stream" href="/features/streaming">
-    What streaming is on Nito and when to use it.<br />
+  <Card title="Ask and Continue" icon="message-captions" href="/commands/ask-and-continue">
+    Send a prompt and keep the conversation going.
   </Card>
 
-  <Card title="Tool Calling" icon="tools" href="/features/tool-calling">
-    Dive into how a model can call functions.<br />
-  </Card>
-
-  <Card title="Per Call Privacy Modes" icon="file-lock" href="/privacy/what-each-command-protects">
-    One key, many models, selectable privacy per call.
-  </Card>
-
-  <Card title="Chat Completions Endpoint" icon="message-captions" href="/api-reference/chat-and-text/chat-completions">
-    Schema reference chat completions on Nito.
+  <Card title="Features Overview" icon="square-code" href="/features">
+    What Nito can do across models and commands.
   </Card>
 </CardGroup>

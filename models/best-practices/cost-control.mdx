@@ -13,7 +13,7 @@ The largest single factor in cost is usually the model. A compact model that han
 
 ## Cut Input Cost with Prompt Caching
 
-If a long prefix repeats across requests, prompt caching lets a supporting provider serve that prefix from cache instead of reprocessing it, which reduces the input cost of those tokens. Set `prompt_cache_key` or `cache_control` and Nito forwards the directive; the response `usage` reports `cache_read_input_tokens` so you can see how much was served cheaply from cache. This only helps when the prefix is large and genuinely repeated, so put stable content first and the variable question last. Full detail is in [Prompt caching](/features/prompt-caching).
+If a long prefix repeats across requests, prompt caching lets a supporting provider serve that prefix from cache instead of reprocessing it, which reduces the input cost of those tokens. Set `prompt_cache_key` or `cache_control` and Nito forwards the directive; the response `usage` reports `cache_read_input_tokens` so you can see how much was served cheaply from cache. This only helps when the prefix is large and genuinely repeated, so put stable content first and the variable question last. Full detail is in [Prompt caching](/features).
 
 ## Cap Output With `max_tokens`
 
@@ -64,7 +64,7 @@ Neither is bad; both are worth the money when the task needs them. The point is 
     How cost is structured and where to read per-model rates.
   </Card>
 
-  <Card title="Prompt Caching" icon="file-contract" href="/features/prompt-caching">
+  <Card title="Prompt Caching" icon="file-contract" href="/features">
     Pass provider prompt-cache directives.<br />
   </Card>
 

@@ -166,48 +166,33 @@
         "groups": [
           {
             "group": "Core Features",
-            "pages": [
-              "features/chat-completions",
-              "features/streaming",
-              "features/tool-calling",
-              "features/reasoning"
-            ],
             "root": "features/index",
+            "icon": "lightbulb-gear",
             "expanded": true,
-            "icon": "lightbulb-gear"
+            "pages": [
+              "features/reasoning"
+            ]
           },
           {
             "group": "Server-Side Tools",
             "root": "features/server-side-tools",
+            "icon": "server",
+            "expanded": true,
             "pages": [
               "features/server-side-tools/web-search",
               "features/server-side-tools/web-fetch",
-              "features/server-side-tools/file-parser",
-              "features/server-side-tools/code-interpreter"
-            ],
-            "expanded": true,
-            "icon": "server"
+              "features/server-side-tools/file-parser"
+            ]
           },
           {
             "group": "Multimodal",
+            "root": "features/multimodal",
+            "icon": "cubes",
+            "expanded": true,
             "pages": [
               "features/multimodal/image-input",
-              "features/multimodal/pdf-input",
-              "features/multimodal/image-generation"
-            ],
-            "root": "features/multimodal",
-            "expanded": true,
-            "icon": "cubes"
-          },
-          {
-            "group": "Efficiency",
-            "root": "features/efficiency",
-            "pages": [
-              "features/prompt-caching",
-              "features/safe-retries"
-            ],
-            "expanded": true,
-            "icon": "arrow-up-short-wide"
+              "features/multimodal/pdf-input"
+            ]
           }
         ],
         "icon": "cubes-stacked"
