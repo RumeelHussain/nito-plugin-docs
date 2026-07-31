@@ -1,0 +1,33 @@
+---
+title: "Getting Started"
+description: "The first questions: where commands run, the difference between the two triggers, signing in, and whether you need an API key."
+---
+
+The questions that come up in the first hour. Each answer links to the page with the full story.
+
+#### Do I type Nito commands in my terminal or inside the chat?
+
+Inside a running Claude Code or Codex session, not your terminal shell. `/nito:ask` and `$nito:ask` are commands the host understands; your shell does not. The one exception is the `nito` [CLI](/help/faq/using-the-cli), which does run in the terminal.
+
+#### What is the difference between `/nito:` and `$nito:`?
+
+Only the trigger. Claude Code uses `/nito:`, Codex uses `$nito:`. Every command exists in both hosts with the same behavior. See the [Command Index](/commands/command-index).
+
+#### Do I need an API key?
+
+No. The plugin signs in through your browser and stores the credential for you. You never paste a key into a chat, and Nito never asks for one there. See [Install](/get-started/install-claude-code).
+
+#### Why did setup ask me to sign in twice?
+
+Because there are two credentials: a **Local CLI** credential for local features, and a **Hosted** connection for the model calls. Setup authorizes both in the browser and skips either one that is already signed in, so you may only see one prompt.
+
+#### Is Nito a model, or a gateway?
+
+A gateway. Nito sits in front of many models and you choose which one answers per call. There is no single "Nito model." See [How It Works](/get-started/how-it-works).
+
+## Related Resources
+
+- [Install Claude Code](/get-started/install-claude-code)
+- [Install Codex](/get-started/install-codex)
+- [Your First Ask](/get-started/your-first-ask)
+- [Command Index](/commands/command-index)

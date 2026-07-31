@@ -1,0 +1,32 @@
+---
+title: "Privacy"
+description: "Common privacy questions: what your host can see, what Private guarantees, the tiers, and what Nito keeps."
+---
+
+Short answers on what is private and what is not. The full treatment is in the [Privacy](/privacy/overview) section.
+
+#### Does using the plugin send my prompt to my host's model provider?
+
+It depends on the command. A plain `ask` runs inside your host conversation, so your host can see that prompt. `private` is the command built to keep a turn out of your host's upstream entirely. See [Ask](/commands/ask-and-continue) and [Private](/commands/private).
+
+#### What does Private actually guarantee?
+
+A `private` turn is not sent to your host's own model provider. What it does not do is turn off local disk writes or act as a sandbox by itself. The [Private](/commands/private) page spells out exactly what is and is not covered.
+
+#### What are the privacy tiers?
+
+Anonymous, Private, Confidential, and Encrypted. The tier follows the model you choose and never silently downgrades. See [Privacy Tiers at a Glance](/models/privacy-tiers-at-a-glance) and [The Four Tiers](/privacy/tiers).
+
+#### Can I verify the privacy claim myself?
+
+Yes, for the attested tiers. A Confidential call runs in a sealed environment and returns evidence you can verify independently, rather than asking you to take the claim on trust. See [Verify It Yourself](/privacy/tee-attestation).
+
+#### What does Nito keep about my prompts?
+
+By default, metadata only. Prompts, completions, reasoning, tool payloads, and attachment contents are treated as request-local and are not persisted. See [Data Retention and Visibility](/privacy/data-retention-and-visibility).
+
+## Related Resources
+
+- [How Privacy Works](/privacy/overview)
+- [What Each Command Protects](/privacy/what-each-command-protects)
+- [The Four Tiers](/privacy/tiers)

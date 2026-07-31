@@ -1,0 +1,28 @@
+---
+title: "Using the CLI"
+description: "Whether you need the nito CLI, what it is for, and how it relates to the in-chat plugin."
+---
+
+Questions about the terminal side of Nito. See the [CLI](/cli/cli-overview) section for the full reference.
+
+#### Do I need the `nito` CLI at all?
+
+No, not for everyday prompting. The plugin does the work from inside your chat. The [CLI](/cli/cli-overview) is there for installing and repairing the integration, and for running Nito from the terminal or a script when you want to.
+
+#### What can I do from the terminal that I cannot do in a chat?
+
+Install and authorize a host (`nito setup`), check the health of your setup (`nito doctor`), keep everything current (`nito update`), and start a fully Nito-routed session from a script. See [CLI Overview](/cli/cli-overview).
+
+#### Can I ask a question without opening a chat?
+
+Yes. `nito ask "your question"` prints an answer and exits, and `nito fusion` runs a multi-model Fusion. See [Ask and Fusion from the Terminal](/cli/ask-and-fusion-from-terminal).
+
+#### A command says Nito is not connected. What do I do?
+
+Run `nito doctor` to see what is wrong, `nito agent login` to sign in, then re-run your command once. See [Doctor and Update](/cli/doctor-and-update) and [Troubleshooting](/help/troubleshooting).
+
+## Related Resources
+
+- [CLI Overview](/cli/cli-overview)
+- [Ask and Fusion from the Terminal](/cli/ask-and-fusion-from-terminal)
+- [Doctor and Update](/cli/doctor-and-update)

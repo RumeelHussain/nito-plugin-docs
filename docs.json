@@ -235,11 +235,24 @@
         "groups": [
           {
             "group": "Help",
+            "icon": "life-ring",
+            "expanded": true,
             "pages": [
-              "help/troubleshooting",
-              "help/faq"
-            ],
-            "icon": "life-ring"
+              "help/troubleshooting"
+            ]
+          },
+          {
+            "group": "FAQ",
+            "icon": "circle-question",
+            "expanded": true,
+            "root": "help/faq/index",
+            "pages": [
+              "help/faq/getting-started",
+              "help/faq/privacy",
+              "help/faq/models-and-fusion",
+              "help/faq/plans-and-usage",
+              "help/faq/using-the-cli"
+            ]
           }
         ],
         "icon": "circle-question"
