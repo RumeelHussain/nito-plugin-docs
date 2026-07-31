@@ -11,7 +11,7 @@ Every chat completion choice carries a `finish_reason` that tells you why genera
 |---|---|
 | `stop` | The model finished normally. It reached a natural end or a stop sequence. This is the success case. |
 | `length` | Generation hit a token cap (`max_tokens` / `max_completion_tokens`, or a model context limit). The reply is truncated; raise the cap and retry if you need more. |
-| `tool_calls` | The model wants you to run one or more tools. Read `message.tool_calls`, execute them, append the results as `tool` messages, and call again. See [Tool calling](/features/tool-calling). |
+| `tool_calls` | The model wants you to run one or more tools. Read `message.tool_calls`, execute them, append the results as `tool` messages, and call again. See [Tool calling](/commands/session). |
 | `error` | Something failed mid-generation. In a stream this arrives alongside a top-level `error` object. See [Error events](/api-reference/streaming-format/error-events). |
 
 ## Where it appears
@@ -46,7 +46,7 @@ The same four values appear on each participant in a [fusion response](/api-refe
 ## Related
 
 - [Chat Completions API](/api-reference/chat-and-text/chat-completions)
-- [Tool calling](/features/tool-calling)
+- [Tool calling](/commands/session)
 - [Error events](/api-reference/streaming-format/error-events)
 - [Delta format](/api-reference/streaming-format/delta-format)
 

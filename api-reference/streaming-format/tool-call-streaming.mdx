@@ -3,7 +3,7 @@ title: Tool call streaming
 description: How Nito streams tool calls in a chat completion. The start, argument-delta, and completed events, and how to reassemble them.
 ---
 
-When a model calls a tool mid-stream, the tool call arrives in fragments inside the `delta.tool_calls` array. This page covers the streaming events and how to reassemble a complete tool call. For the non-streaming shape and the round-trip, see [Tool calling](/features/tool-calling).
+When a model calls a tool mid-stream, the tool call arrives in fragments inside the `delta.tool_calls` array. This page covers the streaming events and how to reassemble a complete tool call. For the non-streaming shape and the round-trip, see [Tool calling](/commands/session).
 
 ## The three stages
 
@@ -49,11 +49,11 @@ Multiple concurrent tool calls are distinguished by their `index`; keep one buff
 
 ## After the stream
 
-Once `finish_reason` is `tool_calls`, run the requested tools, append each result as a `tool` message with the matching `tool_call_id`, and make a new chat completions call. The gateway routes tool declarations, calls, and results but does **not** execute caller-defined function tools. See [Tool calling](/features/tool-calling).
+Once `finish_reason` is `tool_calls`, run the requested tools, append each result as a `tool` message with the matching `tool_call_id`, and make a new chat completions call. The gateway routes tool declarations, calls, and results but does **not** execute caller-defined function tools. See [Tool calling](/commands/session).
 
 ## Related
 
-- [Tool calling](/features/tool-calling)
+- [Tool calling](/commands/session)
 - [Delta format](/api-reference/streaming-format/delta-format)
 - [Finish reasons](/api-reference/chat-and-text/finish-reasons)
 - [SSE transport](/api-reference/streaming-format/server-sent-events)

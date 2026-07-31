@@ -3,7 +3,7 @@ title: Chat Completions API
 description: Schema reference for POST /v1/chat/completions on Nito. Request fields, response shape, status codes, and a worked call.
 ---
 
-The chat completions endpoint is the primary text surface on Nito. This page is the precise schema companion to the [Chat Completions feature guide](/features/chat-completions): it leads with the request and response tables and a worked call. Read the feature guide first for the conceptual model (one key, model-ID-carried privacy).
+The chat completions endpoint is the primary text surface on Nito. This page is the precise schema companion to the [Chat Completions feature guide](/commands/ask-and-continue): it leads with the request and response tables and a worked call. Read the feature guide first for the conceptual model (one key, model-ID-carried privacy).
 
 ## Endpoint
 
@@ -33,7 +33,7 @@ The body is decoded as **strict JSON**: unknown fields are rejected with a `400`
 | `cache_control` | object | No | Provider cache hints (raw JSON object), passed through. Model must support it. |
 | `web_search` | bool or object | No | Let the model search the web mid-generation. |
 | `web_fetch` | boolean | No | Let the model fetch a URL mid-generation. |
-| `tools` | array | No | Function tools and hosted tools. See [Tool calling](/features/tool-calling). |
+| `tools` | array | No | Function tools and hosted tools. See [Tool calling](/commands/session). |
 | `tool_choice` | string or object | No | `auto` / `none` / `required`, or `{type, function:{name}}`. |
 | `user` | string | No | Opaque end-user identifier for your own bookkeeping. |
 
@@ -150,7 +150,7 @@ Nito also serves an OpenAI Responses-compatible endpoint at `POST /v1/responses`
 
 ## Related
 
-- [Chat Completions (feature guide)](/features/chat-completions)
+- [Chat Completions (feature guide)](/commands/ask-and-continue)
 - [Message format](/api-reference/chat-and-text/message-format)
 - [Reasoning parameters](/api-reference/chat-and-text/reasoning-parameters)
 - [Finish reasons](/api-reference/chat-and-text/finish-reasons)

@@ -3,7 +3,7 @@ title: Chat Fusion API
 description: Schema reference for POST /api/v1/chat/fusion. Fan out a prompt to 2-3 models concurrently, then merge with a synthesis pass.
 ---
 
-Chat fusion asks 2 to 3 models the same prompt concurrently, then runs one synthesis ("judge") pass that merges their answers into a single output. It is **non-streaming only**. This page is the schema reference; for the conceptual model see [Multi-model routing](/features/multi-model-routing).
+Chat fusion asks 2 to 3 models the same prompt concurrently, then runs one synthesis ("judge") pass that merges their answers into a single output. It is **non-streaming only**. This page is the schema reference; for the conceptual model see [Multi-model routing](/commands/fusion).
 
 ## Endpoint
 
@@ -91,7 +91,7 @@ Fusion returns `200` even on **partial failure**. If one participant fails, its 
 
 ## Related
 
-- [Multi-model routing](/features/multi-model-routing)
+- [Multi-model routing](/commands/fusion)
 - [Chat Completions API](/api-reference/chat-and-text/chat-completions)
 - [Message format](/api-reference/chat-and-text/message-format)
 - [Finish reasons](/api-reference/chat-and-text/finish-reasons)

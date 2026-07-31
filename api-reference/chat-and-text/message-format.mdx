@@ -76,13 +76,13 @@ Files are parsed server-side inline (text, pdf, docx, pptx, xlsx, xls) by the sa
 
 ## Tool and assistant pairing
 
-When an `assistant` message requests tools, it carries `tool_calls`. Each tool result is then sent back as a separate `tool` message whose `tool_call_id` matches the call. See [Tool calling](/features/tool-calling) for the full round-trip.
+When an `assistant` message requests tools, it carries `tool_calls`. Each tool result is then sent back as a separate `tool` message whose `tool_call_id` matches the call. See [Tool calling](/commands/session) for the full round-trip.
 
 ## Related
 
 - [Chat Completions API](/api-reference/chat-and-text/chat-completions)
 - [Chat Fusion API](/api-reference/chat-and-text/chat-fusion)
-- [Tool calling](/features/tool-calling)
+- [Tool calling](/commands/session)
 - [Multimodal](/features/multimodal)
 
 {/* source: internal/server/api_chat.go (apiChatRequestMessage, apiChatContentPartToInference, imageURLWithMediaType, validateAttachmentURL); internal/inference/contracts.go (Role, ContentPartKind, AttachmentSource); internal/inference/validation.go (validateMessage); DOCS_SOURCE_OF_TRUTH.md §2 (Roles & content parts) */}
