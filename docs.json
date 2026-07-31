@@ -85,35 +85,15 @@
         "groups": [
           {
             "group": "Models",
-            "pages": [
-              "models/all-models",
-              "models/model-catalog",
-              "models/pricing",
-              "models/model-id-convention",
-              "models/privacy-tiers-at-a-glance",
-              "models/model-families",
-              "models/providers",
-              "models/model-groups",
-              "models/backend-selection",
-              "models/choosing-a-model",
-              "models/deprecations-and-lifecycle"
-            ],
+            "root": "models/index",
             "icon": "cube",
             "expanded": true,
-            "root": "models/index"
-          },
-          {
-            "group": "Best Practices",
-            "root": "models/best-practices/index",
             "pages": [
-              "models/best-practices/latency-and-performance",
-              "models/best-practices/cost-control",
-              "models/best-practices/secure-api-key-handling",
-              "models/best-practices/privacy-safe-logging",
-              "models/best-practices/uptime-and-fallbacks"
-            ],
-            "expanded": true,
-            "icon": "shield-check"
+              "models/all-models",
+              "models/choosing-a-model",
+              "models/model-families",
+              "models/pricing"
+            ]
           }
         ],
         "icon": "cube"

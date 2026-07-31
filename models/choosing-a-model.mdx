@@ -1,69 +1,64 @@
 ---
 title: "Choosing the Right Model"
-description: "A practical guide from use case to model and privacy mode on Nito."
+description: "A practical guide from a task to the right Nito model and privacy tier, from Claude Code, Codex, or the CLI."
 ---
 
-With many models behind one key, the useful question is not "what exists" but "what should I use for this." This page is a decision guide. It maps common situations to a kind of model and a privacy mode, so you can choose quickly and refine later. Throughout, treat the live catalog as the final word: always confirm exact model IDs against `GET /v1/models`.
+With many models available through Nito, the useful question is not "what exists" but "what should I use for this." This page is a decision guide. It maps a common task to a kind of model and a privacy tier, so you can choose quickly and refine later. To browse what is actually available, list [`models`](/models/all-models); for the syntax to set your pick, see [Choosing a model](/commands/choosing-a-model).
 
-The single most useful habit is to separate two decisions that feel like one. What the model does and how protected the call is are independent choices. Mixing them is the most common reason people end up over-paying for privacy they did not need, or under-protecting a call that mattered.
+The single most useful habit is to separate two decisions that feel like one. What the model does and how protected the call is are independent choices. Mixing them is the most common reason people end up paying for privacy they did not need, or under-protecting a call that mattered.
 
 ## Start from Two Questions
 
-1. **What task is this?** Generation or image creation. This picks the kind of model.
-2. **How sensitive is this call?** This sets the privacy mode, independent of the model.
+1. **What task is this?** This picks the kind of model.
+2. **How sensitive is this call?** This sets the privacy tier, independent of the model.
 
 Answer those two and you have most of the decision. The rest is refinement.
 
 ## By Task
 
-- **Conversational or generative text.** Use a chat model. Favor a capable general model for quality, or a smaller one for speed and cost. See [Text](/models/model-families#text).
-- **Step-by-step problem solving.** Use a reasoning-capable chat model and enable `reasoning`. Use `effort: "high"` for genuinely hard problems and a lower effort for routine ones, since higher effort spends more tokens and time. See [Reasoning](/features/reasoning).
-- **Understanding images or documents.** Use a vision-capable chat model for images, and the file parser for PDFs and office documents. See [Image input](/features/multimodal/image-input).
-- **Creating images.** Use the image-generation endpoint. See [Image generation](/features/multimodal).
-- **Current information.** Use a chat model with web search enabled, so the model can pull in facts newer than its training. See [Web search](/features/server-side-tools/web-search).
+- **Conversational or generative text.** Use a chat model. Favor a capable general model for quality, or a smaller one for speed and cost. See [Model families](/models/model-families).
+- **Step-by-step problem solving.** Use a reasoning-capable model. Reasoning is a capability of the model you pick, so choose a model that supports it rather than setting a flag. See [Reasoning](/features/reasoning).
+- **Understanding images.** Use a vision-capable model and attach the image. See [Image input](/features/multimodal/image-input).
+- **Reading documents.** Attach the file. Any model can work with it. See [PDF input](/features/multimodal/pdf-input).
+- **Current information.** Turn on web search so the model can pull in facts newer than its training. See [Web search](/features/server-side-tools/web-search).
+- **Several opinions at once.** Use Fusion to ask more than one model and compare answers. See [Fusion](/commands/fusion).
 
 ## By Sensitivity
 
-A privacy mode describes how protected your prompt and the reply are while the model runs. Pick the lightest mode that genuinely fits the call.
+A privacy tier describes how protected your prompt and the reply are while the model runs. The tier follows the model you choose, so pick the lightest tier that genuinely fits the call.
 
 | The call is... | Use | Why |
 | --- | :-: | --- |
-| Low-sensitivity, internal | Ordinary mode (`model`) | Lowest overhead; metadata-only retention by default. |
-| Sensitive, needs no provider retention | Private-tier model | Zero-data-retention enforced upstream. |
-| Highly sensitive, needs proof | `model:confidential` | Sealed execution inside a hardware-isolated environment, with an attestation you can verify. |
-| Maximum assurance | `model:encrypted` | Client-side encryption to the sealed environment, on top of `:confidential`. Non-streaming. |
+| Low-sensitivity, internal | [Anonymous](/privacy/tiers/anonymous) | Lowest overhead, metadata-only retention by default. |
+| Sensitive, needs no provider retention | [Private](/privacy/tiers/private) | The provider retains nothing about the request. |
+| Highly sensitive, needs proof | [Confidential](/privacy/tiers/confidential) | Sealed execution you can verifiably attest. |
 
-The privacy decision is orthogonal to the model decision: pick the model for the task, then pick the mode for the sensitivity. The only constraint is that `:confidential` and `:encrypted` require a model that actually supports them, and a request that cannot be served as asked fails rather than quietly downgrading to a weaker mode. That refusal is a feature, not a glitch: it means you never silently lose the protection you asked for.
+The privacy decision is independent of the model decision: pick the model for the task, then pick the tier for the sensitivity. A request that cannot be served at the tier you asked for fails rather than quietly downgrading to a weaker one. That refusal is a feature, not a glitch: you never silently lose the protection you asked for. See [Privacy tiers](/privacy/tiers) for the full picture.
 
-## Why a Privacy Dial Instead of Always-Maximum Privacy
+## Choosing Well
 
-It is tempting to put every call in the strongest mode and stop thinking about it. The reason not to is that the strongest modes carry real trade-offs. The `:encrypted` mode does not stream, so a chat interface built on it cannot show tokens as they arrive. Attestation-capable backends are fewer, which can mean higher latency or lower availability. Forcing routine, low-sensitivity calls through the strongest mode makes them slower and more fragile for no benefit. Matching the protection to the sensitivity of each call is the whole point of a per-call dial: you pay the cost of strong privacy only where the request needs it.
+A few habits keep your choices efficient:
+
+- **Match model size to the job.** Do not default everything to the biggest model. A smaller model is faster and cheaper, and it is often enough.
+- **Use reasoning only for genuinely hard problems.** It costs more tokens and more time, so reach for a reasoning-capable model when the task truly needs step-by-step work, not for routine questions.
+- **Match the privacy tier to the sensitivity.** Maxing out privacy on every call adds overhead and can route to fewer backends for no benefit. Pay the cost of strong privacy only where the request needs it.
+- **Remember your host is untouched.** Choosing a Nito model never changes your own host's model. Your Claude Code or Codex assistant keeps running on its usual model; the Nito model applies only to the calls you send through Nito.
 
 ## Worked Examples
 
-- **A customer support bot that must not retain user data.** Use a capable chat model in private mode. Step up to `:confidential` if you need to prove the privacy property to your own customers, since attestation gives you something verifiable to show them.
-- **A coding helper for internal use.** A reasoning-capable chat model in ordinary mode is usually enough. Raise to private if the code itself is sensitive.
-- **A research assistant that needs fresh facts.** A chat model with web search enabled. Be aware that some provider web-tool combinations relax zero-data-retention; if that matters for your use, prefer a Confidential tier.
-
-## Cost and Latency
-
-Cost and latency vary by model and by privacy mode. Cheaper models and ordinary mode are faster and cheaper; `:confidential` and `:encrypted` can route to fewer backends and add overhead. When cost matters, compare candidates with the [pricing reference](/models/pricing) and lean on Nito's [backend selection](/models/backend-selection), which prefers the cheapest eligible backend among those that satisfy your privacy mode and feature requirements. Remember the ordering from that page: privacy and capability are filtered first, so cost only chooses among backends that already qualify.
-
-## Common Issues
-
-- **Choosing privacy by model instead of by call.** A model can serve multiple modes; choose the mode per request, not once for the whole project.
-- **Forgetting that `:encrypted` cannot stream.** If you need both streaming and attestation, use `:confidential` instead.
-- **Hard-coding a model ID.** Confirm IDs against `GET /v1/models`, since models are added and retired over time.
+- **A support helper that must not retain user data.** Use a capable chat model at the Private tier. Step up to Confidential if you need to prove the privacy property to someone else, since attestation gives you something verifiable to show.
+- **A coding helper for internal use.** A reasoning-capable model at the Anonymous tier is usually enough. Raise to Private if the code itself is sensitive.
+- **A research assistant that needs fresh facts.** A chat model with web search enabled.
 
 ## Related Resources
 
 <CardGroup cols={3}>
-  <Card title="Model Families" icon="object-ungroup" href="/models/model-families">
-    Explore Model Grouping, aliases, and fallbacks.
+  <Card title="Choosing a Model" icon="terminal" href="/commands/choosing-a-model">
+    The command syntax for browsing and setting your model.
   </Card>
 
-  <Card title="Privacy Tiers at a Glance" icon="lock-alt" href="/models/privacy-tiers-at-a-glance">
-    Nito's four privacy tiers, in brief.
+  <Card title="All Models" icon="object-ungroup" href="/models/all-models">
+    Browse the live catalog of available models.
   </Card>
 
   <Card title="Pricing" icon="money-bills" href="/models/pricing">

@@ -1,55 +1,47 @@
 ---
 title: "Model Families"
-description: "The kinds of models Nito serves, what each is for, and which modalities are available today."
+description: "The kinds of models you can run with Nito commands, what each is for, and which capabilities are available today."
 ---
 
-Models on Nito fall into a few families grouped by what they do. A family is just a category of model with a shared job: generating text, reading an image, making an image. This page describes the families that are available so you can match a task to the right kind of model.
+Models in the Nito catalog fall into a few families grouped by what they do. A family is just a category of model with a shared job: generating text, or reading an image. This page describes the families so you can match a task to the right kind of model.
 
 A term used throughout: a **modality** is a kind of data, such as text or images. A model's input modalities are what it accepts; its output modalities are what it produces. The families below are best understood as combinations of those.
 
-Use the anchors to jump to a family: [Text](#text), [Reasoning](#reasoning), [Vision (image input)](#vision-image-input), [Image generation](#image-generation).
+Use the anchors to jump to a family: [Text](#text), [Reasoning](#reasoning), [Vision (image input)](#vision-image-input).
 
 ## Text
 
-Text models are the core chat-and-generation family. You send a list of messages, you get a generated reply. This is the [chat completions](/commands/ask-and-continue) surface, and it is what most applications use. Text models vary in size, speed, context window (how much text they can consider at once), and cost. Because those vary, do not assume two text models are interchangeable on price or context; pick one with `GET /v1/models` and the [decision guide](/models/choosing-a-model).
+Text models are the core chat-and-generation family. You send a prompt, you get a generated reply. This is what most Nito commands use when you ask a question or continue a conversation (see [Ask and Continue](/commands/ask-and-continue)). Text models vary in size, speed, context window (how much text they can consider at once), and cost. Because those vary, do not assume two text models are interchangeable on price or context; browse the catalog with the `models` command and use the [decision guide](/models/choosing-a-model).
 
 ## Reasoning
 
 Reasoning is not a separate family of model so much as a capability some text models expose: they can work through a problem step by step before committing to a final answer, and they let you control how much effort to spend doing so. Think of it as the difference between answering off the cuff and showing your working first.
 
-On Nito you request this with the `reasoning` parameter (`enabled`, `effort` of `low`/`medium`/`high`, `summary`, `max_tokens`). The reasoning is returned as `reasoning_details`, and the tokens spent reasoning are counted separately in `usage` as `reasoning_tokens`, so you can see what the thinking cost. Reasoning is a per-model capability: check `supports_reasoning` on the model entry before relying on it. See [Reasoning](/features/reasoning).
+The catalog marks which models support reasoning, so browse with the `models` command and check the entry before relying on it. When a reasoning model is used, the thinking it does is metered separately from ordinary output, so you can see what it cost. See [Reasoning](/features/reasoning).
 
 ## Vision (Image Input)
 
-Vision-capable text models accept images as part of a chat message, alongside text, for tasks like describing a photo or reading a chart. Vision here means image input, not image output: the model reads the picture and replies in text. You attach an image as a content part (a data URL, an https URL, or base64 with a media type). Support is per model: check `supports_image_inputs`. Accepted image formats for direct upload are PNG, JPEG, and WebP. See [Image input](/features/multimodal/image-input).
+Vision-capable text models accept images as part of a prompt, alongside text, for tasks like describing a photo or reading a chart. Vision here means image input, not image output: the model reads the picture and replies in text. The catalog marks which models support vision, so browse with the `models` command and check the entry. Accepted image formats are PNG, JPEG, and WebP. See [Image Input](/features/multimodal/image-input).
 
-Nito also parses documents (PDF, DOCX, PPTX, XLSX, XLS, and text) server-side so their text can be fed into a prompt. That is the [file parser](/features/server-side-tools/file-parser) at work, not a vision capability: the document is turned into text first, then sent as text. Use vision for pictures and charts; use the file parser for documents.
-
-## Image Generation
-
-Image-generation models run the other direction from vision: text in, image out. On Nito this is served through the [image generations endpoint](/features/multimodal), backed by an image provider. You send a prompt and options like size and count, and receive image URLs or base64 data. The default image model is a Z-Image generation model. Note that the chat surface and the image-generation surface are separate endpoints; a vision-capable chat model that reads images does not generate them.
+Nito also parses documents (PDF, DOCX, PPTX, XLSX, XLS, and text) so their text can be fed into a prompt with any model. That is the [file parser](/features/server-side-tools/file-parser) at work, not a vision capability: the document is turned into text first, then sent as text. Use vision for pictures and charts; use the file parser for documents.
 
 <Note>
-  **Audio and video are not served on Nito today** — no transcription, speech, or video in/out, and no endpoints for them. Plan around text, vision input, and image generation.
+  **Audio and video are not available in the plugin today.** No transcription, speech, or video in or out. Plan around text and vision input.
 </Note>
 
 ## Common Issues
 
-- **Confusing vision input with image generation.** Reading an image and creating one are different families on different endpoints.
-- **Assuming every text model can see images or reason.** Image input and reasoning are per-model capabilities; read `supports_image_inputs` and `supports_reasoning` on the entry.
+- **Assuming every text model can see images or reason.** Image input and reasoning are per-model capabilities; the catalog marks which models support each, so check the entry when you browse.
+- **Expecting to generate images.** The plugin reads images (vision), it does not create them from a prompt.
 
 ## Related Resources
 
-<CardGroup cols={3}>
+<CardGroup cols={2}>
   <Card title="Choosing the Right Model" icon="magnifying-glass-waveform" href="/models/choosing-a-model">
-    A decision guide from use case to model.<br />
+    A decision guide from use case to model.
   </Card>
 
-  <Card title="Chat Completions Feature" icon="message-dots" href="/commands/ask-and-continue">
-    OpenAI-compatible endpoint for chat and text generation.
-  </Card>
-
-  <Card title="Image Generation" icon="image-stack" href="/features/multimodal">
-    Generate images from a text prompt with the Nito images endpoint.<br />
+  <Card title="All Models" icon="list-timeline" href="/models/all-models">
+    Browse every model in the catalog.
   </Card>
 </CardGroup>

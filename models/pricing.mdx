@@ -1,13 +1,13 @@
 ---
 title: "Pricing"
-description: "How model pricing works on Nito and where to read per-model cost."
+description: "How per-model cost works when you run Nito commands, and where to read the live rates."
 ---
 
-This page explains how Nito prices inference and where to read the numbers. The per-model rates are configured in the billing system and surfaced on each model's catalog entry, so the authoritative figures come from the live catalog, not a static table here.
+This page explains how Nito prices your usage and where to read the numbers. Rates are configured live and shown on each model's catalog entry, so the authoritative figures come from the catalog when you browse it, not from a static table here.
 
 ## How Pricing Works
 
-Nito bills in credits, tracked internally in nanos (billionths of a unit) for precision. Inference is priced primarily per token, with separate rates for input and output, plus additional rates for cached input tokens, reasoning output tokens, and server-side tool usage. Image generation is priced by output. Before each call, Nito places a hold sized to the expected cost, then settles it against actual usage. Failed requests are not billed. See [Check usage and credits](/plans/checking-usage).
+Nito bills in credits. Usage is priced mostly per token, with separate rates for input and output, plus additive rates for cached input tokens, reasoning output tokens, and server-side tools such as web search and fetch. Before each command runs, Nito places a hold sized to the expected cost, then settles it against what you actually used. Failed requests are not billed. See [Checking Usage](/plans/checking-usage) for your balance.
 
 ## What Gets Billed
 
@@ -20,49 +20,40 @@ A single call can accrue charges across several rate categories, each priced sep
 | Cached input tokens | Per token | Cache read and cache write are metered separately from ordinary input. |
 | Reasoning output | Per token | Reasoning tokens are billed on top of ordinary output. |
 | Server-side tools | Per use | Web search, web fetch, and similar hosted tools bill in addition to model tokens. |
-| Image generation | By output | Images are priced by output, not by input tokens. |
 
-Input and output are always separate rates; cache, reasoning, and server-tool charges are additive on top. Absence of a rate on a model entry means it is not yet configured, not that the item is free.
+Input and output are always separate rates; cache, reasoning, and server-tool charges are additive on top. If a model shows no rate for an item, that item is simply not configured for it, not that it is free.
 
 ## Where to Read Per-Model Cost
 
-Each model's `GET /v1/models` entry carries a `pricing` object (joined from the billing system at response time) alongside its `context_window`. Its per-token rates are expressed in nanos and cover input and output tokens, cache read and write, the reasoning output rate, web search and fetch, and an image output rate, plus `context_limit_tokens` for the model's context limit. The object also carries `currency_code` (defaults to `USD`), `unit` (`nanos`), and a price `version`; and each per-token rate is mirrored as a `*_million_token_nanos` field (the rate per million tokens) for convenience. Read pricing from the entry so your estimates track the live configuration.
-
-```shellscript wrap
-curl "https://nito.dev.zprotocol.org/v1/models" \
-  -H "Authorization: Bearer $NITO_API_KEY"
-# each entry includes a "pricing" object in nanos when configured
-```
-
-Rates are configured live and read from each model's `pricing` object, so there is no canonical static price table — but the [Model list](/models/all-models) page publishes a **snapshot** with each model's input/output price per 1M tokens for a quick overview. All amounts are in `nanos` (billionths of the currency in `currency_code`, default `USD`): divide by `1e9` for the value in dollars, so a `*_million_token_nanos` rate ÷ `1e9` gives the price per 1M tokens (e.g. `170000000` → `$0.17`).
+Rates are configured live and vary by model, so there is no canonical static price table on this page. When you browse the catalog with the `models` command, each model's entry shows its per-token cost, so your estimate tracks the live configuration. Because size, speed, and cost vary between models, do not assume two models cost the same: check the catalog entry for the one you plan to use.
 
 ## Server-Side Tool Pricing
 
-Server-side tools such as web search and web fetch are billed in addition to the model tokens. Their per-use rates (`web_search_request_nanos`, `web_search_result_nanos`, `web_fetch_request_nanos`) are part of the same `pricing` object, read live. See [Tool pricing](/features/server-side-tools) for the reference.
+Server-side tools such as web search and web fetch are billed in addition to model tokens, at their own per-use rates. Those rates are shown alongside the model on the catalog and are read live. See [Server-Side Tools](/features/server-side-tools) for what these tools do.
 
-## Estimating a Call
+## Plan Pricing Is Separate
 
-A rough estimate for a text call is `input_tokens * input_rate + output_tokens * output_rate`, plus any reasoning or tool costs, all in nanos. Because rates are per model and configured live, pull them from the `pricing` object rather than hard-coding numbers. The actual charge for a completed call is always reported in the response `usage` block and aggregated in the org usage overview.
+Per-model cost is distinct from your plan. What your plan includes and what upgrading unlocks are covered in [Plans and Billing](/plans/what-paid-unlocks). For free tier limits, see [Free Usage](/plans/free-usage).
 
 ## Common Issues
 
-- **Hard-coding prices.** Rates are configured live and can change. Read them from the model entry.
-- **Expecting `pricing` on every entry.** It appears only when configured for that model; absence means it is not yet set, not that the model is free.
-- **Treating nanos as whole credits.** Nanos are billionths; divide by 1e9.
+- **Assuming prices are fixed.** Rates are configured live and can change. Read them from the catalog when you browse.
+- **Expecting a rate on every model.** A rate appears only when configured for that model; absence means it is not yet set, not that the model is free.
 - **Forgetting tool and reasoning costs.** Web tools and reasoning tokens are billed on top of base input and output.
+- **Confusing per-model cost with your plan.** They are separate; see Plans and Billing.
 
 ## Related Resources
 
 <CardGroup cols={3}>
-  <Card title="Model list" icon="list-timeline" href="/models/all-models">
-    Snapshot of every model with per-1M prices.
+  <Card title="All Models" icon="list-timeline" href="/models/all-models">
+    Browse every model in the catalog.
   </Card>
 
-  <Card title="Check usage and credits" icon="analytics" href="/plans/checking-usage">
-    Check consumption, credits, and balance.
+  <Card title="Checking Usage" icon="analytics" href="/plans/checking-usage">
+    Check your consumption, credits, and balance.
   </Card>
 
-  <Card title="Tool pricing" icon="toolbox" href="/features/server-side-tools">
-    Server-side tool (web search / fetch) per-use rates.
+  <Card title="Server-Side Tools" icon="toolbox" href="/features/server-side-tools">
+    What web search and fetch do, and how they bill.
   </Card>
 </CardGroup>
