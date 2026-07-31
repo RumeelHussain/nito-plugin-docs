@@ -1,0 +1,44 @@
+---
+title: "MCP Tools"
+description: "The tools the hosted Nito connection exposes over MCP, for wiring Nito into your own agents. Optional at launch."
+---
+
+The plugin's hosted connection speaks the **Model Context Protocol (MCP)**. Most users never touch it directly; the plugin calls these tools for you. This page is for people building their own agent or integration who want to call Nito the same way the plugin does.
+
+<Note>
+This is optional at launch. You do not need any of it to use the plugin. If you only want to prompt Nito from Claude Code, Codex, or the terminal, the other CLI pages cover everything.
+</Note>
+
+## The Tools
+
+The adapter exposes exactly these tools, each with the `nito.` prefix. The set is fixed: no undocumented tools are exposed, and a missing required tool is reported rather than hidden.
+
+| Tool | Input | Returns |
+| :-- | :-- | :-- |
+| `nito.auth_status` | `{}` | User, org, client, scope, and expiry metadata. Never raw tokens. |
+| `nito.account_status` | `{}` or `{"projection":"compact"}` | Full safe account state, or the compact status-card fields only. |
+| `nito.models_list` | `{}` or a bounded `query` / `limit` / `cursor` / `type` / `projection` | The compatible model catalog, or a paged picker projection. |
+| `nito.chat_complete` | Chat request fields | The final assistant response and its metadata. Non-streaming. |
+| `nito.chat_fusion` | Prompt, two or three models, optional output and web controls | Participants, synthesis, safe attestation fields, usage, and partial status. |
+
+## What Each Tool Is For
+
+- **`nito.auth_status`** confirms who you are connected as and when the connection expires. It returns metadata only, never the credential itself.
+- **`nito.account_status`** returns your plan and usage. The `compact` projection returns just the rendered status-card fields, including the eligible-Free monthly plugin-request limit, the remaining count, and the UTC reset, and omits identifiers, scopes, and token metadata.
+- **`nito.models_list`** lists the catalog. Plain `{}` returns the full compatible list; `projection=picker` returns only `id`, `display_name`, and `privacy_tier`, plus `next_cursor`, `total`, and `catalog_revision` for paging.
+- **`nito.chat_complete`** is a single, non-streaming completion. It applies the same model policy as the rest of Nito, so premium and privacy rules are enforced here too.
+- **`nito.chat_fusion`** runs a multi-model Fusion and returns each participant plus the synthesis, along with safe attestation fields. It is available over OAuth sign-in.
+
+## Privacy and Limits Still Apply
+
+These tools are a different transport, not a different set of rules. The privacy tier still follows the model, premium and beta model policy is enforced on `nito.chat_complete`, and rate limits are returned as normal tool errors with canonical `rate_limited` codes when you go over. Prompts, tool arguments, and completions are not persisted or logged by default.
+
+## Running the Local Bridge
+
+If your agent needs a local MCP endpoint, the CLI can run one:
+
+```bash
+nito agent mcp
+```
+
+This starts the optional local MCP bridge, which mirrors the same documented tools. For the full protocol details, scopes, and paging behavior, see the platform [MCP reference](/api-reference).

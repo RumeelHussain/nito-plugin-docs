@@ -1,0 +1,85 @@
+---
+title: "Privacy Tiers in Depth"
+description: "The four privacy tiers as a ladder, how to select each one, and why support is decided per model in the catalog."
+---
+
+Nito lets you choose how private each call is, and you make that choice per request rather than once for your whole account. The brief version lives in [Privacy tiers at a glance](/models/privacy-tiers-at-a-glance). This section is the authoritative reference: one page per tier, going deeper into what each one protects, how you select it, and the trade-offs you accept when you pick it.
+
+## Each Privacy Tier Builds on the Last
+
+Read the four tiers as a ladder. Each rung adds a stronger guarantee and, in exchange, narrows the set of models and features available to you. You climb only as high as a given call needs.
+
+| **Tier** | `privacy_tier` | **Select with** | **Core guarantee it adds** |
+| :-- | :-: | :-- | :-- |
+| **Anonymous** | `anon` | plain model ID | Metadata-only retention by default |
+| **Private** | `private` | plain model ID · private-tier | Zero-data-retention enforced upstream |
+| **Confidential** | `confidential` | `model:confidential` | Sealed TEE execution with a verifiable attestation |
+| **Encrypted** | `encrypted` | `model:encrypted` \+ headers | Client-side encryption to the sealed enclave |
+
+Each higher tier keeps the guarantees of the ones below it and adds its own. Confidential runs inside a Trusted Execution Environment that you can attest; Encrypted keeps that sealed execution and additionally encrypts your data to it.
+
+## Selecting Privacy Tiers by Names
+
+The four tiers — Anonymous, Private, Confidential, Encrypted — are the canonical `privacy_tier` values in the catalog. The model-ID suffix is the real selector:
+
+- **No suffix** selects the model's stored tier, either `anon` (Anonymous) or `private` (Private).
+- **`:confidential`** selects Confidential.
+- **`:encrypted`** selects Encrypted.
+
+`:confidential` and `:encrypted` are the canonical suffixes. There is no separate `tier` field in the request body; you change the privacy of a call by changing the model string, nothing else.
+
+## Which Privacy Tiers a Model Offers
+
+No model supports every tier. Which rungs of the ladder a given model offers is reported on its catalog entry from `GET /v1/models`, and the practical rule is always the same: read the model entry, then choose the tier the model supports.
+
+- **Anonymous / Private** are decided by the model's `privacy_tier` field (`anon` or `private`). You do not add a suffix; the model's own tier determines which of the two you get.
+- **Confidential** is available when the entry shows `attestation_available: true` (with `privacy_tier: "confidential"`). Select it with `:confidential`.
+- **Encrypted** is available when the entry shows `encrypted_supported: true`. Select it with `:encrypted` and the required encryption headers.
+
+A privacy mode never silently downgrades. If you append `:confidential` to a model that has no TEE backend, the call is rejected rather than served at a weaker tier. A guarantee that quietly weakens is worse than no guarantee, so the gateway refuses instead.
+
+```mermaid placement="top-right" actions={true}
+flowchart TD
+    A["1 · Anonymous<br/>privacy_tier: anon · no suffix<br/>metadata-only retention"] --> P["2 · Private<br/>privacy_tier: private · no suffix<br/>+ zero-data-retention upstream"]
+    P --> C["3 · Confidential<br/>attestation_available · :confidential<br/>+ sealed TEE execution you can attest"]
+    C --> E["4 · Encrypted<br/>encrypted_supported · :encrypted + headers<br/>+ client-side encryption to the enclave"]
+```
+
+_Each rung keeps the guarantees of the rungs below it and adds its own. Support is decided per model — read `privacy_tier`, `attestation_available`, and `encrypted_supported` on the catalog entry, then choose the tier the model offers._
+
+## How to Read the Rest of this Section
+
+Start with the tier closest to your need and climb from there:
+
+- [**Anonymous**](/privacy/tiers/anonymous) the lightest tier and the default. Broad model availability, metadata-only retention.
+- [**Private**](/privacy/tiers/private) privately served models with no upstream retention.
+- [**Confidential**](/privacy/tiers/confidential) sealed execution with an attestation you can fetch and verify. Supports streaming.
+- [**Encrypted**](/privacy/tiers/encrypted) the top rung: client-side encryption to the sealed environment, with the most constraints.
+
+## Related Resources
+
+<CardGroup cols={3}>
+  <Card title="Privacy Overview" icon="shield-check" href="/privacy/overview">
+    What “private” means on Nito.<br />
+  </Card>
+
+  <Card title="Privacy Tiers at a Glance" icon="cubes-stacked" href="/models/privacy-tiers-at-a-glance">
+    Explore Nito's four privacy tiers.
+  </Card>
+
+  <Card title="Per-Call Privacy Modes" icon="phone-circle" href="/privacy/per-call-privacy-modes">
+    Different privacy modes available per-call.<br />
+  </Card>
+
+  <Card title="TEE Attestation" icon="stamp" href="/privacy/tee-attestation">
+    How Nito turns a privacy promise into something you can check.<br />
+  </Card>
+
+  <Card title="Model ID Convention" icon="id-card" href="/models/model-id-convention">
+    What Nito retains and what it does not.<br /><br />
+  </Card>
+
+  <Card title="How Nito Works" icon="gears" href="/get-started/how-nito-works">
+    How model IDs are named on Nito, and how the optional suffix selects a privacy mode.
+  </Card>
+</CardGroup>

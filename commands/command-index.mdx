@@ -1,0 +1,27 @@
+---
+title: "Command Index"
+description: "Every Nito plugin command, one line each. Trigger with a slash in Claude Code and a dollar sign in Codex."
+---
+
+Every command exists in both hosts. The only difference is the trigger: **`/nito:`** in Claude Code, **`$nito:`** in Codex.
+
+| Command | What it does |
+| :-- | :-- |
+| [`ask`](/commands/ask-and-continue) | Ask a Nito model one question inside your current chat. |
+| [`continue`](/commands/ask-and-continue) | Follow up on the immediately preceding Nito exchange. |
+| [`fusion`](/commands/fusion) | Send one prompt to two or three models plus a synthesis. Paid. |
+| [`private`](/commands/private) | A one-shot exchange your host's upstream never sees, or a no-trace incognito session. |
+| [`session`](/commands/session) | Open a persistent session powered entirely by a Nito model. Paid. |
+| [`model`](/commands/choosing-a-model) | Set your durable default Nito model. |
+| [`models`](/commands/choosing-a-model) | Browse the models available to your account. |
+| [`context`](/commands/context-and-mode) | Turn conversation context on or off for `ask`, or check it. |
+| [`mode`](/commands/context-and-mode) | Report how the current conversation is routed. |
+| [`status`](/commands/status-and-account) | Show your profile, plan, and usage. |
+| [`login`](/commands/status-and-account) | Authorize the plugin's connection to Nito. |
+| [`logout`](/commands/status-and-account) | Sign out. |
+| [`signup`](/commands/status-and-account) | Start creating a Nito account. |
+| `help` | Open the built-in menu of Nito actions. It is a menu, not a model call. |
+
+<Note>
+`help` (`/nito:help` or `$nito:help`) is the progressive-discovery menu. It shows or routes to the focused commands above and never makes a Nito inference call itself.
+</Note>

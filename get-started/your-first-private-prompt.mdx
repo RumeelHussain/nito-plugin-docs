@@ -1,0 +1,65 @@
+---
+title: "Your First Private Prompt"
+description: "Run an incognito prompt your host's upstream never sees, understand what the guarantee covers, and open a full incognito session."
+---
+
+`private` is the plugin's flagship. Unlike `ask`, a private prompt and its answer are kept **out of your host model's request**, your host's upstream never sees them. The answer comes from a Nito model and is shown back to you as a blocked turn.
+
+## Run It
+
+<Tabs>
+  <Tab title="Claude Code">
+    ```text
+    /nito:private Review this snippet for a security bug: <your code>
+    ```
+  </Tab>
+  <Tab title="Codex">
+    ```text
+    $nito:private Review this snippet for a security bug: <your code>
+    ```
+  </Tab>
+</Tabs>
+
+## What Just Happened
+
+The plugin intercepted the command before your host ran its own inference, sent a **prompt-only** request to a Nito model through the local helper, and returned the answer as a blocked result. The private prompt and the Nito answer were **excluded from your host model's request**, so they never became part of the host's context.
+
+The result is labeled `Session mode: Incognito` and shows the model and privacy tier that answered.
+
+<Warning>
+The private guarantee depends on your host's hooks being **enabled and trusted**. If hooks are disabled, the command cannot intercept the turn. Do not submit private data with hooks off. On Codex, this is the one-time `/hooks` trust step from install.
+</Warning>
+
+## What Stays in the Path
+
+Private keeps your prompt out of the *host model's request*. It does not remove everyone from the path: your local host process, your operating system, the Nito gateway, and the selected model provider are still involved. That boundary is covered in full on [The Trust Boundary](/privacy/trust-boundary).
+
+## Open a Full Incognito Session
+
+Run `private` with **no prompt** to go further than a single turn:
+
+<Tabs>
+  <Tab title="Claude Code">
+    ```text
+    /nito:private
+    ```
+    Opens a fresh, fully Nito-routed session that keeps nothing, no prompt history, no transcript, no resume state. Your original session is untouched and receives only a launch result.
+  </Tab>
+  <Tab title="Codex">
+    ```text
+    $nito:private
+    ```
+    Reports that a no-prompt private **session** is not yet available on Codex (coming soon), without calling any model. For now, use `$nito:private <prompt>` for one private turn, or `$nito:session` for a persistent Nito-routed session.
+  </Tab>
+</Tabs>
+
+## Next
+
+<CardGroup cols={2}>
+  <Card title="Private (full reference)" icon="user-secret" href="/commands/private">
+    Every option, and exactly what the guarantee covers.
+  </Card>
+  <Card title="The Trust Boundary" icon="shield-halved" href="/privacy/trust-boundary">
+    What private protects and what remains in the path.
+  </Card>
+</CardGroup>

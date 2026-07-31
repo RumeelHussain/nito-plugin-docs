@@ -1,0 +1,78 @@
+---
+title: "File Parser"
+description: "Extract text from uploaded documents. From the API you reach the parser inline in a chat request; the standalone parse endpoint is a browser-session surface."
+---
+
+The file parser extracts plain text from a document so a model can read it. The gateway does the work server-side: it detects the file kind, pulls out the text, and folds it into the model's context.
+
+There are two ways to reach it, and which one applies to you depends on how you authenticate:
+
+- **Inline in a chat request** the path you use from the API. Attach a file to a chat message and the gateway parses it and injects the text before the model runs. This works with your API key.
+- **The standalone parse endpoint** (`POST /api/v1/attachments/parse`) a **browser-session** surface used by the console UI. It is **not callable with an API key** and returns `403` if you try. From the API, use the inline path below.
+
+## Parsing Inline in a Chat Request
+
+Send the file as a content part alongside your text. The gateway runs the parser on it and continues the completion with the extracted text in context, so there is no separate call and no second round trip.
+
+```bash wrap
+curl https://nito.dev.zprotocol.org/v1/chat/completions \
+  -H "Authorization: Bearer $NITO_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "openai/gpt-oss-120b",
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          { "type": "text", "text": "Summarize this document." },
+          { "type": "file", "file": { "filename": "report.pdf", "file_data": "data:application/pdf;base64,JVBERi0xLjcK..." } }
+        ]
+      }
+    ]
+  }'
+```
+
+> **TODO (needs SME):** replace `https://nito.dev.zprotocol.org` with the canonical production base URL once confirmed.
+
+A few rules the gateway enforces:
+
+- Supply the file **inline as `file_data`** (a base64 data URL) or **by `file_url`** for the gateway to fetch. A **`file_id` reference is not supported** and is rejected with `<field>.file_id is not supported`.
+- The model must support file attachments. On a model that does not, the request is rejected with `model does not support file attachments`.
+- Images are not parsed here. Send an image to an image-capable model as [image input](/features/multimodal/image-input) instead.
+
+## What the Parser Accepts
+
+The parser handles text and common office documents: **text, pdf, docx, pptx, xlsx, xls**. Anything else returns `file type is not supported for server-side parsing`, and an image returns `image files should be sent directly to an image-capable model`.
+
+## Limits
+
+The parser bounds its work so responses stay predictable:
+
+- **50 MiB** default upload cap. A file over the cap is rejected with **`413`**.
+- **2,000** PDF pages maximum.
+- **10 seconds** PDF parsing timeout.
+- Extracted text is bounded by a **50 MiB** safety limit; output that hits a cap is truncated and flagged.
+
+## Billing
+
+A parse is billed as **`z-protocol/document-parse`**, metered as **1 unit** per parse, separate from any model token usage.
+
+## The Standalone Parse Endpoint (Browser Session Only)
+
+The console UI parses uploads through `POST /api/v1/attachments/parse` (multipart form data). This endpoint requires a **browser session** and is **not** part of the API-key surface: calling it with a bearer token returns `403`. It returns a JSON envelope with the extracted `text`, the detected `mime_type` and `file_kind`, input `bytes`, and — for paginated formats — `page_count`, `parsed_pages`, a `truncated` flag, and any `warnings`. If you are building against the API, use the inline-chat path above instead; it runs the same parser.
+
+## Related Resources
+
+<CardGroup cols={3}>
+  <Card title="How Nito Works" icon="gears" href="/get-started/how-nito-works">
+    Understand the request lifecycle and chat request surface.
+  </Card>
+
+  <Card title="Server-Side Tools" icon="tools" href="/features/server-side-tools">
+    Tools Nito or the provider runs for you mid-generation.
+  </Card>
+
+  <Card title="PDF and Document Input" icon="file-pdf" href="/features/multimodal/pdf-input">
+    For the multimodal view of sending files inline.
+  </Card>
+</CardGroup>

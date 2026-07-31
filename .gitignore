@@ -1,0 +1,9 @@
+# Internal working docs — not part of the published site
+PLATFORM-DOCS-PLAYBOOK.md
+Plugin Docs Outline - Rumeel (external).md
+REVIEW-NOTES.md
+
+# Dependencies / build / OS
+node_modules/
+.DS_Store
+*.log

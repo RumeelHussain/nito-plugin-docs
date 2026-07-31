@@ -1,0 +1,68 @@
+---
+title: "Troubleshooting"
+description: "Symptom-first fixes for the common plugin problems: commands not found, tools not loading, sign-in prompts, and known Codex issues."
+---
+
+Find your symptom, apply the fix. If your question is conceptual rather than a failure, see the [FAQ](/help/faq).
+
+## "zsh: no matches found" or "command not found" when I type $nito or /nito
+
+You are typing the command in your **terminal shell** instead of inside a session. Plugin commands only work inside a running Claude Code or Codex session.
+
+- Start your host (`claude` or `codex`), then type the command at the host's prompt.
+- To run Nito from the terminal on purpose, use the [CLI](/cli/cli-overview): `nito ask "..."`.
+
+<Note>
+In some shells the `$` in `$nito:` is read as a variable. That is another sign the command is being typed in the shell rather than in a Codex session.
+</Note>
+
+## Typing $ in Codex does not show Nito commands
+
+The `$nito:` commands are invoked by typing them, not from an autocomplete popup. Type the full command (for example `$nito:ask your question`) at the Codex prompt. If nothing happens at all, confirm the plugin is installed and trusted with `nito doctor`.
+
+## A command says Nito is not connected
+
+The plugin shows a **specific recovery action** rather than failing silently. Do the step it names, then **re-run your original command once**. The plugin does not auto-replay a possibly billable request, so the retry is yours to make.
+
+If it keeps happening:
+
+<Steps>
+  <Step title="Check">
+    Run `nito doctor` in your terminal and read what it flags.
+  </Step>
+  <Step title="Sign in">
+    Run `nito agent login`, then confirm with `nito agent status`.
+  </Step>
+  <Step title="Repair">
+    If an integration is broken, run `nito doctor --repair`, then re-run the command that failed.
+  </Step>
+</Steps>
+
+See [Doctor and Update](/cli/doctor-and-update) and [When Tools Do Not Load in a Chat](/commands/status-and-account).
+
+## Codex shows a hooks or trust warning at startup
+
+Codex warns about hooks the first time. This is Codex's own trust step, separate from Nito sign-in. Approve it so the Nito hooks can run. It does not mean anything is wrong with your Nito account.
+
+## "text.verbosity is not supported" in a Nito-routed Codex session
+
+This is a known compatibility issue between a recent Codex release and the gateway: Codex sends a verbosity setting the gateway does not yet accept, and the request is rejected. It is being tracked as a gateway fix, and it is **not** a problem with your account or sign-in.
+
+Until it is resolved:
+
+- Prefer the in-chat `$nito:` commands (`$nito:ask`, `$nito:private`, and so on) inside your normal Codex session, which are not affected.
+- Retry the Nito-routed session after updating with `nito update`, which pulls the fix once it ships.
+
+## Setup only asked me to sign in once
+
+That is expected. Setup authorizes two credentials (Local CLI and Hosted) and **skips whichever is already signed in**. If you had one from an earlier install, you only see the other. Confirm both are healthy with `nito doctor`.
+
+## The plugin seems out of date after an update
+
+Run `nito update` to upgrade the binary and refresh the managed integrations so the plugin bundle matches the new version. If only the integrations drifted, `nito update --skip-binary` re-syncs them without touching the binary. See [Doctor and Update](/cli/doctor-and-update).
+
+## Something else
+
+- Reinstall or reconnect a host: [Install Claude Code](/get-started/install-claude-code), [Install Codex](/get-started/install-codex).
+- Confirm your whole setup end to end: [Check Your Setup](/get-started/check-your-setup).
+- Understand what each command does: [Command Index](/commands/command-index).

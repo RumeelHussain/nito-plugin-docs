@@ -1,0 +1,86 @@
+---
+title: "Ask and Fusion from the Terminal"
+description: "Run a single Nito question or a multi-model Fusion directly from the shell, with attachments, JSON output, and piped input."
+---
+
+`nito ask` and `nito fusion` do the same work as the in-chat [`ask`](/commands/ask-and-continue) and [`fusion`](/commands/fusion) commands, but from your shell. They print an answer and exit, which makes them easy to pipe, script, or drop into a keyboard shortcut.
+
+## Ask
+
+```text
+nito ask [prompt] [flags]
+```
+
+A single question to a single Nito model. The answer prints to standard output.
+
+```bash
+nito ask "Summarize what a Merkle proof guarantees."
+```
+
+### Options
+
+| Flag | Default | Effect |
+| :-- | :-- | :-- |
+| `--model <id>` | your saved default | Choose the Nito model for this call. |
+| `--file <path>` | none | Attach a local image or document. Repeatable. |
+| `--web-search off\|auto\|on` | `on` | Hosted web search mode. |
+| `--web-fetch <on\|off>` | `on` | Allow hosted fetch of URLs you name. |
+| `--max-tokens <n>` | `2048` | Cap the output length. |
+| `--stdin` | off | Read the prompt from standard input instead of an argument. |
+| `--json` | off | Print a structured JSON response instead of plain text. |
+| `--timeout <duration>` | `2m` | Request timeout. |
+
+### Piping Input
+
+With `--stdin`, the prompt comes from whatever you pipe in, so you can feed a file or another command straight to Nito:
+
+```bash
+cat error.log | nito ask --stdin "What is the root cause here?"
+```
+
+### Structured Output
+
+`--json` prints a machine-readable object instead of prose, which is what you want in a script:
+
+```bash
+nito ask --json "Return three tags for this repo." | jq .
+```
+
+## Fusion
+
+```text
+nito fusion [--model <id> --model <id>] [prompt] [flags]
+```
+
+One prompt, two or three models, plus a synthesis. This is the client-side form of [Fusion](/commands/fusion): your machine fans the prompt out and a judge model reconciles the answers.
+
+```bash
+nito fusion --model model-a --model model-b "Is this contract vulnerable to reentrancy?"
+```
+
+### Options
+
+| Flag | Default | Effect |
+| :-- | :-- | :-- |
+| `--model <id>` | (required) | A participant model. Repeat two or three times. |
+| `--judge <id>` | first model | The model that writes the synthesis. |
+| `--file <path>` | none | Attach a local file to every participant. Repeatable. |
+| `--web-search off\|auto\|on` | `on` | Hosted web search mode. |
+| `--web-fetch <on\|off>` | `on` | Allow hosted fetch of URLs you name. |
+| `--stdin` | off | Read the prompt from standard input. |
+| `--json` | off | Print structured JSON. |
+| `--timeout <duration>` | `5m` | Overall Fusion timeout. |
+
+<Note>
+Fusion needs a **paid plan**. It also mixes privacy tiers by the rules on the [Fusion](/commands/fusion) page: the synthesis lands at the least-private tier among the participants, so a single Anonymous model pulls the whole run to Anonymous.
+</Note>
+
+## Choosing a Model
+
+Both commands accept `--model`. Without it, `ask` uses your saved default; Fusion always needs its participants named explicitly. To see what is available to your account:
+
+```bash
+nito agent models
+```
+
+See [Choosing a Model](/commands/choosing-a-model) for how the saved default works.

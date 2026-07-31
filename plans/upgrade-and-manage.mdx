@@ -1,0 +1,35 @@
+---
+title: "Upgrade and Manage"
+description: "Where to change plans, how billing is managed, and how a plan change reaches the plugin."
+---
+
+Plans are chosen and managed in the **Nito app**, not from inside a chat. The plugin reads your plan; it does not sell or change it. This keeps payment out of your host session and in the billing surface where it belongs.
+
+## Upgrading
+
+Open **Billing** in the Nito app and pick a plan. You can move up the ladder at any time: Free to Plus, Plus to Advanced, or Advanced to Max. Each tier includes everything below it, so upgrading only adds capabilities. For what each tier unlocks, see [What Paid Unlocks](/plans/what-paid-unlocks).
+
+<Note>
+Prices are set live and can vary by region and billing period (monthly or annual). Confirm the current price for your account in the app before subscribing.
+</Note>
+
+## Payment Options
+
+Billing supports standard card checkout, and **crypto-wallet payment** is available on eligible plans. The exact options shown depend on your account and region; the app presents whatever applies to you at checkout.
+
+## Managing an Existing Subscription
+
+From **Billing** in the app you can:
+
+- Change or cancel your plan.
+- Switch between monthly and annual billing.
+- View invoices and billing history.
+- See your prepaid credit balance, if you use credits.
+
+## How a Change Reaches the Plugin
+
+Your plan and entitlements are read live, so a plan change takes effect for the plugin without reinstalling anything. After upgrading, confirm the new plan on your [status card](/plans/checking-usage) with `status` in a chat, or `nito agent status` from the terminal.
+
+<Note>
+If a newly unlocked feature (like [Fusion](/commands/fusion) or a [full session](/commands/session)) still reports as unavailable right after upgrading, re-check `status` to confirm the new plan is reflected, then run the command again. Full sessions additionally require full-session access to be enabled for your organization.
+</Note>

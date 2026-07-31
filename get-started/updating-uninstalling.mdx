@@ -1,0 +1,53 @@
+---
+title: "Updating and Uninstalling"
+description: "Keep the CLI and plugin current with one command, and remove everything cleanly when you're done."
+---
+
+## How Versions Work
+
+The CLI and the plugin are always **version-matched**. Setup installs the plugin from a local marketplace that the CLI materializes from itself, so the two never drift. When you update the CLI, you refresh the plugin at the same time.
+
+## Updating
+
+```bash
+nito update
+```
+
+This upgrades the `nito` CLI and refreshes your managed host integrations in one step. To refresh only the integrations without upgrading the binary:
+
+```bash
+nito update --skip-binary
+```
+
+## Uninstalling
+
+Removal is two parts: remove the plugin from your host, then remove your Nito credential.
+
+<Steps>
+  <Step title="Remove the plugin">
+    <Tabs>
+      <Tab title="Claude Code">
+        ```bash
+        claude plugin uninstall nito@nito
+        ```
+      </Tab>
+      <Tab title="Codex">
+        ```bash
+        codex plugin remove nito@nito
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step title="Remove your credential">
+    Sign out to remove the local Nito credential from your OS keychain:
+
+    ```bash
+    nito agent logout
+    ```
+  </Step>
+</Steps>
+
+<Note>
+Uninstalling the plugin and signing out does not delete your Nito account or any billing. Manage those from your account in the browser, see [Upgrade and Manage](/plans/upgrade-and-manage).
+</Note>

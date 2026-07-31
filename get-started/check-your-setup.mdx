@@ -1,0 +1,50 @@
+---
+title: "Check Your Setup"
+description: "Confirm the plugin is signed in and healthy with the status card and the doctor command."
+---
+
+Two commands tell you whether everything is working: `status` for your account, and `doctor` for your local install.
+
+## Check Your Status
+
+<Tabs>
+  <Tab title="Claude Code">
+    ```text
+    /nito:status
+    ```
+  </Tab>
+  <Tab title="Codex">
+    ```text
+    $nito:status
+    ```
+  </Tab>
+</Tabs>
+
+The status card shows your signed-in profile, the gateway environment, how you authenticated, your plan, and your usage. It's the quickest confirmation that you're connected.
+
+## Run Doctor
+
+From the terminal:
+
+```bash
+nito doctor
+```
+
+Doctor checks the local pieces the plugin depends on and prints a line per check:
+
+- the `nito` binary is installed,
+- your agent profile has a credential,
+- your host (Claude Code / Codex) is found,
+- the Codex hook's trust state,
+- the gateway is reachable and authenticated,
+- your default model resolves.
+
+## What Healthy Looks Like
+
+Every check reads `PASS`, with `INFO` lines where a check is not applicable. That means the plugin is installed, signed in, and pointed at a reachable gateway.
+
+<Note>
+Doctor also runs a tiny live **inference** check. If that one line reports a failure but your `ask` and `private` commands actually work, re-run `nito doctor`, the inference smoke test can be transiently flaky and is not a reliable signal on its own.
+</Note>
+
+If a check other than inference fails, [Troubleshooting](/help/troubleshooting) maps each symptom to a fix.

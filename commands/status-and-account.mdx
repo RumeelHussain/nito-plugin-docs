@@ -1,0 +1,54 @@
+---
+title: "Status and Account"
+description: "Read your status card, check free usage, sign in and out, and recover when tools do not load in a chat."
+---
+
+## Status
+
+<Tabs>
+  <Tab title="Claude Code">
+    ```text
+    /nito:status
+    ```
+  </Tab>
+  <Tab title="Codex">
+    ```text
+    $nito:status
+    ```
+  </Tab>
+</Tabs>
+
+The status card shows your signed-in profile, the gateway environment, how you authenticated, your plan, and your usage, including any free-allowance notices. It is the quickest confirmation that you are connected and which plan you are on.
+
+For what the free allowance includes and when it resets, see [Free Usage](/plans/free-usage).
+
+## Sign In and Out
+
+<Tabs>
+  <Tab title="Claude Code">
+    ```text
+    /nito:login
+    /nito:logout
+    /nito:signup
+    ```
+  </Tab>
+  <Tab title="Codex">
+    ```text
+    $nito:login
+    $nito:logout
+    $nito:signup
+    ```
+  </Tab>
+</Tabs>
+
+- **`login`** authorizes the plugin's connection to Nito.
+- **`logout`** signs you out.
+- **`signup`** starts creating a Nito account.
+
+## When Tools Do Not Load in a Chat
+
+If a Nito command reports that Nito is not connected, the plugin shows a **specific recovery action** instead of failing silently or quietly using the wrong credential. Complete the step it names, then **re-run your original command once**. The plugin does not automatically replay a request that may be billable, so the retry is always yours to make.
+
+<Note>
+Nito never asks for your credentials inside a chat. Sign-in always happens through your host's own authorization flow or the browser.
+</Note>

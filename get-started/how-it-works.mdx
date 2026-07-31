@@ -1,0 +1,45 @@
+---
+title: "How It Works"
+description: "The mental model: an authorized connection to Nito inside your host, a local Nito helper for private and session work, and nothing routed to Nito unless you ask."
+---
+
+You do not need to know how the plugin is built to use it, but one simple picture makes everything else make sense.
+
+## The Mental Model
+
+The plugin reaches Nito two ways, and each one handles a different kind of command:
+
+- **An authorized connection inside your host.** Your first setup authorizes your host (Claude Code or Codex) to talk to Nito once. After that, commands like `/nito:ask`, `/nito:fusion`, `/nito:models`, and `/nito:status` run over that connection. The result comes back into your chat, labeled with the model and privacy level that served it.
+- **A local Nito helper.** A small command-line helper, installed alongside the plugin, powers the parts that need to run on your machine: installation, file attachments, and launching private or session workflows. This is what makes `/nito:private` able to answer without your host's upstream ever seeing the prompt.
+
+<Note>
+These are two separate authorizations by design. Signing in to one does not sign you in to the other, and the plugin will tell you clearly which one a command needs, it never quietly uses the wrong one.
+</Note>
+
+## Your Host Stays Primary
+
+Nothing routes to Nito unless you run a Nito command. Ordinary messages to Claude Code or Codex behave exactly as they always have, same model, same tools, same settings. A Nito command makes **at most one** Nito call and returns a labeled result; there is no background traffic and no automatic retry of a billable request.
+
+| Command | Runs over |
+| :-- | :-- |
+| `ask` · `fusion` · `models` · `status` | the authorized connection inside your host |
+| `private` · `session` · file attachments | the local Nito helper |
+
+## Every Result Is Labeled
+
+When a Nito command returns, it tells you what happened: the environment it used, the logical model or route, the privacy level, and how much of your context was shared. You never have to guess whether a call was private or which model answered, the result says so.
+
+## When Something Isn't Connected
+
+If the authorized connection isn't ready (for example you haven't finished signing in) a hosted command shows a short, specific recovery step instead of failing silently or falling back to the wrong path. You complete the step, then re-run your original command once. The plugin does not replay a potentially billable or stateful request for you.
+
+## What's Next
+
+<CardGroup cols={2}>
+  <Card title="Install on Claude Code" icon="download" href="/get-started/install-claude-code">
+    Get set up and run your first ask.
+  </Card>
+  <Card title="Install on Codex" icon="terminal" href="/get-started/install-codex">
+    The same, for Codex.
+  </Card>
+</CardGroup>

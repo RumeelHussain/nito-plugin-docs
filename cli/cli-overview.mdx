@@ -1,0 +1,59 @@
+---
+title: "CLI Overview"
+description: "The nito command line: what it is for, the commands you will actually use, and how it relates to the in-chat plugin."
+---
+
+The plugin runs Nito from inside Claude Code and Codex. The **`nito` CLI** is the same capability from your terminal, plus the commands that set everything up in the first place.
+
+You do not need the CLI for day-to-day prompting. Reach for it when you want to:
+
+- **Install or repair** a host integration ([`nito setup`](/get-started/install-claude-code), [`nito doctor`](/cli/doctor-and-update)).
+- **Ask or run Fusion** without opening a chat at all ([`nito ask`](/cli/ask-and-fusion-from-terminal), [`nito fusion`](/cli/ask-and-fusion-from-terminal)).
+- **Launch a fully Nito-routed session** from a script or shortcut ([`nito claude`](/cli/session-launchers), [`nito codex`](/cli/session-launchers)).
+- **Keep everything current** ([`nito update`](/cli/doctor-and-update)).
+
+<Note>
+CLI commands run in your **terminal shell** (the `%` or `$` prompt). Plugin commands like `/nito:ask` and `$nito:ask` run **inside a Claude Code or Codex session**. They are two front doors to the same Nito account, not the same input box.
+</Note>
+
+## The Commands You Will Use
+
+| Command | What it does |
+| :-- | :-- |
+| `nito setup <host>` | Install and authorize a host integration. |
+| `nito ask` | Ask one question and print the answer. |
+| `nito fusion` | Run one prompt across two or three models with a synthesis. |
+| `nito claude` | Start an isolated Nito-routed Claude Code session. |
+| `nito codex` | Start an isolated Nito-routed Codex session. |
+| `nito doctor` | Check your install, credentials, and host integrations. |
+| `nito update` | Upgrade Nito and refresh managed integrations. |
+
+Every command accepts `--help`, so `nito ask --help` prints its exact flags and defaults.
+
+## Global Flags
+
+These work on any command:
+
+| Flag | Effect |
+| :-- | :-- |
+| `--quiet` | Show only the requested answer or essential value. |
+| `--verbose` | Show additional execution and diagnostic details. |
+| `--no-color` | Disable colored output, for logs and pipes. |
+| `--config <path>` | Use a specific Nito CLI config file. |
+
+## Signing In
+
+The CLI signs in through your browser, the same authorization the plugin uses. If a command reports that you are not connected, run:
+
+```text
+nito agent login
+```
+
+This stores an agent credential in your operating system keychain. You can check the active profile and connectivity with `nito agent status`, and sign out with `nito agent logout`. Nito never asks for a password in the terminal; approval always happens in the browser.
+
+## How This Section Is Organized
+
+- **[Ask and Fusion from the Terminal](/cli/ask-and-fusion-from-terminal)** covers direct, one-shot calls.
+- **[Session Launchers](/cli/session-launchers)** covers `nito claude` and `nito codex`.
+- **[Doctor and Update](/cli/doctor-and-update)** covers health checks and upgrades.
+- **[MCP Tools](/cli/mcp-tools)** documents the tools the hosted connection exposes, for advanced integrations.

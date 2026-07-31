@@ -1,0 +1,62 @@
+---
+title: "Fusion"
+description: "Send one prompt to two or three models, then get a synthesized answer that reconciles them and shows where they disagree."
+---
+
+`fusion` sends one prompt to **two or three** models at once, then runs a synthesis pass that reconciles their answers into one and shows you where they agreed and disagreed. It is the command to reach for on a contested decision, where a single model's confident answer would hide that the question is genuinely open.
+
+<Note>
+Fusion requires a **paid plan**. See [What Paid Unlocks](/plans/what-paid-unlocks).
+</Note>
+
+## Syntax
+
+<Tabs>
+  <Tab title="Claude Code">
+    ```text
+    /nito:fusion [--file <path>]... [--web-search off|auto|on] [--web-fetch=off|on] [--judge <model-id>] <model-id> <model-id> [model-id] -- <prompt>
+    ```
+  </Tab>
+  <Tab title="Codex">
+    ```text
+    $nito:fusion [--file <path>]... [--web-search off|auto|on] [--web-fetch=off|on] [--judge <model-id>] <model-id> <model-id> [model-id] -- <prompt>
+    ```
+  </Tab>
+</Tabs>
+
+You name **two or three** participant models as positional arguments. Fewer than two or more than three is rejected with a clear message, and the models must be distinct.
+
+### Options
+
+| Option | What it does |
+| :-- | :-- |
+| `<model-id> <model-id> [model-id]` | The two or three participant models. |
+| `--judge <model-id>` | The model that runs the synthesis. Defaults to one of the participants. |
+| `--file <path>` | Attach a local file to every participant. Repeatable. |
+| `--web-search` / `--web-fetch` | Control server tools per participant. See [Web Search](/features/server-side-tools/web-search). |
+
+## How Privacy Tiers Mix
+
+Participants must share a compatible privacy level:
+
+- **Anonymous and Private can mix** in one Fusion.
+- **Confidential must stay in a Confidential-only Fusion.** Combining a Confidential model with a lower tier is refused, so a synthesis never quietly downgrades the privacy of a Confidential participant.
+
+## Reading the Results
+
+A Fusion result has two parts:
+
+1. **Each participant, listed separately**, with the model, timing, tokens, and whether web search was used.
+2. **A synthesis** that gives a single reconciled answer, and, importantly, a **"where the candidates disagree"** section that names the split and which way it leans.
+
+That disagreement map is the point: you see *that* a decision is contested and exactly where, instead of one model's opinion presented as settled.
+
+## Example
+
+```text
+/nito:fusion anthropic/claude-sonnet-5 anthropic/claude-haiku-4.5 google/gemini-3.5-flash -- For a new multi-tenant SaaS API, should auth be stateless JWTs or server-side sessions? Answer in 3 sentences.
+```
+
+The result lists each model's answer, then a synthesized recommendation with the tradeoff and a note on where the three models diverged.
+
+{/* PLACEHOLDER: swap in final launch model IDs when the catalog is confirmed. */}

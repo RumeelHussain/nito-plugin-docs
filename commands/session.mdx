@@ -1,0 +1,61 @@
+---
+title: "Session"
+description: "Open a separate, persistent session powered entirely by a Nito model, with your workspace and history retained."
+---
+
+`session` opens a separate host session in your current workspace that is powered **entirely by a Nito model**. Unlike Private, it is meant to be lived in: it keeps your prompt history, transcripts, and project state, so you can work a task over many turns on a Nito model instead of your host's default.
+
+<Note>
+Full sessions require a **paid plan** with full-session access enabled for your organization. See [What Paid Unlocks](/plans/what-paid-unlocks).
+</Note>
+
+## Syntax
+
+<Tabs>
+  <Tab title="Claude Code">
+    ```text
+    /nito:session [--model <id>] [--web-search off|auto|on]
+    ```
+    Opens a persistent, Nito-routed Claude session in a separate terminal for the current workspace.
+  </Tab>
+  <Tab title="Codex">
+    ```text
+    $nito:session [--model <id>] [--web-search off|auto|on]
+    ```
+    Opens a persistent, Nito-routed Codex session in a separate terminal for the current workspace.
+  </Tab>
+</Tabs>
+
+Without `--model`, the session uses your saved [default model](/commands/choosing-a-model). It does not accept an inline prompt or the Private-only options (`--ephemeral-history`, `--skip-permissions`).
+
+## Private vs. Session
+
+They both route away from your host's default model, but they are opposites on persistence:
+
+| | Private (no prompt) | Session |
+| :-- | :-- | :-- |
+| Keeps prompt history | No | Yes |
+| Keeps transcripts | No | Yes |
+| Keeps project memory / resume | No | Yes (host-dependent) |
+| Purpose | Throwaway incognito turn | Ongoing Nito-routed work |
+| Inline prompt accepted | Yes (one-shot form) | No |
+
+Use **Private** for a turn that should leave no trace; use **Session** for sustained work you want to keep, routed through Nito.
+
+## What Runs Inside a Session
+
+A Nito session is a normal host session with the model pinned to Nito:
+
+- Your host's **native model picker** works, restricted to eligible Nito chat models on the session's privacy tier so it cannot break the session's guarantees.
+- Your host's **agents/subagents and tools** work, running against the Nito catalog.
+- **Standard and Confidential** models can power a session. Encrypted models are not included in this release.
+
+## First-Release Notes
+
+- **Codex:** wrapper-owned resume is not yet available. Transcripts and local state are retained in a dedicated Nito profile without changing your ordinary Codex configuration.
+- **Claude Code:** the session runs with a dedicated local Nito profile. Some host features that depend on the provider (for example newly-requested extended thinking and experimental betas) are disabled for this first release; visible assistant text and tool history are preserved.
+- Exiting the session and launching your host normally returns you to your ordinary model.
+
+## From the Terminal
+
+The same session can be launched directly from the CLI without a host command. See [Session Launchers](/cli/session-launchers).

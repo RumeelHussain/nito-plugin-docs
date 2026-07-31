@@ -1,0 +1,36 @@
+---
+title: "Requirements"
+description: "What you need before installing: a supported host version, a supported platform, a Nito account, and the Nito CLI."
+---
+
+## Host
+
+You need a working install of one host:
+
+| Host | Minimum version |
+| :-- | :-- |
+| Claude Code | `2.1.214` or newer |
+| Codex CLI | `0.144.5` or newer |
+
+The minimum applies to **full Nito-routed sessions** (`/nito:session`, `nito claude`, `nito codex`). If your host is older, a session launch stops with a clear message telling you the version you need. Ask and Private work against your installed host.
+
+{/* PLACEHOLDER: confirm final launch minimums before public release. */}
+
+## Platform
+
+- **macOS** and **Linux**, fully supported.
+- **Windows**: supported. On Windows, a Private session that crashes may leave its temporary profile until the operating system clears it, rather than being cleaned up on exit.
+
+## Account
+
+- A **Nito account**. {/* PLACEHOLDER: sign-up link pending. */}
+- Free-plan access is available; some features (Fusion, full sessions) require a paid plan. See [Plans and Billing](/plans/free-usage).
+
+## The Nito CLI
+
+The `nito` command-line tool must be installed and on your `PATH`. It powers setup, file attachments, and private/session launches. Installing it is the first step of each host's install guide.
+
+<CardGroup cols={2}>
+  <Card title="Install on Claude Code" icon="download" href="/get-started/install-claude-code" />
+  <Card title="Install on Codex" icon="terminal" href="/get-started/install-codex" />
+</CardGroup>

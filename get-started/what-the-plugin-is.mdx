@@ -1,0 +1,75 @@
+---
+title: "What the Nito Plugin Is"
+description: "Open-source and frontier models inside Claude Code and Codex, with a privacy level attached to every call, without replacing your host's own model."
+---
+
+The Nito plugin adds a second, private AI layer inside **Claude Code** and **Codex**. Without changing the model that runs your session, it lets you call other models through Nito (open-source and frontier) and attach a privacy level to every one of those calls. Your host stays primary: ordinary messages never touch Nito, and Nito runs only when you explicitly ask it to.
+
+Think of it as a set of focused commands you invoke on purpose. In Claude Code they are `/nito:…`; in Codex they are `$nito:…`. Everything else in your session works exactly as before.
+
+<Info>
+**New to Nito itself?** These docs cover the plugin. For the platform foundation (one key across many models, the per-call privacy dial, and how verifiable privacy works) see the platform docs: [Introduction](https://nito.mintlify.site/get-started/introduction) and [How Nito Works](https://nito.mintlify.site/get-started/how-nito-works).
+{/* PLACEHOLDER: finalize the cross-site link convention between the plugin site and the platform docs. */}
+</Info>
+
+## What You Can Do
+
+<CardGroup cols={2}>
+  <Card title="Ask a second model" icon="comment-question">
+    `/nito:ask` gets a one-shot second opinion from a Nito model inside your current chat, then labels which model and privacy level answered.
+  </Card>
+  <Card title="Fuse several models" icon="layer-group">
+    `/nito:fusion` sends one prompt to two or three models, then synthesizes a single answer and shows you where they agreed and disagreed.
+  </Card>
+  <Card title="Run a private prompt" icon="user-secret">
+    `/nito:private` answers from a Nito model in an incognito turn your host's upstream never sees, the prompt and answer stay out of the host model's request.
+  </Card>
+  <Card title="Open a Nito-routed session" icon="window">
+    `/nito:session` opens a separate, fully Nito-routed session in your workspace, powered by a model you choose from the Nito catalog.
+  </Card>
+</CardGroup>
+
+## It Never Changes Your Host's Own Model
+
+The plugin sits *alongside* Claude Code or Codex. It does not swap out the model running your session, rewrite your configuration, or route your ordinary prompts anywhere. When you run a Nito command, that one call goes to Nito; when you don't, nothing does. Your host model, its tools, and its settings are untouched.
+
+## A Privacy Level on Every Call
+
+Every Nito call carries a privacy tier, and you choose it by the model you pick. The tier follows the model.
+
+- **Frontier models** run in an **anonymized** tier: broad model access with a metadata-only retention posture.
+- **Open-source models** can reach deeper tiers, including **Confidential**, where your call runs inside attested hardware and you can verify it ran there.
+
+A privacy level never silently weakens. If you request a stronger tier than a model supports, the call is refused with a clear message rather than served at a weaker level. The full ladder (Anonymous, Private, Confidential, and Encrypted) is covered in [Privacy](/privacy/tiers).
+
+<Note>
+The **no-trace** guarantee belongs to `/nito:private` specifically. A regular `/nito:ask` is a normal turn in your host chat, so the host model can see that exchange. Use Private when the prompt must stay out of the host's request.
+</Note>
+
+## Free and Paid at a Glance
+
+You can start on a free allowance and upgrade when you need more.
+
+| | Free | Paid |
+| :-- | :-- | :-- |
+| Ask a second model | ✓ | ✓ |
+| Private prompts | ✓ | ✓ |
+| Fusion (multi-model) | — | ✓ |
+| Full Nito-routed sessions | — | ✓ |
+
+{/* PLACEHOLDER: exact free-allowance amounts and plan names/prices are pending, see Plans and Billing. */}
+
+Full details, including what counts against the free allowance, live in [Plans and Billing](/plans/free-usage).
+
+## One Plugin, Two Hosts
+
+Claude Code and Codex are equals. The same commands exist in both; only the trigger differs (`/nito:` vs `$nito:`). Where a capability differs between hosts, the difference is called out on the page where it matters.
+
+<CardGroup cols={2}>
+  <Card title="Install on Claude Code" icon="download" href="/get-started/install-claude-code">
+    Install, authorize once, run your first ask, under two minutes.
+  </Card>
+  <Card title="Install on Codex" icon="terminal" href="/get-started/install-codex">
+    Same flow for Codex, including the one-time hook-trust step.
+  </Card>
+</CardGroup>

@@ -1,0 +1,52 @@
+---
+title: "Context and Mode"
+description: "Control what your Nito calls share (prompt-only by default), and check how the current conversation is routed."
+---
+
+## Context
+
+By default, Nito receives **only the prompt you type**. `context` lets you opt into sending a little more, and check what the current setting is.
+
+<Tabs>
+  <Tab title="Claude Code">
+    ```text
+    /nito:context on|off|status
+    ```
+  </Tab>
+  <Tab title="Codex">
+    ```text
+    $nito:context on|off|status
+    ```
+  </Tab>
+</Tabs>
+
+- **`on`** lets future `ask` calls include a short, host-generated **summary** of the relevant task or conversation. It is a generated summary, not a verbatim transcript.
+- **`off`** returns to prompt-only.
+- **`status`** reports the current preference.
+
+### What Is and Is Not Sent
+
+- **By default:** only your prompt.
+- **With context on:** your prompt plus a short generated summary, for `ask` only. It does not affect Fusion, and it never changes your host's active model.
+- A per-call `--history` or `--no-history` on `ask` **overrides** this preference for that call.
+
+### Why It Is Best-Effort
+
+The preference lives in your visible conversation state, so it is **not durable**. It can reset after things like a restart, sign-out, a new conversation, or a context compaction. Treat it as a per-conversation convenience, not a persistent account setting, and confirm it with `context status` when it matters.
+
+## Mode
+
+<Tabs>
+  <Tab title="Claude Code">
+    ```text
+    /nito:mode
+    ```
+  </Tab>
+  <Tab title="Codex">
+    ```text
+    $nito:mode
+    ```
+  </Tab>
+</Tabs>
+
+`mode` reports how the current conversation is routed. By default your conversation is in **explicit-ask mode**: your host stays primary and only reaches Nito when you run a Nito command. Fully Nito-routed work happens in a separate process you start with [`session`](/commands/session); entering or leaving that cannot switch your current conversation or move hidden state into it.

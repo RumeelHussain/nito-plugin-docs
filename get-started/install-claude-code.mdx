@@ -1,0 +1,81 @@
+---
+title: "Install on Claude Code"
+description: "Install the Nito CLI, run setup, approve access, and run your first ask, start to finish in under two minutes."
+---
+
+This page takes you from nothing to a working `/nito:ask` in Claude Code. You do **not** need Git, a repository checkout, or any environment variables, the setup command handles everything.
+
+## Prerequisites
+
+- **Claude Code** installed and working. See [Requirements](/get-started/requirements) for the minimum version.
+- A **Nito account**. {/* PLACEHOLDER: link to sign-up once the URL is final. */}
+
+## Install
+
+<Steps>
+  <Step title="Install the Nito CLI">
+    The CLI powers setup, file attachments, and private/session launches.
+
+    ```bash
+    {/* PLACEHOLDER: final install command pending production release. */}
+    # install the `nito` command line tool
+    ```
+
+    Confirm it's on your PATH:
+    ```bash
+    nito --version
+    ```
+  </Step>
+
+  <Step title="Run setup for Claude Code">
+    One command installs the plugin and starts authorization:
+
+    ```bash
+    nito setup claude
+    ```
+
+    This extracts the Claude Code plugin, registers it as a local marketplace, and installs `nito@nito`, all version-matched to your CLI.
+  </Step>
+
+  <Step title="Approve access">
+    Setup authorizes **two credentials** and tells you so up front:
+
+    - the **local CLI credential** (powers Private, Session, and file attachments), and
+    - the **hosted connection** (powers Ask, Fusion, Models, and Status).
+
+    For each credential that needs it, setup **opens your browser** to a Nito approval page and waits. Sign in and approve. If the browser doesn't open, setup prints a URL to visit, and you can paste the redirect URL back into the terminal.
+
+    A credential you have already authorized is **skipped**, so if you've signed in before, you may only be prompted for one. When it finishes, setup confirms the plugin's tools are available in Claude Code and prints `Nito full setup complete` with your gateway (never the token itself).
+
+    <Note>There is no separate step to run inside Claude Code, setup completes the hosted authorization for you.</Note>
+
+    <Note>Each approval requires an existing Nito session and active membership in the organization you choose.</Note>
+  </Step>
+
+  <Step title="Run your first ask">
+    Open Claude Code and run:
+
+    ```text
+    /nito:ask What is the capital of France?
+    ```
+
+    You should get an answer labeled with the model and privacy level that served it. That's the plugin working.
+  </Step>
+</Steps>
+
+## What Setup Just Did
+
+- **Installed the plugin** from a local marketplace that Nito materialized from your CLI, so the CLI and plugin stay in lockstep, with no repo to clone.
+- **Authorized two credentials** in sequence: the local CLI credential (for Private, Session, and attachments) and the hosted connection (for Ask, Fusion, Models, Status). They're separate on purpose; the plugin always tells you which one a command needs.
+- **Pinned your gateway** into the plugin so later private and session launches keep using the same account, with nothing to re-configure.
+
+## Next
+
+<CardGroup cols={2}>
+  <Card title="Your First Private Prompt" icon="user-secret" href="/get-started/your-first-private-prompt">
+    Run an incognito prompt your host's upstream never sees.
+  </Card>
+  <Card title="Check Your Setup" icon="stethoscope" href="/get-started/check-your-setup">
+    Confirm everything is healthy with status and doctor.
+  </Card>
+</CardGroup>

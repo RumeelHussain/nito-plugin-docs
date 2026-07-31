@@ -1,0 +1,70 @@
+---
+title: "Session Launchers"
+description: "Start an isolated, fully Nito-routed Claude Code or Codex session from the terminal, with a dedicated profile that leaves your normal setup untouched."
+---
+
+`nito claude` and `nito codex` open a host session whose model is **entirely a Nito model**, from your terminal. They are the CLI form of the in-chat [`session`](/commands/session) command: the host runs normally, but every model turn goes to Nito instead of the host's own provider.
+
+Each launcher runs in an **isolated profile**. Your ordinary Claude Code or Codex configuration, credentials, and history are not touched, and exiting returns you to your normal setup.
+
+<Note>
+Fully Nito-routed sessions require a **paid plan** with full-session access enabled for your organization. See [What Paid Unlocks](/plans/what-paid-unlocks).
+</Note>
+
+## Claude
+
+```text
+nito claude --model <logical-model-id> [-- <claude args>] [flags]
+```
+
+Anything after `--` is passed straight through to Claude Code.
+
+### Options
+
+| Flag | Default | Effect |
+| :-- | :-- | :-- |
+| `--model <id>` | (required) | The certified Nito model that powers the session. |
+| `--private` | off | Start with no Claude transcript or prompt-history persistence. |
+| `--ephemeral-history` | off | Allow up-arrow history in the temporary private profile, then delete it on a clean exit. |
+| `--skip-permissions` | off | Run a private sidecar with Claude permission prompts bypassed. |
+| `--web-search off\|auto\|on` | `on` | Claude web search mode. |
+| `--web-fetch <on\|off>` | `on` | Allow Claude WebFetch. |
+| `--working-directory <path>` | current | Working directory for the session. |
+| `--agent-profile <name>` | default | Nito agent credential profile to use. |
+
+The privacy flags mirror the in-chat Private command. Read [Private](/commands/private) for exactly what each one does and does not guarantee: `--ephemeral-history` is not the same as never writing to disk, and `--skip-permissions` is not a sandbox.
+
+## Codex
+
+```text
+nito codex --model <logical-model-id> [-- <codex args>] [flags]
+```
+
+Anything after `--` is passed straight through to Codex.
+
+### Options
+
+| Flag | Default | Effect |
+| :-- | :-- | :-- |
+| `--model <id>` | (required) | The certified Nito model that powers the session. |
+| `--web-search off\|auto\|on` | `on` | Codex web search: `off`, `auto` (cached), or `on` (live). |
+| `--working-directory <path>` | current | Working directory for the session. |
+| `--agent-profile <name>` | default | Nito agent credential profile to use. |
+
+<Note>
+`nito codex` is a Nito-routed session, so it needs **only your Nito sign-in**, not an OpenAI login. It does not accept the Private-only flags (`--private`, `--ephemeral-history`, `--skip-permissions`); those belong to `nito claude`.
+</Note>
+
+## Choosing the Model
+
+Both launchers require `--model`. List the certified session models available to your account with:
+
+```bash
+nito agent models
+```
+
+Standard and Confidential models can power a session. Encrypted models are not part of this release. See [Models](/models) for the catalog and [Privacy Tiers](/privacy/tiers) for what each tier reaches.
+
+## Relationship to the In-Chat Command
+
+`nito claude` / `nito codex` and `/nito:session` / `$nito:session` open the same kind of isolated Nito-routed session. Use the plugin command when you are already in a chat; use the CLI launcher when you want to start one from a script, an alias, or a fresh terminal.

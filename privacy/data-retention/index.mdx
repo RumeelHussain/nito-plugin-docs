@@ -1,0 +1,36 @@
+---
+title: "Data Retention"
+description: "Nito's retention contract. Metadata-only by default, with request and response bodies request-local."
+---
+
+Retention is the question of **what survives a request and for how long**. It is separate from visibility (who sees what while the request is in flight, covered in [Data visibility](/privacy/data-visibility)) and separate from privacy modes (how strongly a single call is protected). This page is the contract: it states Nito's default posture, then frames the sub-pages that go deeper on each mechanism.
+
+Read the one-line version first: **the default is metadata only.** The gateway keeps operational metadata about a request; it does not persist the prompt, the completion, the reasoning, the tool calls, or the contents of any file you uploaded. Those are request-local. Everything below reinforces that default.
+
+## The Default: Metadata Only
+
+The baseline retention posture is the strongest and best-supported claim in this section. By default the gateway keeps only operational metadata. Request and response bodies are request-local; inference responses are returned with `Cache-Control: no-store`; and telemetry is restricted to a safe allowlist rather than capturing payloads. This is the floor that every privacy mode builds on, and it is documented in full on [Metadata-only default](/privacy/data-retention/metadata-only-default).
+
+## The Sub-Pages
+
+- [**Metadata-only default**](/privacy/data-retention/metadata-only-default): the baseline — what "metadata" means, why bodies are request-local, the `no-store` header, and the telemetry allowlist.
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card title="Data Visibility" icon="eyes" href="/privacy/data-visibility">
+    Who sees what while a request is being served.
+  </Card>
+
+  <Card title="Metadata-Only Default" icon="clipboard-list" href="/privacy/data-retention/metadata-only-default">
+    Nito’s baseline retention posture.
+  </Card>
+
+  <Card title="Privacy Overview" icon="shield-check" href="/privacy/overview">
+    What “private” means on Nito. How privacy modes are selected and what each enforces.
+  </Card>
+
+  <Card title="How Nito Works" icon="gears" href="/get-started/how-nito-works">
+    How model IDs are named on Nito, and how the optional suffix selects a privacy mode.
+  </Card>
+</CardGroup>

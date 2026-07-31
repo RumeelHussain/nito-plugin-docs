@@ -1,0 +1,83 @@
+---
+title: "Code Interpreter"
+description: "Let a model run code mid-generation for real computation. On Nito this is an xAI-only passthrough with no gateway-native sandbox."
+---
+
+Language models are good at reasoning about code but unreliable at _being_ a calculator. Ask one to compute the variance of a list or parse a messy CSV in its head and it will often produce a confident, wrong answer, because it is predicting text, not executing arithmetic. A code interpreter fixes that by letting the model actually run code while it answers: it writes a small program, the program runs, and the real result comes back into the conversation. For anything involving exact computation, data manipulation, or verification, this is the difference between a plausible guess and a correct answer.
+
+This page explains how the capability works on Nito, and it is honest up front about an important limitation: on Nito, code interpreter is a thin passthrough to one provider, not a gateway-native feature.
+
+## When to Use Code Interpreter
+
+Reach for code interpreter when the answer depends on running something rather than recalling it:
+
+- **Exact math and statistics** that the model should compute, not estimate.
+- **Data wrangling** over a snippet of data the user provided (filtering, aggregating, reshaping).
+- **Verification**, where the model checks its own work by executing it.
+
+For tasks that are pure language (summarizing, rewriting, answering from knowledge), you do not need it, and turning it on only adds cost and latency.
+
+## xAI Models Only
+
+Code interpreter is available on **xAI models only**. Enabling it routes the request to xAI's own `code_interpreter` tool. If you enable it on any other provider's model, the request is rejected with a `400`:
+
+```text
+code_interpreter requires an xAI model
+```
+
+There is **no gateway-native sandbox**. Nito does not run your code itself; it forwards the tool to xAI and relays the result. The execution environment, the languages supported, the runtime limits, and the result format are all defined by xAI, not by Nito. This is why the page is careful not to overstate what the interpreter can do: those details belong to the provider running it.
+
+## How Code Interpreter Works in a Request
+
+You enable code interpreter the same way as the other hosted tools, by listing it in `tools`. You do not write the code; the model decides when to run code, writes it, runs it in xAI's sandbox, and folds the result into its reply.
+
+```json wrap
+{
+  "model": "x-ai/grok-4.5",
+  "messages": [
+    { "role": "user", "content": "Compute the variance of [4, 8, 15, 16, 23, 42]." }
+  ],
+  "tools": [{ "type": "code_interpreter" }]
+}
+```
+
+Use a current xAI model ID from `GET /v1/models`. As with every chat request, the body is decoded strictly, so an unknown field returns a `400`.
+
+Conceptually the flow is: your prompt arrives, the model recognizes a task it should compute, it emits code to the interpreter, the interpreter executes it inside xAI's environment, and the model continues its answer using the real output. You issue one request and receive the finished answer; the code round-trip happens inside the generation.
+
+## A Privacy Note
+
+Because execution happens at xAI, any data the model passes into the interpreter is processed by xAI under xAI's handling. xAI requests are forwarded with provider storage disabled, but code interpreter is not a TEE-sealed feature. If you need verifiable, sealed execution, that is a separate property: see [privacy tiers](/privacy/tiers). Match the sensitivity of the data you hand to the interpreter to the privacy guarantee you actually need.
+
+## What to Expect Back
+
+Because this is a passthrough, the exact shape of the interpreter's output as relayed by the gateway is defined by the xAI path rather than by Nito.
+
+> **TODO (needs SME):** the response shape for code-interpreter output as relayed by the gateway (tool-result content parts, execution metadata, and billing treatment). Confirm against the xAI passthrough path before publishing specifics.
+
+## Common Issues
+
+- **Enabling it on a non-xAI model.** It returns `400 code_interpreter requires an xAI model`. Check the model is an xAI model first.
+- **Expecting a gateway sandbox.** There is none; behavior is xAI's. Treat xAI's documentation as the source of truth for languages and limits.
+- **Using it for non-computational tasks.** It adds cost and latency without benefit when the task is pure language.
+- **Sending sensitive data without considering where it runs.** The code executes at xAI, which is not the same as a sealed TEE call.
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card title="Server-Side Tools" icon="tools" href="/features/server-side-tools">
+    For the family overview and the hosted-tool shape.
+  </Card>
+
+  <Card title="Web search" icon="searchengin" href="/api-reference/server-tools/web-search">
+    For query-driven retrieval.<br />
+  </Card>
+
+  <Card title="Web Fetch" icon="arrow-down-to-bracket" href="/features/server-side-tools/web-fetch">
+    For reading a specific URL instead of searching.
+  </Card>
+
+  <Card title="Tool Calling" icon="gears" href="/features/tool-calling">
+    For your own (non-hosted) function tools.
+  </Card>
+</CardGroup>

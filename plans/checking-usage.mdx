@@ -1,0 +1,47 @@
+---
+title: "Checking Usage"
+description: "Read your plan, remaining free allowance, and reset time from the status card, in a chat or from the terminal."
+---
+
+Your usage lives on the **status card**, the authoritative, live view of your plan and remaining allowance. Check it whenever you want to confirm what plan you are on or how much of the free allowance is left.
+
+## From a Chat
+
+<Tabs>
+  <Tab title="Claude Code">
+    ```text
+    /nito:status
+    ```
+  </Tab>
+  <Tab title="Codex">
+    ```text
+    $nito:status
+    ```
+  </Tab>
+</Tabs>
+
+The card shows your signed-in profile, the gateway environment, how you authenticated, your plan, and your usage, including any free-allowance notice.
+
+## What the Card Tells You
+
+- **Plan:** which tier you are on (Free, Plus, Advanced, or Max).
+- **Free allowance:** if you are on the free tier, the card shows the authoritative monthly plugin-request limit, how many you have left, and the UTC reset time.
+- **Connection:** the profile and environment you are connected as, which doubles as a quick confirmation that the plugin is working.
+
+<Note>
+The remaining count and reset time are read live, so the status card is the source of truth for your allowance, not any number cached elsewhere. See [Free Usage](/plans/free-usage) for how the allowance works.
+</Note>
+
+## From the Terminal
+
+You do not need a chat open to check. From your shell:
+
+```bash
+nito agent status
+```
+
+This reports the active profile and connectivity. For a full end-to-end check that also confirms a request reaches a model, run [`nito doctor`](/cli/doctor-and-update).
+
+## When You Are Close to the Limit
+
+The plugin surfaces an allowance notice as you approach and reach the free limit, rather than letting a command fail without explanation. When you run out, model-backed commands pause until the monthly reset or until you upgrade. See [What Paid Unlocks](/plans/what-paid-unlocks) to keep working immediately.

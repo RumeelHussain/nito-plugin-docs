@@ -1,0 +1,65 @@
+---
+title: "Choosing a Model"
+description: "Browse the catalog, set a durable default, and override per call, without ever changing your host's own model."
+---
+
+You pick which Nito model answers in three ways: browse the catalog, set a saved default, or override for a single call.
+
+<Note>
+Choosing a Nito model **never changes your host's own model**. `model` sets the model Nito uses for its commands; your Claude Code or Codex session keeps running on whatever model it was already using.
+</Note>
+
+## Browse the Catalog
+
+<Tabs>
+  <Tab title="Claude Code">
+    ```text
+    /nito:models
+    ```
+  </Tab>
+  <Tab title="Codex">
+    ```text
+    $nito:models
+    ```
+  </Tab>
+</Tabs>
+
+Lists the models available to your account, with their type and privacy reach. For the full catalog reference, see [Models](/models).
+
+## Set a Durable Default
+
+<Tabs>
+  <Tab title="Claude Code">
+    ```text
+    /nito:model <model-id>
+    ```
+  </Tab>
+  <Tab title="Codex">
+    ```text
+    $nito:model <model-id>
+    ```
+  </Tab>
+</Tabs>
+
+Saves your default model. That default is used by future `ask`, `continue`, and `private`/`session` launches when you do not pass `--model`. It does **not** change your host's active session model, and Fusion participant models always stay explicit.
+
+## Override for One Call
+
+Every command that takes a model accepts `--model <id>` to override the default for that single call:
+
+<Tabs>
+  <Tab title="Claude Code">
+    ```text
+    /nito:ask --model <model-id> <prompt>
+    ```
+  </Tab>
+  <Tab title="Codex">
+    ```text
+    $nito:ask --model <model-id> <prompt>
+    ```
+  </Tab>
+</Tabs>
+
+## Default When You Have No Preference
+
+If you have never set a default, `ask` uses a built-in default model so your first call works without a model-picker round trip. Set your own default once you know which model you prefer.

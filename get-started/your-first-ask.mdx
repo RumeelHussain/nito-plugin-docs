@@ -1,0 +1,90 @@
+---
+title: "Your First Ask"
+description: "See what's available, ask a Nito model inside your chat, read the result label, and try a different model."
+---
+
+`ask` is the simplest Nito command: it sends one prompt to a Nito model and returns the answer inside your current chat. Your host model stays primary, it just makes one Nito call when you ask.
+
+<Note>
+Type Nito commands **inside a running Claude Code or Codex session**, not in your terminal shell. Typing `$nito:ask …` at a plain shell prompt will not work, your shell tries to interpret it (for example, zsh reports `no matches found`). Start your host first, then run the command in it.
+</Note>
+
+## See What's Available
+
+The help command is a menu, not a model call. It shows the Nito actions you can run:
+
+<Tabs>
+  <Tab title="Claude Code">
+    ```text
+    /nito:help
+    ```
+  </Tab>
+  <Tab title="Codex">
+    ```text
+    $nito:help
+    ```
+  </Tab>
+</Tabs>
+
+## Run Your First Ask
+
+<Tabs>
+  <Tab title="Claude Code">
+    ```text
+    /nito:ask What is the capital of France?
+    ```
+  </Tab>
+  <Tab title="Codex">
+    ```text
+    $nito:ask What is the capital of France?
+    ```
+  </Tab>
+</Tabs>
+
+You don't have to choose a model first. When you have no saved preference, `ask` uses a sensible default; the model picker is there for when you *want* to browse or change models, not something you clear before your first call.
+
+## Read the Result Label
+
+Every Nito result ends with a label that tells you exactly what ran:
+
+```text
+Nito · <environment> · <model> · <privacy tier> · <context scope>
+```
+
+A hosted plugin call looks like this:
+
+```text
+Nito · Hosted · MODEL-ID · private · Prompt only
+```
+
+- **environment**: where the call ran. Plugin calls read `Hosted`.
+- **model**: the logical model that answered.
+- **privacy tier**: Anonymous, Private, Confidential, or Encrypted.
+- **context scope**: how much of your conversation was shared (prompt-only by default).
+
+You never have to guess whether a call was private or which model answered, the label says so.
+
+<Note>
+`ask` is a normal turn in your host chat, so your host model can see the ask exchange. If a prompt must stay out of the host's request entirely, use [`private`](/get-started/your-first-private-prompt) instead.
+</Note>
+
+## Try a Different Model
+
+Override the model for a single call with `--model`:
+
+<Tabs>
+  <Tab title="Claude Code">
+    ```text
+    /nito:ask --model MODEL-ID Summarize the tradeoffs of optimistic locking.
+    ```
+  </Tab>
+  <Tab title="Codex">
+    ```text
+    $nito:ask --model MODEL-ID Summarize the tradeoffs of optimistic locking.
+    ```
+  </Tab>
+</Tabs>
+
+{/* PLACEHOLDER: swap MODEL-ID for a real launch model once the catalog is final. */}
+
+Browse the catalog and set a durable default on the [Models](/models) pages and in [Choosing a Model](/commands/choosing-a-model).

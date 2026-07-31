@@ -1,0 +1,61 @@
+---
+title: "Ask and Continue"
+description: "Ask a Nito model one question inside your current chat, then continue that exchange, without changing your host model."
+---
+
+`ask` sends one prompt to a Nito model and returns the answer inside your current chat. `continue` follows up on that same exchange. Both make **at most one** Nito call and leave your host model untouched.
+
+<Note>
+`ask` is a normal turn in your host chat, so **your host model can see the ask prompt and answer**. It is a "second opinion," not a private one. When a prompt must stay out of the host's request, use [`private`](/commands/private) instead.
+</Note>
+
+## Ask
+
+<Tabs>
+  <Tab title="Claude Code">
+    ```text
+    /nito:ask [--model <id>] [--file <path>]... [--history|--no-history] [--web-search off|auto|on] [--web-fetch=off|on] [--] <prompt>
+    ```
+  </Tab>
+  <Tab title="Codex">
+    ```text
+    $nito:ask [--model <id>] [--file <path>]... [--history|--no-history] [--web-search off|auto|on] [--web-fetch=off|on] [--] <prompt>
+    ```
+  </Tab>
+</Tabs>
+
+The result is labeled with the environment, model, privacy tier, and context scope, for example `Nito · Hosted · MODEL-ID · private · Prompt only`.
+
+### Options
+
+| Option | What it does |
+| :-- | :-- |
+| `--model <id>` | Use a specific model for this call. Without it, `ask` uses your saved default. See [Choosing a Model](/commands/choosing-a-model). |
+| `--file <path>` | Attach a local file. Repeatable. |
+| `--history` / `--no-history` | Include or exclude conversation context for this one call. Authoritative over the [Context](/commands/context-and-mode) preference. |
+| `--web-search off\|auto\|on` | Control web search. See [Web Search](/features/server-side-tools/web-search). |
+| `--web-fetch=off\|on` | Control URL retrieval. See [Web Fetch](/features/server-side-tools/web-fetch). |
+| `--` | End of options; everything after is the prompt. |
+
+### What the Host Can See
+
+By default `ask` sends **only your prompt** to Nito, and the exchange stays in your host chat where the host model can see it. Turning [Context](/commands/context-and-mode) on lets `ask` include a short host-generated summary of the task; nothing is sent that you did not enable.
+
+## Continue
+
+`continue` reuses the **immediately preceding** Nito exchange (that prompt and answer) plus your new prompt, and nothing else from the conversation. It is for following up without re-pasting.
+
+<Tabs>
+  <Tab title="Claude Code">
+    ```text
+    /nito:continue [--model <id>] [--file <path>]... <prompt>
+    ```
+  </Tab>
+  <Tab title="Codex">
+    ```text
+    $nito:continue [--model <id>] [--file <path>]... <prompt>
+    ```
+  </Tab>
+</Tabs>
+
+If the preceding Nito exchange is unavailable or ambiguous, `continue` does nothing and asks you to use `ask` instead. Passing `--model` overrides the model for the follow-up.

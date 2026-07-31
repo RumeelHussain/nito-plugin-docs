@@ -1,0 +1,546 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "aspen",
+  "name": "Nito Plugin",
+  "colors": {
+    "primary": "#3FB58A",
+    "light": "#3FB58A",
+    "dark": "#3FB58A"
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Get Started",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "get-started/what-the-plugin-is",
+              "get-started/how-it-works"
+            ],
+            "icon": "book"
+          },
+          {
+            "group": "Install",
+            "pages": [
+              "get-started/install-claude-code",
+              "get-started/install-codex",
+              "get-started/requirements",
+              "get-started/updating-uninstalling"
+            ],
+            "icon": "download"
+          },
+          {
+            "group": "First Steps",
+            "pages": [
+              "get-started/your-first-ask",
+              "get-started/your-first-private-prompt",
+              "get-started/check-your-setup"
+            ],
+            "icon": "flag-checkered"
+          }
+        ],
+        "icon": "rocket-launch"
+      },
+      {
+        "tab": "Commands",
+        "groups": [
+          {
+            "group": "Core",
+            "pages": [
+              "commands/ask-and-continue",
+              "commands/choosing-a-model",
+              "commands/fusion"
+            ],
+            "icon": "bolt"
+          },
+          {
+            "group": "Private and Sessions",
+            "pages": [
+              "commands/private",
+              "commands/session"
+            ],
+            "icon": "user-secret"
+          },
+          {
+            "group": "Account and Settings",
+            "pages": [
+              "commands/status-and-account",
+              "commands/context-and-mode"
+            ],
+            "icon": "gear"
+          },
+          {
+            "group": "Reference",
+            "pages": [
+              "commands/command-index"
+            ],
+            "icon": "list"
+          }
+        ],
+        "icon": "wand-magic-sparkles"
+      },
+      {
+        "tab": "Models",
+        "groups": [
+          {
+            "group": "Models",
+            "pages": [
+              "models/all-models",
+              "models/model-catalog",
+              "models/pricing",
+              "models/model-id-convention",
+              "models/privacy-tiers-at-a-glance",
+              "models/model-families",
+              "models/providers",
+              "models/model-groups",
+              "models/backend-selection",
+              "models/choosing-a-model",
+              "models/deprecations-and-lifecycle"
+            ],
+            "icon": "cube",
+            "expanded": true,
+            "root": "models/index"
+          },
+          {
+            "group": "Best Practices",
+            "root": "models/best-practices/index",
+            "pages": [
+              "models/best-practices/latency-and-performance",
+              "models/best-practices/cost-control",
+              "models/best-practices/secure-api-key-handling",
+              "models/best-practices/privacy-safe-logging",
+              "models/best-practices/uptime-and-fallbacks"
+            ],
+            "expanded": true,
+            "icon": "shield-check"
+          }
+        ],
+        "icon": "cube"
+      },
+      {
+        "tab": "Privacy",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "privacy/privacy-architecture",
+              "privacy/zero-data-retention",
+              "privacy/per-call-privacy-modes"
+            ],
+            "root": "privacy/overview",
+            "expanded": true,
+            "icon": "books"
+          },
+          {
+            "group": "Privacy Tiers",
+            "pages": [
+              "privacy/tiers/anonymous",
+              "privacy/tiers/private",
+              "privacy/tiers/confidential",
+              "privacy/tiers/encrypted"
+            ],
+            "root": "privacy/tiers/index",
+            "expanded": true,
+            "icon": "layer-group"
+          },
+          {
+            "group": "TEE Attestation",
+            "pages": [
+              "privacy/tee-attestation/what-a-tee-is",
+              "privacy/tee-attestation/attestation-pipeline",
+              "privacy/tee-attestation/seven-gate-baseline",
+              "privacy/tee-attestation/freshness-binding",
+              "privacy/tee-attestation/address-only-model-binding",
+              "privacy/tee-attestation/per-provider-attestation",
+              "privacy/tee-attestation/verify-yourself-recipe"
+            ],
+            "root": "privacy/tee-attestation/index",
+            "expanded": true,
+            "icon": "stamp"
+          },
+          {
+            "group": "Data Handling",
+            "root": "privacy/data-handling",
+            "pages": [
+              "privacy/data-visibility",
+              "privacy/data-retention/index",
+              "privacy/data-retention/metadata-only-default"
+            ],
+            "expanded": true,
+            "icon": "database"
+          }
+        ],
+        "icon": "shield-check"
+      },
+      {
+        "tab": "Features",
+        "groups": [
+          {
+            "group": "Core Features",
+            "pages": [
+              "features/chat-completions",
+              "features/streaming",
+              "features/tool-calling",
+              "features/reasoning"
+            ],
+            "root": "features/index",
+            "expanded": true,
+            "icon": "lightbulb-gear"
+          },
+          {
+            "group": "Server-Side Tools",
+            "root": "features/server-side-tools",
+            "pages": [
+              "features/server-side-tools/web-search",
+              "features/server-side-tools/web-fetch",
+              "features/server-side-tools/file-parser",
+              "features/server-side-tools/code-interpreter"
+            ],
+            "expanded": true,
+            "icon": "server"
+          },
+          {
+            "group": "Multimodal",
+            "pages": [
+              "features/multimodal/image-input",
+              "features/multimodal/pdf-input",
+              "features/multimodal/image-generation"
+            ],
+            "root": "features/multimodal",
+            "expanded": true,
+            "icon": "cubes"
+          },
+          {
+            "group": "Efficiency",
+            "root": "features/efficiency",
+            "pages": [
+              "features/prompt-caching",
+              "features/safe-retries"
+            ],
+            "expanded": true,
+            "icon": "arrow-up-short-wide"
+          }
+        ],
+        "icon": "cubes-stacked"
+      },
+      {
+        "tab": "Plans and Billing",
+        "groups": [
+          {
+            "group": "Plans",
+            "pages": [
+              "plans/free-usage",
+              "plans/what-paid-unlocks"
+            ],
+            "icon": "tags"
+          },
+          {
+            "group": "Managing",
+            "pages": [
+              "plans/checking-usage",
+              "plans/upgrade-and-manage"
+            ],
+            "icon": "sliders"
+          }
+        ],
+        "icon": "credit-card"
+      },
+      {
+        "tab": "CLI",
+        "groups": [
+          {
+            "group": "Basics",
+            "pages": [
+              "cli/cli-overview",
+              "cli/ask-and-fusion-from-terminal"
+            ],
+            "icon": "terminal"
+          },
+          {
+            "group": "Sessions and Health",
+            "pages": [
+              "cli/session-launchers",
+              "cli/doctor-and-update"
+            ],
+            "icon": "heart-pulse"
+          },
+          {
+            "group": "Advanced",
+            "pages": [
+              "cli/mcp-tools"
+            ],
+            "icon": "screwdriver-wrench"
+          }
+        ],
+        "icon": "terminal"
+      },
+      {
+        "tab": "Help",
+        "groups": [
+          {
+            "group": "Help",
+            "pages": [
+              "help/troubleshooting",
+              "help/faq"
+            ],
+            "icon": "life-ring"
+          }
+        ],
+        "icon": "circle-question"
+      },
+      {
+        "tab": "API Playground",
+        "groups": [
+          {
+            "group": "Nito API Endpoints",
+            "pages": [
+              {
+                "group": "Chat & Text",
+                "pages": [
+                  "api-reference/endpoints/chat-text/createchatcompletion",
+                  "api-reference/endpoints/chat-text/createanthropicmessage",
+                  "api-reference/endpoints/chat-text/createopenairesponse",
+                  "api-reference/endpoints/chat-text/createopenaichatcompletion",
+                  "api-reference/endpoints/chat-text/createopenairesponsecompact",
+                  "api-reference/endpoints/chat-text/countanthropicmessagetokens"
+                ],
+                "icon": "input-text"
+              },
+              {
+                "group": "Images",
+                "pages": [
+                  "api-reference/endpoints/images/createopenaiimagegeneration",
+                  "api-reference/endpoints/images/createimagegeneration"
+                ],
+                "icon": "file-image"
+              },
+              {
+                "group": "Models",
+                "pages": [
+                  "api-reference/endpoints/models/listopenaimodels",
+                  "api-reference/endpoints/models/listmodels",
+                  "api-reference/endpoints/models/listmodelgroups"
+                ],
+                "icon": "cubes"
+              },
+              {
+                "group": "Attestation",
+                "pages": [
+                  "api-reference/endpoints/attestation/getattestation",
+                  "api-reference/endpoints/attestation/getlegacyteeattestation"
+                ],
+                "icon": "stamp"
+              },
+              {
+                "group": "MCP",
+                "pages": [
+                  "api-reference/endpoints/mcp/handlemcpdelete",
+                  "api-reference/endpoints/mcp/handlemcpget",
+                  "api-reference/endpoints/mcp/handlemcppost"
+                ],
+                "icon": "server"
+              },
+              {
+                "group": "Authentication",
+                "pages": [
+                  "api-reference/endpoints/authentication/acceptwalletinvitationform",
+                  "api-reference/endpoints/authentication/completegooglesocialauth",
+                  "api-reference/endpoints/authentication/completexsocialauth",
+                  "api-reference/endpoints/authentication/completeemailmfa",
+                  "api-reference/endpoints/authentication/completesocialmfa",
+                  "api-reference/endpoints/authentication/loginwallet",
+                  "api-reference/endpoints/authentication/signupwallet",
+                  "api-reference/endpoints/authentication/loginemail",
+                  "api-reference/endpoints/authentication/createwalletchallenge",
+                  "api-reference/endpoints/authentication/getcsrftoken",
+                  "api-reference/endpoints/authentication/getanonymousfreetierstatus",
+                  "api-reference/endpoints/authentication/getstoragekey",
+                  "api-reference/endpoints/authentication/getsession",
+                  "api-reference/endpoints/authentication/listsocialauthproviders",
+                  "api-reference/endpoints/authentication/requestpasswordreset",
+                  "api-reference/endpoints/authentication/resendemailverification",
+                  "api-reference/endpoints/authentication/resetpassword",
+                  "api-reference/endpoints/authentication/startgooglesocialauth",
+                  "api-reference/endpoints/authentication/startxsocialauth",
+                  "api-reference/endpoints/authentication/signupemail",
+                  "api-reference/endpoints/authentication/verifywalletchallenge",
+                  "api-reference/endpoints/authentication/verifyemail"
+                ],
+                "icon": "shield-check"
+              },
+              {
+                "group": "Account & Security",
+                "pages": [
+                  "api-reference/endpoints/account-security/acceptwalletinvitation",
+                  "api-reference/endpoints/account-security/acceptemailinvitation",
+                  "api-reference/endpoints/account-security/begintotpsetup",
+                  "api-reference/endpoints/account-security/changeaccountpassword",
+                  "api-reference/endpoints/account-security/logout",
+                  "api-reference/endpoints/account-security/confirmtotpsetup",
+                  "api-reference/endpoints/account-security/disabletotp",
+                  "api-reference/endpoints/account-security/disableidentity",
+                  "api-reference/endpoints/account-security/getaccountprofile",
+                  "api-reference/endpoints/account-security/getaccountsecurity",
+                  "api-reference/endpoints/account-security/linkwalletidentity",
+                  "api-reference/endpoints/account-security/linkemailidentity",
+                  "api-reference/endpoints/account-security/showemailinvitationaccept",
+                  "api-reference/endpoints/account-security/showwalletinvitationaccept",
+                  "api-reference/endpoints/account-security/revokeaccountsession",
+                  "api-reference/endpoints/account-security/revokeaccountoauthtoken",
+                  "api-reference/endpoints/account-security/updateaccountprofile"
+                ],
+                "icon": "500px"
+              },
+              {
+                "group": "Organizations",
+                "pages": [
+                  "api-reference/endpoints/organizations/createorg",
+                  "api-reference/endpoints/organizations/createorginvitation",
+                  "api-reference/endpoints/organizations/createorgapikey",
+                  "api-reference/endpoints/organizations/disableorgmember",
+                  "api-reference/endpoints/organizations/getorgapioverview",
+                  "api-reference/endpoints/organizations/getorgfreetierstatus",
+                  "api-reference/endpoints/organizations/listorgs",
+                  "api-reference/endpoints/organizations/listorgapikeys",
+                  "api-reference/endpoints/organizations/listorgmembers",
+                  "api-reference/endpoints/organizations/resendorginvitation",
+                  "api-reference/endpoints/organizations/revokeorginvitation",
+                  "api-reference/endpoints/organizations/revokeorgapikey",
+                  "api-reference/endpoints/organizations/updateorgmemberrole"
+                ],
+                "icon": "buildings"
+              },
+              {
+                "group": "Billing",
+                "pages": [
+                  "api-reference/endpoints/billing/createbillingportalsession",
+                  "api-reference/endpoints/billing/createbillingcheckoutsession",
+                  "api-reference/endpoints/billing/createreferralinvite",
+                  "api-reference/endpoints/billing/getorgbillingautotopup",
+                  "api-reference/endpoints/billing/getorgbillingbalance",
+                  "api-reference/endpoints/billing/getreferraloverview",
+                  "api-reference/endpoints/billing/listbillingcheckoutproducts",
+                  "api-reference/endpoints/billing/updateorgbillingautotopup"
+                ],
+                "icon": "money-bills-simple"
+              },
+              {
+                "group": "OAuth",
+                "pages": [
+                  "api-reference/endpoints/oauth/approveoauthauthorization",
+                  "api-reference/endpoints/oauth/createoauthdeviceauthorization",
+                  "api-reference/endpoints/oauth/createoauthtoken",
+                  "api-reference/endpoints/oauth/denyoauthauthorization",
+                  "api-reference/endpoints/oauth/getmcpprotectedresourcemetadata",
+                  "api-reference/endpoints/oauth/getoauthauthorizationservermetadata",
+                  "api-reference/endpoints/oauth/getoauthprotectedresourcemetadata",
+                  "api-reference/endpoints/oauth/getopenidconfiguration",
+                  "api-reference/endpoints/oauth/getauthstatus",
+                  "api-reference/endpoints/oauth/authorizeoauth",
+                  "api-reference/endpoints/oauth/revokeoauthtoken"
+                ],
+                "icon": "lock-hashtag"
+              },
+              {
+                "group": "Storage & Sync",
+                "pages": [
+                  "api-reference/endpoints/storage-sync/abortsharelink",
+                  "api-reference/endpoints/storage-sync/completesharelink",
+                  "api-reference/endpoints/storage-sync/createbackupdownloadpresign",
+                  "api-reference/endpoints/storage-sync/createbackupuploadpresign",
+                  "api-reference/endpoints/storage-sync/createsharelink",
+                  "api-reference/endpoints/storage-sync/createsyncdownloadpresign",
+                  "api-reference/endpoints/storage-sync/createsyncuploadpresign",
+                  "api-reference/endpoints/storage-sync/parseattachment",
+                  "api-reference/endpoints/storage-sync/getbackupcatalog",
+                  "api-reference/endpoints/storage-sync/getbackupmanifest",
+                  "api-reference/endpoints/storage-sync/getsyncmanifest",
+                  "api-reference/endpoints/storage-sync/listnotifications",
+                  "api-reference/endpoints/storage-sync/opensharelink",
+                  "api-reference/endpoints/storage-sync/updatenotificationreadstate"
+                ],
+                "icon": "sync-alt"
+              },
+              {
+                "group": "System",
+                "pages": [
+                  "api-reference/endpoints/system/getopenapijson",
+                  "api-reference/endpoints/system/getopenapiyaml",
+                  "api-reference/endpoints/system/gethealth"
+                ],
+                "icon": "laptop-binary"
+              }
+            ],
+            "icon": "gear-api",
+            "expanded": true,
+            "root": "api-playground"
+          }
+        ],
+        "icon": "gear-code"
+      }
+    ]
+  },
+  "background": {
+    "color": {
+      "light": "#F6F5F1",
+      "dark": "#16161A"
+    }
+  },
+  "icons": {
+    "library": "fontawesome"
+  },
+  "logo": {
+    "light": "/images/nito-logo-black.png",
+    "dark": "/images/nito-logo-white.png",
+    "href": "/get-started/what-the-plugin-is"
+  },
+  "favicon": {
+    "light": "/images/favicon.ico",
+    "dark": "/images/favicon.ico"
+  },
+  "contextual": {
+    "options": [
+      "view",
+      "assistant",
+      "download-spec",
+      "download-pdf",
+      "chatgpt",
+      "claude"
+    ],
+    "display": "header"
+  },
+  "api": {
+    "playground": {
+      "display": "interactive"
+    },
+    "examples": {
+      "defaults": "all",
+      "languages": [
+        ""
+      ]
+    },
+    "openapi": "nito.openapi.json"
+  },
+  "styling": {
+    "codeblocks": {
+      "theme": {
+        "light": "github-light",
+        "dark": "github-dark"
+      },
+      "languages": {
+        "custom": [
+          "typescript",
+          "python",
+          "curl"
+        ]
+      }
+    }
+  },
+  "appearance": {
+    "default": "dark"
+  },
+  "navbar": {
+    "links": []
+  }
+}

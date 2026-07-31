@@ -1,0 +1,77 @@
+---
+title: "Doctor and Update"
+description: "Diagnose install, credential, and integration problems with nito doctor, and stay current with nito update."
+---
+
+Two commands keep a working install healthy: `nito doctor` tells you what is wrong, and `nito update` keeps everything current.
+
+## Doctor
+
+```text
+nito doctor [flags]
+```
+
+`doctor` checks your Nito installation, your stored credentials, and each host integration, then reports what passed and what needs attention. Run it first whenever a command misbehaves.
+
+By default it also sends a **short, billable chat request** to confirm end-to-end connectivity. That real request is the difference between "credentials look valid" and "a prompt actually reaches a model and comes back."
+
+### Options
+
+| Flag | Effect |
+| :-- | :-- |
+| `--skip-smoke` | Skip the short billable chat request and run only local checks. |
+| `--repair` | Repair local Nito state and remove legacy host integrations. |
+
+Use `--skip-smoke` when you only want to inspect local state, or want to avoid the small charge. Use `--repair` when `doctor` reports a broken or stale integration and you want it cleaned up:
+
+```bash
+nito doctor            # full check, including a live request
+nito doctor --skip-smoke   # local checks only
+nito doctor --repair       # fix local state and drop legacy integrations
+```
+
+<Note>
+`--repair` changes local state and removes old integrations. Run a plain `nito doctor` first to see what it will act on, then re-run with `--repair`.
+</Note>
+
+## Update
+
+```text
+nito update [flags]
+```
+
+`update` upgrades the Nito binary through your package manager and refreshes the managed host integrations so the plugin bundle and hooks match the new version.
+
+### Options
+
+| Flag | Effect |
+| :-- | :-- |
+| `--skip-binary` | Skip the package-manager binary upgrade and only refresh the integrations. |
+
+Run a normal `nito update` to move to a new release. Use `--skip-binary` when the binary is already current (for example it was upgraded by your package manager directly) but you still want the integrations re-synced:
+
+```bash
+nito update              # upgrade Nito and refresh integrations
+nito update --skip-binary   # only re-sync integrations
+```
+
+## A Good Recovery Order
+
+When something is not working, this sequence resolves most problems:
+
+<Steps>
+  <Step title="Check">
+    Run `nito doctor` and read what it flags.
+  </Step>
+  <Step title="Sign in">
+    If it reports a credential problem, run `nito agent login` and check again with `nito agent status`.
+  </Step>
+  <Step title="Update">
+    If the install or integrations are out of date, run `nito update`.
+  </Step>
+  <Step title="Repair">
+    If an integration is still broken, run `nito doctor --repair`, then re-run the command that failed.
+  </Step>
+</Steps>
+
+For host-specific reconnection inside a chat, see [When Tools Do Not Load in a Chat](/commands/status-and-account).
