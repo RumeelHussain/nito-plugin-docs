@@ -1,37 +1,39 @@
 ---
 title: "Free Usage"
-description: "What the free plugin allowance includes, what counts against it, and when it resets."
+description: "What the free allowance includes, what counts against it, and when it resets."
 ---
 
-You can use the plugin without a paid plan. Eligible free accounts get a monthly allowance of Nito plugin requests, enough to try the workflow end to end before deciding to upgrade.
+You can use the plugin without a paid plan. Free accounts get a monthly allowance of Nito requests, enough to try the whole workflow before deciding to upgrade.
 
 ## The Allowance
 
-Eligible free users receive **10 plugin requests per UTC calendar month**. The allowance is shared across your hosted plugin usage, so a request from Claude Code and a request from Codex draw from the same pool.
+Free accounts get **10 requests per UTC calendar month**. The allowance is shared, so a request from Claude Code and a request from Codex draw from the same pool.
 
 <Note>
-The count, how many you have left, and the exact reset time are shown on your [status card](/plans/checking-usage). That card is the authoritative source, since your eligibility and remaining balance are read live.
+Your remaining count and the exact reset time are on your [status card](/plans/checking-usage). That card is the live source; nothing else is.
 </Note>
 
 ## What Counts as a Request
 
-A request is a call that reaches a Nito model: an [`ask`](/commands/ask-and-continue), a [`private`](/commands/private) prompt, and similar model-backed commands each count once.
+A request is a call that reaches a model. An [`ask`](/commands/ask-and-continue) and a [`private`](/commands/private) question each count once.
 
-Commands that do not call a model do not count. Browsing the catalog with [`models`](/commands/choosing-a-model), checking your [`status`](/commands/status-and-account), setting a default with `model`, or opening the [`help`](/commands/command-index) menu are all free and unmetered.
+Commands that do not call a model do not count. Browsing the catalog with [`models`](/commands/choosing-a-model), checking [`status`](/commands/status-and-account), setting a default with `model`, and opening the [`help`](/commands/command-index) menu are all free and unmetered.
 
 ## When It Resets
 
-The allowance resets at the start of each **UTC calendar month**. It does not roll over: an unused balance does not carry into the next month, and the counter returns to the full allowance when the new month begins.
+The allowance resets at the start of each **UTC calendar month**. It does not roll over: an unused balance does not carry into the next month, and the counter returns to full when the new month begins.
 
 ## When You Run Out
 
-When the monthly allowance is spent, model-backed commands stop until the next reset or until you upgrade. The plugin tells you when you have hit the limit rather than failing silently. To keep working immediately, move to a paid plan: see [What Paid Unlocks](/plans/what-paid-unlocks).
+When the allowance is spent, commands that call a model stop until the next reset or until you upgrade. The plugin tells you when you have hit the limit rather than failing silently.
 
-## Paid-Only Features
+## Not Part of the Free Allowance
 
-Some capabilities are not part of the free allowance at all, because they require a paid plan regardless of how many requests you have left:
+Two things need a paid plan no matter how many requests you have left:
 
-- [Fusion](/commands/fusion), which runs several models on one prompt.
+- [Fusion](/commands/fusion), which runs several models on one question.
 - [Full Nito-routed sessions](/commands/session).
 
-See [What Paid Unlocks](/plans/what-paid-unlocks) for the full picture.
+See [What Paid Unlocks](/plans/what-paid-unlocks).
+
+{/* PLACEHOLDER: whether web search is metered separately, counted inside the 10, or unavailable on Free. */}
