@@ -1,11 +1,11 @@
 ---
 title: "Private"
-description: "The flagship command. A one-shot exchange your host's upstream never sees, or a fresh incognito session that keeps nothing."
+description: "A one-shot exchange that never reaches Anthropic or OpenAI, or a fresh incognito session that keeps nothing."
 ---
 
-`private` is one of the plugin commands. It has two behaviors depending on whether you give it a prompt:
+`private` has two behaviors, depending on whether you give it a prompt:
 
-- **With a prompt**, it runs a one-shot exchange that your harness model's upstream **never sees**. The prompt and the Nito answer are kept out of the harness's request, and the answer is shown back to you as a blocked turn.
+- **With a prompt**, it runs a one-shot exchange that **never reaches Anthropic or OpenAI**. The question and the answer stay out of what your harness sends, and the answer is shown back to you as a blocked turn.
 - **With no prompt**, it opens a **fresh incognito session** that keeps nothing, no prompt history, no transcript, no resume state.
 
 <Warning>

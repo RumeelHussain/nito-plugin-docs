@@ -1,6 +1,6 @@
 ---
 title: "Ask and Continue"
-description: "Ask a Nito model one question inside your current chat, then continue that exchange, without changing your host model."
+description: "Ask one question through Nito inside your current chat, then continue that exchange, without changing the model your harness runs."
 ---
 
 `ask` sends one prompt to a model through Nito and returns the answer inside your current chat. `continue` follows up on that same exchange. Both make **at most one** Nito call and leave your harness model untouched.
@@ -59,3 +59,7 @@ By default `ask` sends **only your prompt** to Nito, and the exchange stays in y
 </Tabs>
 
 If the preceding Nito exchange is unavailable or ambiguous, `continue` does nothing and asks you to use `ask` instead. Passing `--model` overrides the model for the follow-up.
+
+## Next
+
+Pick which model answers with [Choosing a Model](/commands/choosing-a-model), or keep a question out of your harness entirely with [`private`](/commands/private).
