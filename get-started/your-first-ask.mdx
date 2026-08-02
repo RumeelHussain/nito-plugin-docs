@@ -1,17 +1,17 @@
 ---
 title: "Your First Ask"
-description: "See what's available, ask a Nito model inside your chat, read the result label, and try a different model."
+description: "See what's available, ask a model through Nito inside your chat, read the result label, and set a default."
 ---
 
-`ask` is the simplest Nito command: it sends one prompt to a Nito model and returns the answer inside your current chat. Your host model stays primary, it just makes one Nito call when you ask.
+`ask` is the simplest Nito command. It sends one question through Nito and returns the answer inside your current chat. Your harness keeps running its own model and makes one Nito call when you ask.
 
 <Note>
-Type Nito commands **inside a running Claude Code or Codex session**, not in your terminal shell. Typing `$nito:ask …` at a plain shell prompt will not work, your shell tries to interpret it (for example, zsh reports `no matches found`). Start your host first, then run the command in it.
+Type Nito commands **inside a running Claude Code or Codex session**, not at your terminal prompt. Typing `$nito:ask …` at a plain shell prompt will not work; your shell tries to interpret it and reports something like `no matches found`. Start your harness first, then run the command inside it.
 </Note>
 
 ## See What's Available
 
-The help command is a menu, not a model call. It shows the Nito actions you can run:
+The help command is a menu rather than a model call. It shows the Nito actions you can run:
 
 <Tabs>
   <Tab title="Claude Code">
@@ -41,14 +41,14 @@ The help command is a menu, not a model call. It shows the Nito actions you can 
   </Tab>
 </Tabs>
 
-You don't have to choose a model first. When you have no saved preference, `ask` uses a sensible default; the model picker is there for when you *want* to browse or change models, not something you clear before your first call.
+You don't have to choose a model first. With no saved preference, `ask` uses a sensible default. The model picker is there for when you *want* to browse or switch, not something to set up before your first call.
 
 ## Read the Result Label
 
-Every Nito result ends with a label that tells you exactly what ran:
+Every Nito result ends with a label telling you exactly what ran:
 
 ```text
-Nito · <environment> · <model> · <privacy tier> · <context scope>
+Nito · <environment> · <model> · <privacy level> · <context scope>
 ```
 
 A hosted plugin call looks like this:
@@ -58,14 +58,14 @@ Nito · Hosted · MODEL-ID · private · Prompt only
 ```
 
 - **environment**: where the call ran. Plugin calls read `Hosted`.
-- **model**: the logical model that answered.
-- **privacy tier**: Anonymous, Private, Confidential, or Encrypted.
-- **context scope**: how much of your conversation was shared (prompt-only by default).
+- **model**: the model that answered.
+- **privacy level**: Anonymous, Private, Confidential, or Encrypted.
+- **context scope**: how much of your conversation was shared. Prompt only, by default.
 
-You never have to guess whether a call was private or which model answered, the label says so.
+You never have to guess whether a call was private or which model answered. The label says so.
 
 <Note>
-`ask` is a normal turn in your host chat, so your host model can see the ask exchange. If a prompt must stay out of the host's request entirely, use [`private`](/get-started/your-first-private-prompt) instead.
+`ask` is an ordinary turn in your chat, so it travels upstream with the rest of your conversation. When a question has to stay out of that, use [`private`](/get-started/your-first-private-prompt) instead.
 </Note>
 
 ## Try a Different Model
@@ -87,4 +87,29 @@ Override the model for a single call with `--model`:
 
 {/* PLACEHOLDER: swap MODEL-ID for a real launch model once the catalog is final. */}
 
-Browse the catalog and set a durable default on the [Models](/models) pages and in [Choosing a Model](/commands/choosing-a-model).
+## Set a Default
+
+Two commands, both inside Claude Code or Codex. There is nothing to set up on a website.
+
+<Tabs>
+  <Tab title="Claude Code">
+    ```text
+    /nito:models          browse the catalog
+    /nito:model           see your current default and change it
+    ```
+  </Tab>
+  <Tab title="Codex">
+    ```text
+    $nito:models          browse the catalog
+    $nito:model           see your current default and change it
+    ```
+  </Tab>
+</Tabs>
+
+Run `model` with no argument to see what you are on and pick from a list.
+
+<Note>
+`/nito:model` changes the model your future Nito calls use. It does not change the model running your session.
+</Note>
+
+More in [Choosing a Model](/commands/choosing-a-model).

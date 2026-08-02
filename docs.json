@@ -51,11 +51,11 @@
             "icon": "cube",
             "expanded": true,
             "pages": [
-              "models/all-models",
-              "models/model-id-convention",
-              "models/privacy-tiers-at-a-glance",
               "models/choosing-a-model",
+              "models/all-models",
+              "models/privacy-tiers-at-a-glance",
               "models/model-families",
+              "models/model-id-convention",
               "models/pricing"
             ]
           }
@@ -106,42 +106,6 @@
         "icon": "shield-check"
       },
       {
-        "tab": "Features",
-        "groups": [
-          {
-            "group": "Core Features",
-            "root": "features/index",
-            "icon": "lightbulb-gear",
-            "expanded": true,
-            "pages": [
-              "features/reasoning"
-            ]
-          },
-          {
-            "group": "Server-Side Tools",
-            "root": "features/server-side-tools",
-            "icon": "server",
-            "expanded": true,
-            "pages": [
-              "features/server-side-tools/web-search",
-              "features/server-side-tools/web-fetch",
-              "features/server-side-tools/file-parser"
-            ]
-          },
-          {
-            "group": "Multimodal",
-            "root": "features/multimodal",
-            "icon": "cubes",
-            "expanded": true,
-            "pages": [
-              "features/multimodal/image-input",
-              "features/multimodal/pdf-input"
-            ]
-          }
-        ],
-        "icon": "cubes-stacked"
-      },
-      {
         "tab": "Commands",
         "groups": [
           {
@@ -178,6 +142,42 @@
           }
         ],
         "icon": "wand-magic-sparkles"
+      },
+      {
+        "tab": "Features",
+        "groups": [
+          {
+            "group": "Core Features",
+            "root": "features/index",
+            "icon": "lightbulb-gear",
+            "expanded": true,
+            "pages": [
+              "features/reasoning"
+            ]
+          },
+          {
+            "group": "Server-Side Tools",
+            "root": "features/server-side-tools",
+            "icon": "server",
+            "expanded": true,
+            "pages": [
+              "features/server-side-tools/web-search",
+              "features/server-side-tools/web-fetch",
+              "features/server-side-tools/file-parser"
+            ]
+          },
+          {
+            "group": "Multimodal",
+            "root": "features/multimodal",
+            "icon": "cubes",
+            "expanded": true,
+            "pages": [
+              "features/multimodal/image-input",
+              "features/multimodal/pdf-input"
+            ]
+          }
+        ],
+        "icon": "cubes-stacked"
       },
       {
         "tab": "CLI",

@@ -1,45 +1,52 @@
 ---
 title: "How It Works"
-description: "The mental model: an authorized connection to Nito inside your host, a local Nito helper for private and session work, and nothing routed to Nito unless you ask."
+description: "What happens when you type a Nito command, and how it works without disrupting your existing workflow."
 ---
 
-You do not need to know how the plugin is built to use it, but one simple picture makes everything else make sense.
+Type a Nito command and one call goes to Nito. Type anything else and your session behaves exactly as it always has.
 
-## The Mental Model
+## The Pieces
 
-The plugin reaches Nito two ways, and each one handles a different kind of command:
+- **The plugin**, inside Claude Code or Codex. It gives you the Nito commands and nothing else. It does not touch the model running your session.
+- **The `nito` command line tool**, on your machine. Setup installs it for you. It handles file attachments and launches private and session work.
+- **Nito**, the service holding the catalog. It takes your call, sends it to a model that can serve it, and returns the answer at that model's privacy level.
 
-- **An authorized connection inside your host.** Your first setup authorizes your host (Claude Code or Codex) to talk to Nito once. After that, commands like `/nito:ask`, `/nito:fusion`, `/nito:models`, and `/nito:status` run over that connection. The result comes back into your chat, labeled with the model and privacy level that served it.
-- **A local Nito helper.** A small command-line helper, installed alongside the plugin, powers the parts that need to run on your machine: installation, file attachments, and launching private or session workflows. This is what makes `/nito:private` able to answer without your host's upstream ever seeing the prompt.
+## What Happens When You Type a Command
 
-<Note>
-These are two separate authorizations by design. Signing in to one does not sign you in to the other, and the plugin will tell you clearly which one a command needs, it never quietly uses the wrong one.
-</Note>
+<Steps>
+  <Step title="You type a Nito command in your session">
+    For example `/nito:ask` in Claude Code, or `$nito:ask` in Codex.
+  </Step>
+  <Step title="The plugin sends that one command to Nito">
+    Nothing else in your session goes with it beyond the context scope shown on the result.
+  </Step>
+  <Step title="Nito routes it to the model you named">
+    At that model's privacy level.
+  </Step>
+  <Step title="The answer comes back into your chat">
+    Ready to use, in the session you were already in.
+  </Step>
+</Steps>
 
-## Your Host Stays Primary
+## What Happens When You Don't
 
-Nothing routes to Nito unless you run a Nito command. Ordinary messages to Claude Code or Codex behave exactly as they always have, same model, same tools, same settings. A Nito command makes **at most one** Nito call and returns a labeled result; there is no background traffic and no automatic retry of a billable request.
+Ordinary messages to Claude Code or Codex behave exactly as they always have. Same model, same tools, same settings. Nothing routes through Nito unless you run a Nito command.
 
-| Command | Runs over |
-| :-- | :-- |
-| `ask` · `fusion` · `models` · `status` | the authorized connection inside your host |
-| `private` · `session` · file attachments | the local Nito helper |
+## You Can See What Ran
 
-## Every Result Is Labeled
+A Nito answer tells you which model served it and at what privacy level.
 
-When a Nito command returns, it tells you what happened: the environment it used, the logical model or route, the privacy level, and how much of your context was shared. You never have to guess whether a call was private or which model answered, the result says so.
+## If a Command Can't Run
 
-## When Something Isn't Connected
-
-If the authorized connection isn't ready (for example you haven't finished signing in) a hosted command shows a short, specific recovery step instead of failing silently or falling back to the wrong path. You complete the step, then re-run your original command once. The plugin does not replay a potentially billable or stateful request for you.
+The plugin tells you what to fix rather than failing quietly. Finish the step it names, then run your command again yourself. It will not re-send a request you would be billed for.
 
 ## What's Next
 
 <CardGroup cols={2}>
   <Card title="Install on Claude Code" icon="download" href="/get-started/install-claude-code">
-    Get set up and run your first ask.
+    Install, authorize, and run your first ask.
   </Card>
   <Card title="Install on Codex" icon="terminal" href="/get-started/install-codex">
-    The same, for Codex.
+    Install, authorize, and run your first ask.
   </Card>
 </CardGroup>

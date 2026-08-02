@@ -1,11 +1,11 @@
 ---
 title: "Install on Codex"
-description: "Install the Nito CLI, run setup, approve access, trust the hook, and run your first ask in Codex."
+description: "Install the command line tool, run setup, approve access, trust the hook, and run your first ask in Codex."
 ---
 
-This page takes you from nothing to a working `$nito:ask` in Codex. It's the same shape as the Claude Code install, with one Codex-specific step: trusting the plugin's hook. You do **not** need Git, a repository checkout, or any environment variables.
+This page takes you from nothing to a working `$nito:ask` in Codex. You do **not** need Git, a repository checkout, or any environment variables. The setup command handles all of it.
 
-## Prerequisites
+## Before You Start
 
 - **Codex CLI** installed and working. See [Requirements](/get-started/requirements) for the minimum version.
 - A **Nito account**. {/* PLACEHOLDER: link to sign-up once the URL is final. */}
@@ -13,50 +13,52 @@ This page takes you from nothing to a working `$nito:ask` in Codex. It's the sam
 ## Install
 
 <Steps>
-  <Step title="Install the Nito CLI">
-    The CLI powers setup, file attachments, and private/session launches.
+  <Step title="Install the nito command line tool">
+    It powers setup, file attachments, and private and session launches.
 
     ```bash
     {/* PLACEHOLDER: final install command pending production release. */}
     # install the `nito` command line tool
     ```
 
-    Confirm it's on your PATH:
+    Check it is on your PATH:
     ```bash
     nito --version
     ```
   </Step>
 
-  <Step title="Run setup for Codex">
+  <Step title="Run setup">
     ```bash
     nito setup codex
     ```
 
-    This extracts the Codex plugin, registers it as a local marketplace, and installs `nito@nito`, version-matched to your CLI. It also bundles the Private and Session hook.
+    This installs the Codex plugin, keeps it version-matched to your command line tool, and bundles the hook that Private and Session need.
   </Step>
 
   <Step title="Approve access">
-    Setup authorizes **two credentials** and tells you so up front:
+    Setup authorizes **two credentials** and tells you which is which as it goes:
 
-    - the **local CLI credential** (powers Private, Session, and file attachments), and
-    - the **hosted connection** (powers Ask, Fusion, Models, and Status).
+    - the **local credential**, which powers Private, Session, and file attachments
+    - the **hosted connection**, which powers Ask, Fusion, Models, and Status
 
-    For each credential that needs it, setup **opens your browser** to a Nito approval page and waits. Sign in and approve. If the browser doesn't open, setup prints a URL to visit, and you can paste the redirect URL back into the terminal. A credential you have already authorized is **skipped**. When it finishes, setup confirms the connection is logged in and prints `Nito full setup complete`.
+    For each one that needs it, setup **opens your browser** to a Nito approval page and waits. Sign in and approve. If the browser does not open, setup prints a URL you can visit, and you can paste the redirect back into the terminal.
 
-    <Note>There is no separate authorization step to run inside Codex, setup completes the hosted authorization for you. The only remaining Codex-specific step is trusting the hook, next.</Note>
+    A credential you have already approved is **skipped**, so if you have signed in before you may only see one prompt.
+
+    <Note>There is no separate step to run inside Codex. Setup finishes the hosted authorization for you.</Note>
   </Step>
 
   <Step title="Trust the hook">
-    Codex will not run a new or changed hook until you review and trust it. In Codex, run:
+    Codex will not run a new or changed hook until you review it. In Codex, run:
 
     ```text
     /hooks
     ```
 
-    Review the Nito Private/Session hook and trust it.
+    Review the Nito hook and trust it.
 
     <Warning>
-    A startup warning about the hook is **expected**. Hook trust approves **local code execution** for `$nito:private` and `$nito:session`, and is **separate from your Nito authentication**. It is not a second login.
+    A startup warning about the hook is **expected**. Trusting it approves **local code execution** for `$nito:private` and `$nito:session`. It is separate from your Nito sign-in, and it is not a second login.
     </Warning>
   </Step>
 
@@ -67,27 +69,27 @@ This page takes you from nothing to a working `$nito:ask` in Codex. It's the sam
     $nito:ask What is the capital of France?
     ```
 
-    You should get an answer labeled with the model and privacy level that served it.
+    You should get an answer telling you which model served it and at what privacy level. That is the plugin working.
   </Step>
 </Steps>
 
 ## What Setup Just Did
 
-- **Installed the plugin** from a local marketplace materialized from your CLI, so the CLI and plugin stay version-matched, no repo to clone.
-- **Authorized the local helper and the hosted connection** as two separate credentials, approved in sequence, that the plugin selects between automatically.
-- **Bundled the hook** that lets `$nito:private` intercept a prompt before Codex inference, which is why the one-time `/hooks` trust step exists.
+- **Installed the plugin** and pinned it to the same version as your command line tool, so the two cannot drift apart.
+- **Approved two credentials** in sequence, the local one and the hosted connection. They are separate on purpose, and the plugin always tells you which one a command needs.
+- **Bundled the hook** that lets `$nito:private` catch a question before Codex sends it anywhere. That is why the one-time trust step exists.
 
 <Note>
-Codex triggers `$nito:…` commands with a `$`, not a `/`. Everywhere else the commands match Claude Code one-for-one.
+Codex triggers commands with a `$` rather than a `/`. Everything else matches Claude Code one for one.
 </Note>
 
 ## Next
 
 <CardGroup cols={2}>
   <Card title="Your First Private Prompt" icon="user-secret" href="/get-started/your-first-private-prompt">
-    Run an incognito prompt your host's upstream never sees.
+    Run a question your harness never sends upstream.
   </Card>
   <Card title="Check Your Setup" icon="stethoscope" href="/get-started/check-your-setup">
-    Confirm everything is healthy with status and doctor.
+    Confirm everything is healthy with `status` and `doctor`.
   </Card>
 </CardGroup>

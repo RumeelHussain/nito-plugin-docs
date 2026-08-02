@@ -1,50 +1,67 @@
 ---
 title: "What the Nito Plugin Is"
-description: "Open-source and frontier models inside Claude Code and Codex, with a privacy level attached to every call, without replacing your host's own model."
+description: "Call open-weight and frontier models from inside Claude Code and Codex, at a privacy level you choose, without changing your harness."
 ---
 
-The Nito plugin adds a second, private AI layer inside **Claude Code** and **Codex**. Without changing the model that runs your session, it lets you call other models through Nito (open-source and frontier) and attach a privacy level to every one of those calls. Your host stays primary: ordinary messages never touch Nito, and Nito runs only when you explicitly ask it to.
+The Nito plugin lets you call open-weight models like Kimi K3, GLM 5.2, DeepSeek, and Qwen, plus frontier models like GPT, Claude, and Gemini, from inside **Claude Code** and **Codex**. No second tool to learn, and no provider keys to collect.
 
-Think of it as a set of focused commands you invoke on purpose. In Claude Code they are `/nito:…`; in Codex they are `$nito:…`. Everything else in your session works exactly as before.
+Your harness keeps running its own model. Ordinary messages never touch Nito, and a call goes through Nito only on the commands you type. Nothing in your existing setup changes.
 
-<Info>
-**New to Nito itself?** These docs cover the plugin. For the platform foundation (one key across many models, the per-call privacy dial, and how verifiable privacy works) see the platform docs: [Introduction](https://nito.mintlify.site/get-started/introduction) and [How Nito Works](https://nito.mintlify.site/get-started/how-it-works).
-{/* PLACEHOLDER: finalize the cross-site link convention between the plugin site and the platform docs. */}
-</Info>
+Every Nito call runs at a named privacy level, and the level comes with the model you pick. Frontier models run anonymized, so the provider gets your question without learning who is asking. Open-weight models go further: retention switched off upstream, stronger levels running inside attested hardware that hands back proof of what ran, and the strongest encrypting your question on your own machine before it leaves. Nito keeps neither the question nor the answer.
+
+The commands are the whole surface. In Claude Code they are `/nito:…`; in Codex they are `$nito:…`. Everything else in your session works exactly as before.
 
 ## What You Can Do
 
 <CardGroup cols={2}>
-  <Card title="Ask a second model" icon="comment-question">
-    `/nito:ask` gets a one-shot second opinion from a Nito model inside your current chat, then labels which model and privacy level answered.
+  <Card title="Use any model" icon="shuffle">
+    `/nito:ask` sends your question to whichever model you pick from the Nito catalog and puts the answer in your session. Name a model per call with `--model`, or set a default once and leave it alone.
   </Card>
-  <Card title="Fuse several models" icon="layer-group">
-    `/nito:fusion` sends one prompt to two or three models, then synthesizes a single answer and shows you where they agreed and disagreed.
+  <Card title="Ask without it going upstream" icon="user-secret">
+    Put a question after `/nito:private` and it goes through Nito instead. The answer lands inline, in the session you are already in. Anthropic and OpenAI never receive it, and Nito keeps no copy.
   </Card>
-  <Card title="Run a private prompt" icon="user-secret">
-    `/nito:private` answers from a Nito model in an incognito turn your host's upstream never sees, the prompt and answer stay out of the host model's request.
+  <Card title="Work in a separate session" icon="window">
+    `/nito:session` opens a second session in your workspace where a model from the Nito catalog does all the work, and keeps your history so you can come back to it. Run `/nito:private` with no question and you get the same thing, disposable: nothing is saved and closing it leaves nothing behind.
   </Card>
-  <Card title="Open a Nito-routed session" icon="window">
-    `/nito:session` opens a separate, fully Nito-routed session in your workspace, powered by a model you choose from the Nito catalog.
+  <Card title="Ask several models at once" icon="layer-group">
+    `/nito:fusion` sends one question to two or three models, then gives you a single answer and shows you where they agreed and disagreed.
   </Card>
 </CardGroup>
 
-## It Never Changes Your Host's Own Model
+## It Is the Same Harness
 
-The plugin sits *alongside* Claude Code or Codex. It does not swap out the model running your session, rewrite your configuration, or route your ordinary prompts anywhere. When you run a Nito command, that one call goes to Nito; when you don't, nothing does. Your host model, its tools, and its settings are untouched.
+The plugin sits *alongside* Claude Code or Codex rather than replacing either one. Same harness, same configuration, same tools. It does not swap out the model running your session, rewrite your settings, or send your ordinary prompts anywhere. When you run a Nito command, that one call goes to Nito. When you don't, nothing does.
 
 ## A Privacy Level on Every Call
 
-Every Nito call carries a privacy tier, and you choose it by the model you pick. The tier follows the model.
+Pick a model and you have picked its privacy level. There are four.
 
-- **Frontier models** run in an **anonymized** tier: broad model access with a metadata-only retention posture.
-- **Open-source models** can reach deeper tiers, including **Confidential**, where your call runs inside attested hardware and you can verify it ran there.
+<CardGroup cols={2}>
+  <Card title="Anonymous">
+    Frontier models, routed so the provider gets your question without learning who is asking.
+  </Card>
+  <Card title="Private">
+    Open-weight models, with retention switched off upstream, so the provider does not store your question or the answer.
+  </Card>
+  <Card title="Confidential">
+    The model runs inside attested hardware. Nito checks the attestation before you see the answer, and blocks the response if the check fails.
+  </Card>
+  <Card title="Encrypted">
+    Your question is encrypted on your own machine against the hardware's key, so nothing in between can read it. Web search, file uploads, and tool calls are switched off at this level.
+  </Card>
+</CardGroup>
 
-A privacy level never silently weakens. If you request a stronger tier than a model supports, the call is refused with a clear message rather than served at a weaker level. The full ladder (Anonymous, Private, Confidential, and Encrypted) is covered in [Privacy](/privacy/tiers).
+A privacy level never silently weakens. If you ask for a stronger level than a model supports, the call is refused with a clear message rather than served at a weaker one. The full ladder is covered in [Privacy](/privacy/tiers).
 
-<Note>
-The **no-trace** guarantee belongs to `/nito:private` specifically. A regular `/nito:ask` is a normal turn in your host chat, so the host model can see that exchange. Use Private when the prompt must stay out of the host's request.
-</Note>
+## When You Don't Want It Going Upstream
+
+`/nito:ask` is an ordinary turn in your session, so it travels upstream with the rest of your conversation like everything else you type.
+
+`/nito:private` doesn't. Your question goes through Nito instead, the answer comes back into your session, and Anthropic or OpenAI never receive either one. Nito keeps no copy.
+
+It does two things depending on what follows it. A question after `/nito:private` gets answered inline. Nothing after it opens a private session that saves nothing.
+
+[Run your first private prompt](/get-started/your-first-private-prompt).
 
 ## Free and Paid at a Glance
 
@@ -52,24 +69,21 @@ You can start on a free allowance and upgrade when you need more.
 
 | | Free | Paid |
 | :-- | :-- | :-- |
-| Ask a second model | ✓ | ✓ |
-| Private prompts | ✓ | ✓ |
-| Fusion (multi-model) | — | ✓ |
-| Full Nito-routed sessions | — | ✓ |
-
-{/* PLACEHOLDER: exact free-allowance amounts and plan names/prices are pending, see Plans and Billing. */}
+| Asks and private prompts | 10 per month | ✓ |
+| Fusion (multi-model) | | ✓ |
+| Full Nito-routed sessions | | ✓ |
 
 Full details, including what counts against the free allowance, live in [Plans and Billing](/plans/free-usage).
 
 ## One Plugin, Two Hosts
 
-Claude Code and Codex are equals. The same commands exist in both; only the trigger differs (`/nito:` vs `$nito:`). Where a capability differs between hosts, the difference is called out on the page where it matters.
+Claude Code and Codex are equals. The same commands exist in both; only the trigger differs (`/nito:` vs `$nito:`). Where a capability differs between the two, the difference is called out on the page where it matters.
 
 <CardGroup cols={2}>
   <Card title="Install on Claude Code" icon="download" href="/get-started/install-claude-code">
-    Install, authorize once, run your first ask, under two minutes.
+    Install, authorize, and run your first ask. Under two minutes.
   </Card>
   <Card title="Install on Codex" icon="terminal" href="/get-started/install-codex">
-    Same flow for Codex, including the one-time hook-trust step.
+    Install, authorize, and run your first ask. Under two minutes.
   </Card>
 </CardGroup>

@@ -1,23 +1,23 @@
 ---
 title: "Features"
-description: "The model capabilities you can use through the plugin: reasoning, web search and fetch, document parsing, and image input. Most turn on with a flag on your command."
+description: "What the models can do through the plugin: reasoning, web search and fetch, documents, and images. Most turn on with a flag on a command you already use."
 ---
 
-The Nito plugin is not just a way to send a prompt. The models behind it can search the web, read a page you name, parse a document you attach, look at an image, and think through a hard problem before answering. This section covers each capability and how to use it from the plugin.
+The models behind the plugin can search the web, read a page you name, parse a document you attach, look at an image, and think through a hard problem before answering. This section covers each one and how to use it.
 
-Most features ride on top of the commands you already know, [`ask`](/commands/ask-and-continue), [`private`](/commands/private), and [`session`](/commands/session), and you turn them on with a flag. There is nothing extra to install.
+Most of them are already on. There is nothing extra to install and, in most cases, nothing to type.
 
 ## What You Can Do
 
 <CardGroup cols={2}>
   <Card title="Reasoning" icon="brain" href="/features/reasoning">
-    Choose a reasoning-capable model and it thinks through a problem before answering.
+    Pick a reasoning-capable model and it thinks through a problem before answering.
   </Card>
   <Card title="Web Search" icon="magnifying-glass" href="/features/server-side-tools/web-search">
-    Pull fresh information from the web into an answer with `--web-search`.
+    The model pulls fresh information from the web when it needs it.
   </Card>
   <Card title="Web Fetch" icon="link" href="/features/server-side-tools/web-fetch">
-    Read a specific URL you name into the model's context with `--web-fetch`.
+    The model reads a URL you name into its context.
   </Card>
   <Card title="Documents" icon="file-lines" href="/features/multimodal/pdf-input">
     Attach a PDF or office file with `--file` and ask about it.
@@ -25,19 +25,26 @@ Most features ride on top of the commands you already know, [`ask`](/commands/as
   <Card title="Image Input" icon="image" href="/features/multimodal/image-input">
     Attach a picture with `--file` and a vision-capable model reads it.
   </Card>
-  <Card title="Choosing a Model" icon="cube" href="/commands/choosing-a-model">
-    Capabilities are per model. Browse the catalog and pick one that fits.
-  </Card>
 </CardGroup>
 
-## Capabilities Follow the Model
+## You Do Not Turn These On
 
-Two of these features, reasoning and image input, are not flags: they are properties of the model you choose. A model either supports reasoning (or vision) or it does not. Browse the catalog with [`models`](/commands/choosing-a-model) to see what each one supports, then pick a model that fits the task. Web search, web fetch, and document parsing work more broadly and are controlled with flags.
+Web search and web fetch are **on by default**, on [`ask`](/commands/ask-and-continue), [`private`](/commands/private), [`session`](/commands/session), and [`fusion`](/commands/fusion) alike. The flags exist to turn them off or narrow them, not to switch them on.
 
-## A Note on Sessions
+| Flag | Effect |
+| :-- | :-- |
+| `--web-search off` | No searching on this call |
+| `--web-search auto` | The model searches only if it decides it needs to |
+| `--web-fetch=off` | No URL retrieval on this call |
 
-When you open a full Nito [`session`](/commands/session), your host's normal behavior, streaming replies and its own tool use, keeps working, now powered by a Nito model. Those are host-native behaviors rather than plugin flags, so they are covered where the session is: see [Session](/commands/session).
+Reasoning and image input are not flags at all. They are properties of the model you choose: a model either supports them or it does not. Browse the catalog with [`models`](/commands/choosing-a-model) to see what each one handles, then pick one that fits the task.
+
+The only thing you type every time is `--file`, because you are naming a specific file to attach.
+
+## Inside a Session
+
+When you open a full [`session`](/commands/session), your harness's normal behaviour keeps working, now running through Nito. Streaming replies and its own tool use are harness-native rather than plugin flags, so they are covered where the session is.
 
 ## From the Terminal
 
-Every capability here also works from the `nito` CLI. See [Ask and Fusion from the Terminal](/cli/ask-and-fusion-from-terminal).
+Every capability here also works from the `nito` command line tool. See [Ask and Fusion from the Terminal](/cli/ask-and-fusion-from-terminal).

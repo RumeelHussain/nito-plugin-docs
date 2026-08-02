@@ -1,31 +1,31 @@
 ---
 title: "FAQ"
-description: "Answers to common plugin questions, grouped by topic: getting started, privacy, models and Fusion, plans, and the CLI."
+description: "Short answers to the questions that come up most, grouped by topic."
 ---
 
-Short answers to the questions that come up most, grouped by topic. Each answer links to the page with the full story. If you are brand new, start with [How It Works](/get-started/how-it-works). If something is broken, see [Troubleshooting](/help/troubleshooting).
+Short answers to the questions that come up most, each linking to the page with the full story. If you are brand new, start with [How It Works](/get-started/how-it-works). If something is broken, see [Troubleshooting](/help/troubleshooting).
 
 ## Browse by Topic
 
-- **[Getting started](/help/faq/getting-started)** where commands run, `/nito:` vs `$nito:`, sign-in, no API key.
-- **[Privacy](/help/faq/privacy)** what your host sees, what Private guarantees, the tiers, retention.
-- **[Models and Fusion](/help/faq/models-and-fusion)** switching models, asking several at once, finding what is available.
-- **[Plans and usage](/help/faq/plans-and-usage)** the free allowance, what paid unlocks, checking usage.
-- **[Using the CLI](/help/faq/using-the-cli)** whether you need the terminal, and what it is for.
+- [**Getting started**](/help/faq/getting-started): where commands run, `/nito:` versus `$nito:`, signing in, no API key.
+- [**Privacy**](/help/faq/privacy): what your harness sees, what `private` guarantees, the four levels, retention.
+- [**Models and Fusion**](/help/faq/models-and-fusion): switching models, asking several at once, finding what is available.
+- [**Plans and usage**](/help/faq/plans-and-usage): the free allowance, what paid unlocks, checking usage.
+- [**Using the CLI**](/help/faq/using-the-cli): whether you need the terminal, and what it is for.
 
 ## Top Questions
 
 **Do I type Nito commands in my terminal or inside the chat?**
-Inside a running Claude Code or Codex session, not your terminal shell. The one exception is the `nito` [CLI](/help/faq/using-the-cli). See [Getting started](/help/faq/getting-started).
+Inside a running Claude Code or Codex session, not your terminal. The exception is the `nito` [command line tool](/help/faq/using-the-cli), which is the terminal.
 
-**Does using the plugin send my prompt to my host's model provider?**
-It depends on the command. A plain `ask` runs in your host conversation, so your host can see it; `private` keeps a turn out of your host's upstream. See [Privacy](/help/faq/privacy).
+**Does using the plugin send my question to Anthropic or OpenAI?**
+It depends on the command. A plain `ask` is an ordinary turn in your chat, so it travels upstream with the rest of your conversation. `private` does not: the question and the answer stay out of what your harness sends. See [Privacy](/help/faq/privacy).
 
-**Does choosing a Nito model change my Claude or Codex model?**
-No. It only changes what Nito uses for its own commands. See [Models and Fusion](/help/faq/models-and-fusion).
+**Does choosing a model change my Claude or Codex model?**
+No. It changes what Nito uses for its own commands. Inside a full Nito session, your harness's own model picker changes the session. See [Models and Fusion](/help/faq/models-and-fusion).
 
 **Is the plugin free?**
-Eligible free accounts get a monthly allowance of plugin requests. See [Plans and usage](/help/faq/plans-and-usage).
+Free accounts get 10 asks or private questions a month. Fusion and full sessions need a paid plan. See [Plans and usage](/help/faq/plans-and-usage).
 
 ## Related
 

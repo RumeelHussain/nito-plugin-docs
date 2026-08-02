@@ -1,18 +1,18 @@
 ---
 title: "Command Index"
-description: "Every Nito plugin command, one line each. Trigger with a slash in Claude Code and a dollar sign in Codex."
+description: "Every Nito plugin command, one line each. A slash in Claude Code, a dollar sign in Codex."
 ---
 
-Every command exists in both hosts. The only difference is the trigger: **`/nito:`** in Claude Code, **`$nito:`** in Codex.
+Every command exists in both harnesses. The only difference is the trigger: **`/nito:`** in Claude Code, **`$nito:`** in Codex.
 
 | Command | What it does |
 | :-- | :-- |
-| [`ask`](/commands/ask-and-continue) | Ask a Nito model one question inside your current chat. |
-| [`continue`](/commands/ask-and-continue) | Follow up on the immediately preceding Nito exchange. |
-| [`fusion`](/commands/fusion) | Send one prompt to two or three models plus a synthesis. Paid. |
-| [`private`](/commands/private) | A one-shot exchange your host's upstream never sees, or a no-trace incognito session. |
-| [`session`](/commands/session) | Open a persistent session powered entirely by a Nito model. Paid. |
-| [`model`](/commands/choosing-a-model) | Set your durable default Nito model. |
+| [`ask`](/commands/ask-and-continue) | Ask one question through Nito, inside your current chat. |
+| [`continue`](/commands/ask-and-continue) | Follow up on the Nito exchange you just had. |
+| [`fusion`](/commands/fusion) | Send one question to two or three models and get a single answer back. Paid. |
+| [`private`](/commands/private) | With a question, answers inline without it going upstream. With no question, opens a session that saves nothing. |
+| [`session`](/commands/session) | Open a separate session that runs entirely through Nito and keeps your history. Paid. |
+| [`model`](/commands/choosing-a-model) | Set the model your future Nito calls use. |
 | [`models`](/commands/choosing-a-model) | Browse the models available to your account. |
 | [`context`](/commands/context-and-mode) | Turn conversation context on or off for `ask`, or check it. |
 | [`mode`](/commands/context-and-mode) | Report how the current conversation is routed. |
@@ -20,8 +20,12 @@ Every command exists in both hosts. The only difference is the trigger: **`/nito
 | [`login`](/commands/status-and-account) | Authorize the plugin's connection to Nito. |
 | [`logout`](/commands/status-and-account) | Sign out. |
 | [`signup`](/commands/status-and-account) | Start creating a Nito account. |
-| `help` | Open the built-in menu of Nito actions. It is a menu, not a model call. |
+| `help` | Open the built-in menu of Nito actions. |
 
 <Note>
-`help` (`/nito:help` or `$nito:help`) is the progressive-discovery menu. It shows or routes to the focused commands above and never makes a Nito inference call itself.
+`help` is the menu. It shows you the commands above and routes you to them, and it never makes a model call itself. Free, and it does not count against any allowance.
+</Note>
+
+<Note>
+`model` changes what your future Nito calls use. It does not change the model running your session. Inside a full Nito session, use your harness's own model picker for that.
 </Note>

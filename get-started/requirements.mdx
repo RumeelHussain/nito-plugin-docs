@@ -1,34 +1,35 @@
 ---
 title: "Requirements"
-description: "What you need before installing: a supported host version, a supported platform, a Nito account, and the Nito CLI."
+description: "What you need before installing: a supported harness version, a supported platform, a Nito account, and the command line tool."
 ---
 
-## Host
+## Your Harness
 
-You need a working install of one host:
+You need a working install of one of these.
 
-| Host | Minimum version |
+| Harness | Minimum version |
 | :-- | :-- |
 | Claude Code | `2.1.214` or newer |
 | Codex CLI | `0.144.5` or newer |
 
-The minimum applies to **full Nito-routed sessions** (`/nito:session`, `nito claude`, `nito codex`). If your host is older, a session launch stops with a clear message telling you the version you need. Ask and Private work against your installed host.
-
 {/* PLACEHOLDER: confirm final launch minimums before public release. */}
+
+**These minimums apply to full sessions only**, meaning `/nito:session`, `nito claude`, and `nito codex`. On an older version, a session launch stops and tells you the version you need. `ask` and `private` work on the harness you already have.
 
 ## Platform
 
-- **macOS** and **Linux**, fully supported.
-- **Windows**: supported. On Windows, a Private session that crashes may leave its temporary profile until the operating system clears it, rather than being cleaned up on exit.
+- **macOS and Linux.** Fully supported.
+- **Windows.** Supported. One difference: if a private session crashes, its temporary profile may sit on disk until the operating system clears it, rather than being removed on exit.
 
 ## Account
 
-- A **Nito account**. {/* PLACEHOLDER: sign-up link pending. */}
-- Free-plan access is available; some features (Fusion, full sessions) require a paid plan. See [Plans and Billing](/plans/free-usage).
+A **Nito account**. {/* PLACEHOLDER: sign-up link pending. */}
 
-## The Nito CLI
+Free accounts get 10 asks or private questions a month. Fusion and full sessions need a paid plan. See [Plans and Billing](/plans/free-usage).
 
-The `nito` command-line tool must be installed and on your `PATH`. It powers setup, file attachments, and private/session launches. Installing it is the first step of each host's install guide.
+## The Command Line Tool
+
+The `nito` tool has to be installed and on your `PATH`. It powers setup, file attachments, and private and session launches. Installing it is the first step of each install guide.
 
 <CardGroup cols={2}>
   <Card title="Install on Claude Code" icon="download" href="/get-started/install-claude-code" />

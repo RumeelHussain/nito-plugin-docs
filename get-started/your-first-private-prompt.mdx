@@ -1,9 +1,9 @@
 ---
 title: "Your First Private Prompt"
-description: "Run an incognito prompt your host's upstream never sees, understand what the guarantee covers, and open a full incognito session."
+description: "Run a private question, understand exactly what the guarantee covers, and open a full incognito session."
 ---
 
-`private` is the plugin's flagship. Unlike `ask`, a private prompt and its answer are kept **out of your host model's request**, your host's upstream never sees them. The answer comes from a Nito model and is shown back to you as a blocked turn.
+A private question and its answer never reach Anthropic or OpenAI. The answer comes back through Nito and is shown to you as a blocked turn.
 
 ## Run It
 
@@ -22,34 +22,34 @@ description: "Run an incognito prompt your host's upstream never sees, understan
 
 ## What Just Happened
 
-The plugin intercepted the command before your host ran its own inference, sent a **prompt-only** request to a Nito model through the local helper, and returned the answer as a blocked result. The private prompt and the Nito answer were **excluded from your host model's request**, so they never became part of the host's context.
+The plugin caught the command before your harness ran its own inference, sent the question on its own through Nito, and returned the answer as a blocked result. The question and the answer never entered your harness's context, so they never went upstream with it.
 
-The result is labeled `Session mode: Incognito` and shows the model and privacy tier that answered.
+The result is labeled `Session mode: Incognito` and shows the model and privacy level that answered.
 
 <Warning>
-The private guarantee depends on your host's hooks being **enabled and trusted**. If hooks are disabled, the command cannot intercept the turn. Do not submit private data with hooks off. On Codex, this is the one-time `/hooks` trust step from install.
+The private guarantee depends on your harness's hooks being **enabled and trusted**. If hooks are off, the command cannot catch the turn. Do not submit private data with hooks off. On Codex this is the one-time `/hooks` trust step from [install](/get-started/install-codex).
 </Warning>
 
 ## What Stays in the Path
 
-Private keeps your prompt out of the *host model's request*. It does not remove everyone from the path: your local host process, your operating system, the Nito gateway, and the selected model provider are still involved. That boundary is covered in full on [The Trust Boundary](/privacy/overview).
+Private keeps your question away from Anthropic and OpenAI. It does not remove everyone from the path: your local harness process, your operating system, the Nito gateway, and the model provider that answers are all still involved. That boundary is covered in full on [Who Can See What](/privacy/overview).
 
 ## Open a Full Incognito Session
 
-Run `private` with **no prompt** to go further than a single turn:
+Run `private` with **no question** to go further than a single turn:
 
 <Tabs>
   <Tab title="Claude Code">
     ```text
     /nito:private
     ```
-    Opens a fresh, fully Nito-routed session that keeps nothing, no prompt history, no transcript, no resume state. Your original session is untouched and receives only a launch result.
+    Opens a fresh session that runs through Nito and keeps nothing: no prompt history, no transcript, no resume state. Your original session is untouched and receives only a launch result.
   </Tab>
   <Tab title="Codex">
     ```text
     $nito:private
     ```
-    Reports that a no-prompt private **session** is not yet available on Codex (coming soon), without calling any model. For now, use `$nito:private <prompt>` for one private turn, or `$nito:session` for a persistent Nito-routed session.
+    Reports that a no-question private **session** is not yet available on Codex, without calling any model. For now, use `$nito:private <question>` for one private turn, or [`$nito:session`](/commands/session) for a session that persists.
   </Tab>
 </Tabs>
 
@@ -59,7 +59,7 @@ Run `private` with **no prompt** to go further than a single turn:
   <Card title="Private (full reference)" icon="user-secret" href="/commands/private">
     Every option, and exactly what the guarantee covers.
   </Card>
-  <Card title="The Trust Boundary" icon="shield-halved" href="/privacy/overview">
+  <Card title="Who Can See What" icon="shield-halved" href="/privacy/overview">
     What private protects and what remains in the path.
   </Card>
 </CardGroup>

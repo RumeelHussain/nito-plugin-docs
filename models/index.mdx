@@ -1,39 +1,47 @@
 ---
 title: "Models"
-description: "One plugin, many models. How the Nito catalog works, how a model's privacy tier travels with it, and how to pick the right one."
+description: "One sign-in, the whole Nito catalog. How models work in the plugin, how a privacy level travels with each one, and how to pick."
 ---
 
-The plugin gives you one place to reach many models. You do not hold accounts with the underlying providers, manage their keys, or learn each one's request format. You name a model, and Nito routes your call to a backend that can serve it.
+One sign-in and you can call Kimi K3, GLM 5.2, DeepSeek, Qwen, GPT, Claude, Gemini, and the rest of the Nito catalog. You do not hold accounts with the providers behind them, manage their keys, or learn each one's request format. You name a model and Nito routes the call.
 
-## One Plugin, the Whole Catalog
+## Switch Whenever You Like
 
-Behind the plugin, Nito sits in front of many models as a single entry point. The practical result: with one sign-in you can reach the whole catalog and switch models whenever you want, without changing anything about how you work.
+The model you name is a stable public name. Nito maps it to whichever backend can actually run it, and picks a healthy one each time. Switching costs you nothing: no new account, no new key, no change to how you work.
 
-The model you name is a **logical model**: a stable public name that Nito maps to whichever backend can actually run it. You choose the name; Nito finds a healthy, eligible backend that serves it.
+The catalog is **discovered rather than fixed**. Nito adds models and retires them over time, so the live list you see when you browse is always the authoritative one. Think of it as a departures board rather than a printed timetable.
 
-The catalog is **discovered, not fixed**. Nito adds new models and retires old ones over time, so the authoritative list is always what you see live when you browse, not a hard-coded table. Think of it like a live departures board rather than a printed timetable.
+## The Privacy Level Travels with the Model
 
-## The Tier Travels with the Model
+Every model carries a privacy level, and you get that level by choosing that model. A more private model gives you a more private call, and the level can never quietly weaken.
 
-Every model carries a privacy tier, and you get that tier by choosing that model. A more private model gives you a more private call, and the tier can never quietly weaken. This is the heart of how privacy works in the plugin: see [Tier Follows the Model](/privacy/tiers) and [The Four Tiers](/privacy/tiers).
+This is the heart of how privacy works in the plugin. There is no account-wide switch to remember and no setting to get wrong: the same setup sends a throwaway question on a light model and a sensitive one on a Confidential model. See [The Four Levels](/privacy/tiers).
+
+## Browsing and Choosing
+
+You browse and set models with commands rather than config files. Run [`models`](/commands/choosing-a-model) to see the catalog for your account, `model` to set a default you keep, and `--model` to override for a single call.
+
+None of it changes your harness's own model.
 
 ## What This Section Covers
 
 <CardGroup cols={2}>
   <Card title="Model List" icon="list" href="/models/all-models">
-    A snapshot of the current catalog, grouped by privacy tier.
+    A snapshot of the current catalog, grouped by privacy level.
   </Card>
   <Card title="Choosing a Model" icon="wand-magic-sparkles" href="/models/choosing-a-model">
-    A practical guide from task to the right model and tier.
+    A practical guide from the task in front of you to the right model.
   </Card>
   <Card title="Model Families" icon="layer-group" href="/models/model-families">
     The kinds of models Nito serves and what each is for.
+  </Card>
+  <Card title="Privacy Levels at a Glance" icon="shield-halved" href="/models/privacy-tiers-at-a-glance">
+    The four levels in brief, and which models reach each.
+  </Card>
+  <Card title="Model ID Convention" icon="id-card" href="/models/model-id-convention">
+    How a model's name shows its level.
   </Card>
   <Card title="Pricing" icon="credit-card" href="/models/pricing">
     How per-model cost works, read live from the catalog.
   </Card>
 </CardGroup>
-
-## Browsing and Choosing
-
-You browse and set models with commands, not config files. Run [`models`](/commands/choosing-a-model) to see the catalog for your account, `model` to set a durable default, and `--model` to override for a single call. None of this changes your host's own model. See [Choosing a Model](/commands/choosing-a-model) for the commands.

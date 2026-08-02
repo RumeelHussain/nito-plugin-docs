@@ -1,85 +1,62 @@
 ---
-title: "Privacy Tiers in Depth"
-description: "The four privacy tiers as a ladder, how the tier follows the model you pick, and why support is decided per model."
+title: "Privacy Levels in Depth"
+description: "The four privacy levels as a ladder, and how the level follows the model you pick."
 ---
 
-Nito lets you choose how private each call is, and that choice rides on the model you select rather than being set once for your whole session. This section is the authoritative reference: one page per tier, going deeper into what each one protects, how you reach it from the plugin, and the trade-offs you accept when you pick it.
+Nito lets you choose how private each call is, and that choice rides on the model you pick rather than being set once for your session. This section is the reference: one page per level, covering what each protects, how you reach it, and what you give up to get it.
 
-## Each Privacy Tier Builds on the Last
+## Each Level Builds on the Last
 
-Read the four tiers as a ladder. Each rung adds a stronger guarantee and, in exchange, narrows the set of models and features available to you. You climb only as high as a given call needs.
+Read the four as a ladder. Each rung adds a stronger guarantee and, in exchange, narrows the models and features available to you. Climb only as high as the call needs.
 
-| **Tier** | **How you reach it** | **Core guarantee it adds** |
+| Level | How you reach it | What it adds |
 | :-- | :-- | :-- |
-| **Anonymous** | Pick a model whose tier is Anonymous | Metadata-only retention by default |
-| **Private** | Pick a model whose tier is Private | Upstream provider held to zero data retention |
+| **Anonymous** | Pick a model whose level is Anonymous | Metadata-only retention by default |
+| **Private** | Pick a model whose level is Private | Upstream provider held to zero data retention |
 | **Confidential** | Pick a model that offers Confidential | Sealed execution with a verifiable attestation |
-| **Encrypted** | Not yet available in the plugin | Client-side encryption to the sealed environment |
+| **Encrypted** | Not available in the plugin yet | Client-side encryption to the sealed environment |
 
-Each higher tier keeps the guarantees of the ones below it and adds its own. Confidential runs inside a sealed environment (a Trusted Execution Environment) that you can attest; Encrypted keeps that sealed execution and additionally encrypts your data to it.
+## The Level Follows the Model
 
-## The Tier Follows the Model You Choose
+There is no privacy flag on your command. The level is part of the model's name.
 
-You do not type a suffix or flag to pick a tier. Every model carries its own privacy tier, and you get the tier of the model you choose. Browse the catalog with the `models` command, then set your model with `model` or `--model`. The tier comes along with it.
+Anonymous and Private are a model's own level, and its ID is just provider and model. A model that also offers Confidential has a second entry in the catalog, whose name ends in `:confidential`.
 
-- **Anonymous and Private** are properties of the model itself. When you pick the model, you get its tier: a model's privacy reach is shown when you browse.
-- **Confidential** is available on models that offer sealed execution. Pick one of those models and your calls run in the sealed environment.
-- **Encrypted** is the top rung and is not yet available in the plugin.
-
-Because the tier is bound to the model, the way to change the privacy of a call is to change the model, nothing else.
-
-## Which Privacy Tiers a Model Offers
-
-No model supports every tier. When you browse models, the catalog marks which models offer each tier, and the practical rule is always the same: read the model's listing, then choose the tier the model supports.
-
-- **Anonymous / Private** is the model's own stored tier. You do not do anything extra; picking the model gives you its tier.
-- **Confidential** is available on models the catalog marks as offering sealed, attestable execution. Pick one of those models to run there.
-- **Encrypted** is not yet available in the plugin.
-
-A privacy tier never silently downgrades. If a request cannot be served at the chosen model's tier, the call fails with a clear message rather than dropping to a weaker tier. A guarantee that quietly weakens is worse than no guarantee, so the request is refused instead.
-
-```mermaid placement="top-right" actions={true}
-flowchart TD
-    A["1 · Anonymous<br/>the default tier<br/>metadata-only retention"] --> P["2 · Private<br/>+ upstream zero data retention"]
-    P --> C["3 · Confidential<br/>+ sealed execution you can attest"]
-    C --> E["4 · Encrypted<br/>not yet available in the plugin<br/>+ client-side encryption to the sealed environment"]
+```text
+z-ai/glm-5.2                 the Private entry
+z-ai/glm-5.2:confidential    the Confidential entry
 ```
 
-_Each rung keeps the guarantees of the rungs below it and adds its own. Support is decided per model: browse the catalog, see which tiers a model offers, then choose the tier the model supports._
+Two entries, one underlying model, two levels. You pick the level by picking the entry, and you never add the marker yourself: it is part of a name the catalog gives you. See [Model ID Convention](/models/model-id-convention).
 
-## How to Read the Rest of this Section
+Browse with the [`models`](/commands/choosing-a-model) command, then set your model with `model` or `--model`. The level comes with it, which means changing the privacy of a call means changing the model. Nothing else.
 
-Start with the tier closest to your need and climb from there:
+## Why a Model Reaches Only Certain Levels
 
-- [**Anonymous**](/privacy/tiers/anonymous) the lightest tier and the default. Broad model availability, metadata-only retention.
-- [**Private**](/privacy/tiers/private) privately served models with no upstream retention.
-- [**Confidential**](/privacy/tiers/confidential) sealed execution with an attestation you can fetch and verify. Supports streaming.
-- [**Encrypted**](/privacy/tiers/encrypted) the top rung: client-side encryption to the sealed environment. Not yet available in the plugin.
+No model offers every level, and the reason is what can be enforced on it.
 
-## Related Resources
+- **Open-weight models can be served with zero data retention enforced, or run inside confidential hardware.** That is what makes everything above Anonymous possible: retention switched off upstream, sealed execution, an attestation you can check. They start at Private and climb from there.
+- **Frontier models always route through their provider.** The most that can be done is make sure the provider never learns who is asking. That is Anonymous, and it is as far as a frontier model goes.
 
-<CardGroup cols={3}>
-  <Card title="Privacy Overview" icon="shield-check" href="/privacy/overview">
-    What "private" means on Nito.<br />
+So the ladder is not a quality ranking. It reflects what can be enforced on a given model.
+
+## It Never Silently Downgrades
+
+If a call cannot be served at the chosen model's level, it **fails with a clear message** rather than dropping to a weaker one. A guarantee that quietly weakens is worse than no guarantee, so the call is refused instead.
+
+## The Four Pages
+
+<CardGroup cols={2}>
+  <Card title="Anonymous" href="/privacy/tiers/anonymous">
+    The lightest level and the default. Broad model availability, metadata-only retention.
   </Card>
-
-  <Card title="Choosing a Model" icon="cubes-stacked" href="/commands/choosing-a-model">
-    Browse models and set the one you want.
+  <Card title="Private" href="/privacy/tiers/private">
+    Privately served models with no upstream retention.
   </Card>
-
-  <Card title="What Each Command Protects" icon="phone-circle" href="/privacy/what-each-command-protects">
-    How privacy applies across the plugin's commands.<br />
+  <Card title="Confidential" href="/privacy/tiers/confidential">
+    Sealed execution with an attestation you can fetch and verify.
   </Card>
-
-  <Card title="TEE Attestation" icon="stamp" href="/privacy/tee-attestation">
-    How Nito turns a privacy promise into something you can check.<br />
-  </Card>
-
-  <Card title="Data Retention and Visibility" icon="id-card" href="/privacy/data-retention-and-visibility">
-    What Nito retains and what it does not.<br /><br />
-  </Card>
-
-  <Card title="How It Works" icon="gears" href="/get-started/how-it-works">
-    How the plugin routes your calls and how the tier follows the model.
+  <Card title="Encrypted" href="/privacy/tiers/encrypted">
+    The top rung, adding client-side encryption to the sealed environment. Not available in the plugin yet.
   </Card>
 </CardGroup>

@@ -1,11 +1,11 @@
 ---
 title: "Update and Uninstall"
-description: "Keep the CLI and plugin current with one command, and remove everything cleanly when you're done."
+description: "Keep the command line tool and plugin current with one command, and remove everything cleanly when you are done."
 ---
 
 ## How Versions Work
 
-The CLI and the plugin are always **version-matched**. Setup installs the plugin from a local marketplace that the CLI materializes from itself, so the two never drift. When you update the CLI, you refresh the plugin at the same time.
+The command line tool and the plugin are always **version-matched**. Setup installs the plugin from the tool itself, so the two never drift apart. Updating one updates the other.
 
 ## Updating
 
@@ -13,7 +13,7 @@ The CLI and the plugin are always **version-matched**. Setup installs the plugin
 nito update
 ```
 
-This upgrades the `nito` CLI and refreshes your managed host integrations in one step. To refresh only the integrations without upgrading the binary:
+This upgrades `nito` and refreshes your managed harness integrations in one step. To refresh only the integrations without upgrading the binary:
 
 ```bash
 nito update --skip-binary
@@ -21,7 +21,7 @@ nito update --skip-binary
 
 ## Uninstalling
 
-Removal is two parts: remove the plugin from your host, then remove your Nito credential.
+Removal is two parts: take the plugin out of your harness, then remove your credential.
 
 <Steps>
   <Step title="Remove the plugin">
@@ -40,7 +40,7 @@ Removal is two parts: remove the plugin from your host, then remove your Nito cr
   </Step>
 
   <Step title="Remove your credential">
-    Sign out to remove the local Nito credential from your OS keychain:
+    Sign out to remove the local Nito credential from your keychain:
 
     ```bash
     nito agent logout
@@ -49,5 +49,5 @@ Removal is two parts: remove the plugin from your host, then remove your Nito cr
 </Steps>
 
 <Note>
-Uninstalling the plugin and signing out does not delete your Nito account or any billing. Manage those from your account in the browser, see [Upgrade and Manage](/plans/upgrade-and-manage).
+Uninstalling the plugin and signing out does not delete your Nito account or stop any billing. Manage those from your account in the browser, see [Upgrade and Manage](/plans/upgrade-and-manage).
 </Note>
