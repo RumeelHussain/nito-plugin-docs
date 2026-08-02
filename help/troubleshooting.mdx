@@ -44,6 +44,26 @@ See [Doctor and Update](/cli/doctor-and-update) and [When Tools Do Not Load in a
 
 Codex warns about hooks the first time. This is Codex's own trust step, separate from Nito sign-in. Approve it so the Nito hooks can run. It does not mean anything is wrong with your Nito account.
 
+## "Nito Private was blocked because its bundled hook was unavailable"
+
+`private` relies on a Codex **hook** to keep the turn out of your host's view. Until you trust that hook, the plugin **fails closed**: it blocks the private request rather than risk sending it through unprotected. That is the privacy guarantee working, not a failure.
+
+To fix it, trust the hook from inside the Codex session:
+
+<Steps>
+  <Step title="Open the hooks menu">
+    At the Codex prompt, type `/hooks`.
+  </Step>
+  <Step title="Trust the Nito hook">
+    Find the bundled **Nito** hook and trust (enable) it.
+  </Step>
+  <Step title="Retry in a fresh turn">
+    Run your `$nito:private` command again. It now goes through, and the host does not see the turn.
+  </Step>
+</Steps>
+
+Only `private` (and session-style privacy) needs this hook. `ask`, `status`, and `models` work without it. A successful private turn reports `Session mode: Incognito` and is handled by Nito rather than your host.
+
 ## "text.verbosity is not supported" in a Nito-routed Codex session
 
 This was a compatibility issue between a recent Codex release and the gateway: Codex sent a verbosity setting the gateway rejected, which failed the request. It was **not** a problem with your account or sign-in, and it has since been **fixed** on the gateway.
