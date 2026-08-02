@@ -46,12 +46,12 @@ Codex warns about hooks the first time. This is Codex's own trust step, separate
 
 ## "text.verbosity is not supported" in a Nito-routed Codex session
 
-This is a known compatibility issue between a recent Codex release and the gateway: Codex sends a verbosity setting the gateway does not yet accept, and the request is rejected. It is being tracked as a gateway fix, and it is **not** a problem with your account or sign-in.
+This was a compatibility issue between a recent Codex release and the gateway: Codex sent a verbosity setting the gateway rejected, which failed the request. It was **not** a problem with your account or sign-in, and it has since been **fixed** on the gateway.
 
-Until it is resolved:
+If you still see it:
 
-- Prefer the in-chat `$nito:` commands (`$nito:ask`, `$nito:private`, and so on) inside your normal Codex session, which are not affected.
-- Retry the Nito-routed session after updating with `nito update`, which pulls the fix once it ships.
+- Run `nito update` to make sure your integration is current, then retry.
+- In the meantime, the in-chat `$nito:` commands (`$nito:ask`, `$nito:private`, and so on) inside your normal Codex session are unaffected.
 
 ## Setup only asked me to sign in once
 
