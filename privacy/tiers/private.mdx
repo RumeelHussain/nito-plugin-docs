@@ -3,17 +3,17 @@ title: "Private"
 description: "Models served under an enforced zero-data-retention requirement, so the upstream provider is told not to keep your request. Chosen by picking a Private-tier model."
 ---
 
-Private is the second rung of the [privacy ladder](/privacy/tiers). It keeps the metadata-only posture of [Anonymous](/privacy/tiers/anonymous) and adds one thing on top: the upstream provider is held to **zero-data-retention**, so it is told, contractually and technically, not to keep your request after serving it. Choose Private when you want assurance about the provider's own retention, but do not need the sealed, attested execution of the Confidential and Encrypted tiers.
+Private is the second rung of the [privacy ladder](/privacy/tiers). It keeps the metadata-only posture of [Anonymous](/privacy/tiers/anonymous) and adds one thing on top: the upstream provider is held to **zero-data-retention**, so it is told, contractually and technically, not to keep your request after serving it. Choose Private when you want assurance about the provider's own retention, but do not need the sealed, attested execution of the Confidential and Encrypted levels.
 
 ## What Private Is
 
-A Private model is one whose privacy tier is Private. These models are routed through backends configured so that the upstream does not retain your data. When a request runs on a Private-tier model, a zero-data-retention requirement is set on the call, and that requirement is what the upstream backend is asked to honor.
+A Private model is one whose privacy level is Private. These models are routed through backends configured so that the upstream does not retain your data. When a request runs on a Private-level model, a zero-data-retention requirement is set on the call, and that requirement is what the upstream backend is asked to honor.
 
-Whether a given model lands you in Anonymous or Private depends on the model, not on anything you type. That is exactly why you check a model's tier before you choose it, rather than assuming.
+Whether a given model lands you in Anonymous or Private depends on the model, not on anything you type. That is exactly why you check a model's level before you choose it, rather than assuming.
 
 ## Zero-Data-Retention
 
-**Zero-data-retention (ZDR)** means the upstream provider is instructed not to keep the request after it has served it. On a Private-tier model this requirement is set explicitly, and models that cannot meet it are not carried at the Private tier at all. The result is a stronger statement than the Anonymous metadata-only default: not only does nothing on your side persist your prompt and reply, the provider serving the call is held to the same.
+**Zero-data-retention (ZDR)** means the upstream provider is instructed not to keep the request after it has served it. On a Private-level model this requirement is set explicitly, and models that cannot meet it are not carried at the Private level at all. The result is a stronger statement than the Anonymous metadata-only default: not only does nothing on your side persist your prompt and reply, the provider serving the call is held to the same.
 
 What ZDR does **not** give you is a hardware-backed proof. Private is an enforced requirement on the provider, not a sealed environment you can attest. If you need to verify where and how your call ran, that is [Confidential](/privacy/tiers/confidential), where you can fetch and check an attestation.
 
@@ -21,21 +21,21 @@ What ZDR does **not** give you is a hardware-backed proof. Private is an enforce
 
 - **No upstream retention.** The provider is told not to keep the request, on top of the metadata-only default.
 - **Inherits Anonymous.** Everything Anonymous gives you (metadata-only retention, responses that are not stored, client-side chat history) still holds.
-- **Privately routed.** The call is placed on a backend configured for the Private tier rather than ordinary Anonymous-tier routing.
+- **Privately routed.** The call is placed on a backend configured for the Private level rather than ordinary Anonymous-level routing.
 
 ## How to Select Private
 
-You do not type a suffix to reach Private. Every model carries its own privacy tier, and you get the tier of the model you choose. Browse the catalog with the `models` command to see which models are Private, then set one with `model` (or `--model`). The tier follows the model: pick a Private-tier model and your calls run in Private.
+There is no privacy flag for Private. Every model carries its own privacy level, and you get the level of the model you choose. Browse the catalog with the `models` command to see which models are Private, then set one with `model` (or `--model`). The level follows the model: pick a Private-level model and your calls run in Private.
 
-If a model's tier is Anonymous, choosing it serves you in [Anonymous](/privacy/tiers/anonymous) instead. The distinction between Anonymous and Private is a property of the model you select, not something you toggle per request.
+If a model's level is Anonymous, choosing it serves you in [Anonymous](/privacy/tiers/anonymous) instead. The distinction between Anonymous and Private is a property of the model you select, not something you toggle per request.
 
 <Note>
-Browsing with the `models` command shows each model's privacy tier so you can pick the one you want. See [Choosing a model](/commands/choosing-a-model) for how to browse and set your model.
+Browsing with the `models` command shows each model's privacy level so you can pick the one you want. See [Choosing a model](/commands/choosing-a-model) for how to browse and set your model.
 </Note>
 
 ## When to Choose Private
 
-Choose Private for moderately sensitive work where the deciding factor is the provider's retention: confidential business content, customer data you do not want a provider to retain, or anything where "the upstream keeps nothing" is the assurance you need. If the call additionally needs a verifiable execution boundary, climb to [Confidential](/privacy/tiers/confidential). If the model you want is only offered at Anonymous, you stay at Anonymous: a privacy tier never silently upgrades or downgrades to a tier the model does not support. A request that cannot be served at the chosen tier fails with a clear message rather than dropping to a weaker one.
+Choose Private for moderately sensitive work where the deciding factor is the provider's retention: confidential business content, customer data you do not want a provider to retain, or anything where "the upstream keeps nothing" is the assurance you need. If the call additionally needs a verifiable execution boundary, climb to [Confidential](/privacy/tiers/confidential). If the model you want is only offered at Anonymous, you stay at Anonymous: a privacy level never silently upgrades or downgrades to a level the model does not support. A request that cannot be served at the chosen level fails with a clear message rather than dropping to a weaker one.
 
 ## Related Resources
 
@@ -45,22 +45,22 @@ Choose Private for moderately sensitive work where the deciding factor is the pr
   </Card>
 
   <Card title="Choosing a Model" icon="cubes-stacked" href="/commands/choosing-a-model">
-    Browse and set your model, and see its privacy tier.
+    Browse and set your model, and see its privacy level.
   </Card>
 
-  <Card title="Privacy Tiers in Depth" icon="square-list" href="/privacy/tiers">
-    The four privacy tiers in depth, and how each one is chosen.
+  <Card title="Privacy Levels in Depth" icon="square-list" href="/privacy/levels">
+    The four privacy levels in depth, and how each one is chosen.
   </Card>
 
-  <Card title="Anonymous Tier" icon="person-circle-question" href="/privacy/tiers/anonymous">
-    The lightest and the default privacy tier.<br /><br />
+  <Card title="Anonymous Level" icon="person-circle-question" href="/privacy/levels/anonymous">
+    The lightest and the default privacy level.<br /><br />
   </Card>
 
-  <Card title="Confidential Tier" icon="postage-stamp" href="/privacy/tiers/confidential">
+  <Card title="Confidential Level" icon="postage-stamp" href="/privacy/levels/confidential">
     Sealed, attested execution with an attestation you can fetch and verify.
   </Card>
 
   <Card title="Data Retention and Visibility" icon="cubes" href="/privacy/data-retention-and-visibility">
-    What is kept, what is visible, and to whom, at each tier.
+    What is kept, what is visible, and to whom, at each level.
   </Card>
 </CardGroup>

@@ -3,14 +3,14 @@ title: "Choosing the Right Model"
 description: "A practical guide from a task to the right Nito model and privacy tier, from Claude Code, Codex, or the CLI."
 ---
 
-With many models available through Nito, the useful question is not "what exists" but "what should I use for this." This page is a decision guide. It maps a common task to a kind of model and a privacy tier, so you can choose quickly and refine later. To browse what is actually available, list [`models`](/models/all-models); for the syntax to set your pick, see [Choosing a model](/commands/choosing-a-model).
+With many models available through Nito, the useful question is not "what exists" but "what should I use for this." This page is a decision guide. It maps a common task to a kind of model and a privacy level, so you can choose quickly and refine later. To browse what is actually available, list [`models`](/models/all-models); for the syntax to set your pick, see [Choosing a model](/commands/choosing-a-model).
 
 The single most useful habit is to separate two decisions that feel like one. What the model does and how protected the call is are independent choices. Mixing them is the most common reason people end up paying for privacy they did not need, or under-protecting a call that mattered.
 
 ## Start from Two Questions
 
 1. **What task is this?** This picks the kind of model.
-2. **How sensitive is this call?** This sets the privacy tier, independent of the model.
+2. **How sensitive is this call?** This sets the privacy level, independent of the model.
 
 Answer those two and you have most of the decision. The rest is refinement.
 
@@ -25,7 +25,7 @@ Answer those two and you have most of the decision. The rest is refinement.
 
 ## By Sensitivity
 
-A privacy tier describes how protected your prompt and the reply are while the model runs. The tier follows the model you choose, so pick the lightest tier that genuinely fits the call.
+A privacy level describes how protected your prompt and the reply are while the model runs. The level follows the model you choose, so pick the lightest level that genuinely fits the call.
 
 | The call is... | Use | Why |
 | --- | :-: | --- |
@@ -33,7 +33,7 @@ A privacy tier describes how protected your prompt and the reply are while the m
 | Sensitive, needs no provider retention | [Private](/privacy/tiers/private) | The provider retains nothing about the request. |
 | Highly sensitive, needs proof | [Confidential](/privacy/tiers/confidential) | Sealed execution you can verifiably attest. |
 
-The privacy decision is independent of the model decision: pick the model for the task, then pick the tier for the sensitivity. A request that cannot be served at the tier you asked for fails rather than quietly downgrading to a weaker one. That refusal is a feature, not a glitch: you never silently lose the protection you asked for. See [Privacy tiers](/privacy/tiers) for the full picture.
+The privacy decision is independent of the model decision: pick the model for the task, then pick the level for the sensitivity. A request that cannot be served at the level you asked for fails rather than quietly downgrading to a weaker one. That refusal is a feature, not a glitch: you never silently lose the protection you asked for. See [Privacy levels](/privacy/tiers) for the full picture.
 
 ## Choosing Well
 
@@ -41,13 +41,13 @@ A few habits keep your choices efficient:
 
 - **Match model size to the job.** Do not default everything to the biggest model. A smaller model is faster and cheaper, and it is often enough.
 - **Use reasoning only for genuinely hard problems.** It costs more tokens and more time, so reach for a reasoning-capable model when the task truly needs step-by-step work, not for routine questions.
-- **Match the privacy tier to the sensitivity.** Maxing out privacy on every call adds overhead and can route to fewer backends for no benefit. Pay the cost of strong privacy only where the request needs it.
-- **Remember your host is untouched.** Choosing a Nito model never changes your own host's model. Your Claude Code or Codex assistant keeps running on its usual model; the Nito model applies only to the calls you send through Nito.
+- **Match the privacy level to the sensitivity.** Maxing out privacy on every call adds overhead and can route to fewer backends for no benefit. Pay the cost of strong privacy only where the request needs it.
+- **Remember your harness is untouched.** Choosing a model through Nito never changes your own harness's model. Your Claude Code or Codex assistant keeps running on its usual model; the Nito model applies only to the calls you send through Nito.
 
 ## Worked Examples
 
-- **A support helper that must not retain user data.** Use a capable chat model at the Private tier. Step up to Confidential if you need to prove the privacy property to someone else, since attestation gives you something verifiable to show.
-- **A coding helper for internal use.** A reasoning-capable model at the Anonymous tier is usually enough. Raise to Private if the code itself is sensitive.
+- **A support helper that must not retain user data.** Use a capable chat model at the Private level. Step up to Confidential if you need to prove the privacy property to someone else, since attestation gives you something verifiable to show.
+- **A coding helper for internal use.** A reasoning-capable model at the Anonymous level is usually enough. Raise to Private if the code itself is sensitive.
 - **A research assistant that needs fresh facts.** A chat model with web search enabled.
 
 ## Related Resources

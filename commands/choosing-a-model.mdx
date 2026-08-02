@@ -6,7 +6,7 @@ description: "Browse the catalog, set a durable default, and override per call, 
 You pick which Nito model answers in three ways: browse the catalog, set a saved default, or override for a single call.
 
 <Note>
-Choosing a Nito model **never changes your host's own model**. `model` sets the model Nito uses for its commands; your Claude Code or Codex session keeps running on whatever model it was already using.
+Choosing a model through Nito **never changes your harness's own model**. `model` sets the model Nito uses for its commands; your Claude Code or Codex session keeps running on whatever model it was already using.
 </Note>
 
 ## Browse the Catalog
@@ -41,7 +41,7 @@ Lists the models available to your account, with their type and privacy reach. F
   </Tab>
 </Tabs>
 
-Saves your default model. That default is used by future `ask`, `continue`, and `private`/`session` launches when you do not pass `--model`. It does **not** change your host's active session model, and Fusion participant models always stay explicit.
+Saves your default model. That default is used by future `ask`, `continue`, and `private`/`session` launches when you do not pass `--model`. It does **not** change your harness's active session model, and Fusion participant models always stay explicit.
 
 ## Override for One Call
 

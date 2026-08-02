@@ -9,7 +9,7 @@ Find your symptom, apply the fix. If your question is conceptual rather than a f
 
 You are typing the command in your **terminal shell** instead of inside a session. Plugin commands only work inside a running Claude Code or Codex session.
 
-- Start your host (`claude` or `codex`), then type the command at the host's prompt.
+- Start your harness (`claude` or `codex`), then type the command at the harness's prompt.
 - To run Nito from the terminal on purpose, use the [CLI](/cli/cli-overview): `nito ask "..."`.
 
 <Note>
@@ -46,7 +46,7 @@ Codex warns about hooks the first time. This is Codex's own trust step, separate
 
 ## "Nito Private was blocked because its bundled hook was unavailable"
 
-`private` relies on a Codex **hook** to keep the turn out of your host's view. Until you trust that hook, the plugin **fails closed**: it blocks the private request rather than risk sending it through unprotected. That is the privacy guarantee working, not a failure.
+`private` relies on a Codex **hook** to keep the turn out of your harness's view. Until you trust that hook, the plugin **fails closed**: it blocks the private request rather than risk sending it through unprotected. That is the privacy guarantee working, not a failure.
 
 To fix it, trust the hook from inside the Codex session:
 
@@ -58,11 +58,11 @@ To fix it, trust the hook from inside the Codex session:
     Find the bundled **Nito** hook and trust (enable) it.
   </Step>
   <Step title="Retry in a fresh turn">
-    Run your `$nito:private` command again. It now goes through, and the host does not see the turn.
+    Run your `$nito:private` command again. It now goes through, and the harness does not see the turn.
   </Step>
 </Steps>
 
-Only `private` (and session-style privacy) needs this hook. `ask`, `status`, and `models` work without it. A successful private turn reports `Session mode: Incognito` and is handled by Nito rather than your host.
+Only `private` (and session-style privacy) needs this hook. `ask`, `status`, and `models` work without it. A successful private turn reports `Session mode: Incognito` and is handled by Nito rather than your harness.
 
 ## "text.verbosity is not supported" in a Nito-routed Codex session
 
@@ -83,6 +83,6 @@ Run `nito update` to upgrade the binary and refresh the managed integrations so 
 
 ## Something else
 
-- Reinstall or reconnect a host: [Install Claude Code](/get-started/install-claude-code), [Install Codex](/get-started/install-codex).
+- Reinstall or reconnect a harness: [Install Claude Code](/get-started/install-claude-code), [Install Codex](/get-started/install-codex).
 - Confirm your whole setup end to end: [Check Your Setup](/get-started/check-your-setup).
 - Understand what each command does: [Command Index](/commands/command-index).

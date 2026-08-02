@@ -32,15 +32,15 @@ z-ai/glm-5.2                 # the Private-tier entry
 z-ai/glm-5.2:confidential    # the Confidential-tier entry
 ```
 
-These are two separate catalog entries. You do not invent the marker or staple it onto any model; it is part of the name of a model that offers the Confidential tier, and you select that entry the same way you select any model. Choosing the `:confidential` entry runs your call in a sealed environment you can verify. The [Model List](/models/all-models) shows which models have a Confidential entry.
+These are two separate catalog entries. You do not invent the marker or staple it onto any model; it is part of the name of a model that offers the Confidential level, and you select that entry the same way you select any model. Choosing the `:confidential` entry runs your call in a sealed environment you can verify. The [Model List](/models/all-models) shows which models have a Confidential entry.
 
 <Note>
-The catalog also has an **Encrypted** tier, but Encrypted is **not yet available through the plugin**. Today the plugin reaches up to Confidential. See [Encrypted](/privacy/tiers/encrypted).
+The catalog also has an **Encrypted** level, but Encrypted is **not yet available through the plugin**. Today the plugin reaches up to Confidential. See [Encrypted](/privacy/tiers/encrypted).
 </Note>
 
-## The Tier Is Part of the Model
+## The Level Is Part of the Model
 
-This is the key idea: a model's privacy tier is a property of the model you choose, not a separate switch you flip. The plain entry and the `:confidential` entry are different models at different tiers. Because the tier travels with the model, it cannot drift, and it never silently downgrades: if a model cannot serve a call at its tier, the call fails with a clear message rather than dropping to something weaker. See [Tier Follows the Model](/privacy/tiers).
+This is the key idea: a model's privacy level is a property of the model you choose, not a separate switch you flip. The plain entry and the `:confidential` entry are different models at different levels. Because the level travels with the model, it cannot drift, and it never silently downgrades: if a model cannot serve a call at its level, the call fails with a clear message rather than dropping to something weaker. See [Level Follows the Model](/privacy/tiers).
 
 ## Logical Names, Not Backends
 
@@ -53,19 +53,19 @@ If you never set a model, the plugin uses a built-in default so your first call 
 ## Reading IDs in Practice
 
 - **Browse for exact IDs.** The catalog is discovered live and changes over time, so confirm an ID with [`models`](/commands/choosing-a-model) rather than pasting one from memory.
-- **A `:confidential` marker means the Confidential tier.** No marker means the model's own stored tier (Anonymous or Private).
-- **The tier follows the model.** Pick the entry whose tier matches how sensitive the call is. See [The Four Tiers](/privacy/tiers).
+- **A `:confidential` marker means the Confidential level.** No marker means the model's own stored level (Anonymous or Private).
+- **The level follows the model.** Pick the entry whose level matches how sensitive the call is. See [The Four Levels](/privacy/tiers).
 
 ## Related Resources
 
 <CardGroup cols={3}>
   <Card title="Model List" icon="list" href="/models/all-models">
-    Every current model, grouped by privacy tier.
+    Every current model, grouped by privacy level.
   </Card>
-  <Card title="Privacy Tiers at a Glance" icon="lock" href="/models/privacy-tiers-at-a-glance">
-    The four tiers, in brief.
+  <Card title="Privacy Levels at a Glance" icon="lock" href="/models/privacy-levels-at-a-glance">
+    The four levels, in brief.
   </Card>
   <Card title="Choosing a Model" icon="wand-magic-sparkles" href="/models/choosing-a-model">
-    From task to the right model and tier.
+    From task to the right model and level.
   </Card>
 </CardGroup>

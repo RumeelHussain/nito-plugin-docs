@@ -3,7 +3,7 @@ title: "Confidential"
 description: "Sealed execution inside a Trusted Execution Environment, with an attestation you can fetch and verify independently. Supports streaming. Chosen by picking a Confidential-tier model."
 ---
 
-Confidential is the third rung of the [privacy ladder](/privacy/tiers) and the first one backed by hardware you can check. It keeps the guarantees of the tiers below it and adds the one thing none of them can: your call runs inside a sealed environment the surrounding system cannot read into, and you can obtain a signed statement that proves it did.
+Confidential is the third rung of the [privacy ladder](/privacy/tiers) and the first one backed by hardware you can check. It keeps the guarantees of the levels below it and adds the one thing none of them can: your call runs inside a sealed environment the surrounding system cannot read into, and you can obtain a signed statement that proves it did.
 
 ## Runs inside a TEE
 
@@ -13,19 +13,19 @@ That attestation is what separates Confidential from [Private](/privacy/tiers/pr
 
 ## What Confidential Requires
 
-Confidential runs on specific sealed-compute backends only, so not every model can run in a TEE. A model supports it when the catalog marks it as offering attested, sealed execution at the Confidential tier. Browse the catalog with the `models` command to see which models carry the Confidential tier before you rely on it.
+Confidential runs on specific sealed-compute backends only, so not every model can run in a TEE. A model supports it when the catalog marks it as offering attested, sealed execution at the Confidential level. Browse the catalog with the `models` command to see which models carry the Confidential level before you rely on it.
 
-If a model does not carry the Confidential tier, choosing it cannot get you sealed execution: the tier follows the model, and a request that cannot be served at Confidential fails with a clear message rather than being served at a weaker tier.
+If a model does not carry the Confidential level, choosing it cannot get you sealed execution: the level follows the model, and a request that cannot be served at Confidential fails with a clear message rather than being served at a weaker level.
 
 ## How to Select Confidential
 
-You do not type a suffix to reach Confidential. Every model carries its own privacy tier, and you get the tier of the model you choose. Browse with the `models` command to find models that carry the Confidential tier, then set one with `model` (or `--model`). The tier follows the model: pick a Confidential-tier model and your calls run sealed and attested.
+There is no privacy flag for Confidential. A model that offers it has its own catalog entry, whose name ends in `:confidential`, and you select that entry the way you select any model. Every model carries its own privacy level, and you get the level of the model you choose. Browse with the `models` command to find models that carry the Confidential level, then set one with `model` (or `--model`). The level follows the model: pick a Confidential-level model and your calls run sealed and attested.
 
 <Note>
-Browsing with the `models` command shows each model's privacy tier so you can pick a Confidential one. See [Choosing a model](/commands/choosing-a-model) for how to browse and set your model.
+Browsing with the `models` command shows each model's privacy level so you can pick a Confidential one. See [Choosing a model](/commands/choosing-a-model) for how to browse and set your model.
 </Note>
 
-If the model you choose does not offer Confidential, the call fails rather than quietly downgrading to a weaker tier.
+If the model you choose does not offer Confidential, the call fails rather than quietly downgrading to a weaker level.
 
 ## Streaming Works at Confidential
 
@@ -43,7 +43,7 @@ Use "attested" and "verifiable" for what Confidential gives you: Nito hands you 
 
 - **Fewer backends.** Sealed execution runs on specific backends only, so Confidential reaches fewer models than Anonymous or Private, which can affect latency and availability.
 - **A proof you must use.** The attestation is only worth as much as the verification you do with it. Nito gives you a baseline and the raw evidence; full assurance comes from verifying the evidence yourself.
-- **Streaming kept, encryption not yet added.** Confidential is the strongest tier that still streams. If you also need your data encrypted to the sealed environment, that is [Encrypted](/privacy/tiers/encrypted), which is non-streaming.
+- **Streaming kept, encryption not yet added.** Confidential is the strongest level that still streams. If you also need your data encrypted to the sealed environment, that is [Encrypted](/privacy/tiers/encrypted), which is non-streaming.
 
 ## When to Choose Confidential
 
@@ -52,16 +52,16 @@ Choose Confidential for sensitive calls where you need to verify that a sealed e
 ## Related Resources
 
 <CardGroup cols={3}>
-  <Card title="Privacy Tiers in Depth" icon="square-list" href="/privacy/tiers">
-    The four privacy tiers in depth, and how each one is chosen.
+  <Card title="Privacy Levels in Depth" icon="square-list" href="/privacy/levels">
+    The four privacy levels in depth, and how each one is chosen.
   </Card>
 
-  <Card title="Private Tier" icon="lock-a" href="/privacy/tiers/private">
+  <Card title="Private Level" icon="lock-a" href="/privacy/levels/private">
     Models served under an enforced zero-data-retention requirement.
   </Card>
 
-  <Card title="Encrypted Tier" icon="binary-lock" href="/privacy/tiers/encrypted">
-    The top tier: client-side encryption to the sealed environment.
+  <Card title="Encrypted Level" icon="binary-lock" href="/privacy/levels/encrypted">
+    The top level: client-side encryption to the sealed environment.
   </Card>
 
   <Card title="TEE Attestation" icon="stamp" href="/privacy/tee-attestation">
@@ -73,6 +73,6 @@ Choose Confidential for sensitive calls where you need to verify that a sealed e
   </Card>
 
   <Card title="Choosing a Model" icon="signal-stream" href="/commands/choosing-a-model">
-    Browse and set your model, and see its privacy tier.<br />
+    Browse and set your model, and see its privacy level.<br />
   </Card>
 </CardGroup>

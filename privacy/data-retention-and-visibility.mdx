@@ -17,7 +17,7 @@ The following are used to serve your request and are **not persisted** by Nito:
 - Tool payloads
 - Attachment contents
 
-Inference responses are returned so they are not cached downstream, and where a conversation history exists it lives on the client side, not on Nito. This metadata-only default is the floor that every tier builds on; the [Private](/privacy/tiers) tier adds the upstream provider being held to zero data retention on top.
+Inference responses are returned so they are not cached downstream, and where a conversation history exists it lives on the client side, not on Nito. This metadata-only default is the floor that every level builds on; the [Private](/privacy/tiers) level adds the upstream provider being held to zero data retention on top.
 
 ## Who Can See What
 
@@ -25,12 +25,12 @@ Retention is separate from visibility. Even when Nito keeps nothing, the questio
 
 | Party | Sees your prompt when | Does not see it when |
 | :-- | :-- | :-- |
-| **Your host** (Claude Code / Codex) | You use [`ask`](/commands/ask-and-continue), which runs in the host conversation | You use [`private`](/commands/private) or a Nito-routed [`session`](/commands/session) |
+| **Your harness** (Claude Code / Codex) | You use [`ask`](/commands/ask-and-continue), which runs in the harness conversation | You use [`private`](/commands/private) or a Nito-routed [`session`](/commands/session) |
 | **Nito** | Any Nito command (that is what serves the model call) | Not applicable |
-| **The upstream model provider** | It serves the call, subject to the model's [tier](/privacy/tiers) | At Private and above, it is held to zero data retention |
+| **The upstream model provider** | It serves the call, subject to the model's [level](/privacy/tiers) | At Private and above, it is held to zero data retention |
 
-The takeaway: keeping your prompt away from your **host** is about which command you choose, while keeping it from the **provider** is about the model's tier. See [What Each Command Protects](/privacy/what-each-command-protects) for the command side, and [The Four Tiers](/privacy/tiers) for the tier side.
+The takeaway: keeping your prompt away from your **harness** is about which command you choose, while keeping it from the **provider** is about the model's level. See [What Each Command Protects](/privacy/what-each-command-protects) for the command side, and [The Four Levels](/privacy/tiers) for the level side.
 
 ## Confirming It Yourself
 
-For the strongest tiers, you do not have to take retention behavior on trust: a Confidential call produces a signed attestation you can verify. See [Verify It Yourself](/privacy/tee-attestation).
+For the strongest levels, you do not have to take retention behavior on trust: a Confidential call produces a signed attestation you can verify. See [Verify It Yourself](/privacy/tee-attestation).
