@@ -76,7 +76,7 @@
             ]
           },
           {
-            "group": "Privacy Tiers",
+            "group": "Privacy Levels",
             "root": "privacy/levels/index",
             "icon": "layer-group",
             "expanded": true,

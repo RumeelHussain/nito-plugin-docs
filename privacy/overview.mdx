@@ -24,12 +24,12 @@ When you run a Nito command, that question goes to Nito. Whether your harness al
 
 ## Private and Session Keep Different Things
 
-Both run the whole session through Nito, so neither conversation reaches Anthropic or OpenAI. What separates them is what stays on your machine afterwards.
+Both run the whole session through Nito, so neither conversation is sent to your harness's own model provider. What separates them is what stays on your machine afterwards.
 
 - [`private`](/commands/private), **with no question after it**, opens a session that keeps nothing. No prompt history, no transcript, nothing to resume. Close it and there is nothing left to find.
 - [`session`](/commands/session) keeps prompt history, transcripts, and resume state on your machine, so you can come back to the work. That record is yours, and anyone with access to your machine can read it.
 
-Either way, the work itself lives in your workspace like any other work. Running a task through Nito keeps the conversation away from Anthropic and OpenAI. It does not hide the files that task wrote from the next ordinary session you open in that workspace.
+Either way, the work itself lives in your workspace like any other work. Running a task through Nito keeps the conversation out of what your harness sends upstream. It does not hide the files that task wrote from the next ordinary session you open in that workspace.
 
 ## The Level Follows the Model
 

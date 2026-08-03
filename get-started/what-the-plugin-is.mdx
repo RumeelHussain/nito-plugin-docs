@@ -7,7 +7,7 @@ The Nito plugin lets you call open-weight models like Kimi K3, GLM 5.2, DeepSeek
 
 Your harness keeps running its own model. Ordinary messages never touch Nito, and a call goes through Nito only on the commands you type. Nothing in your existing setup changes.
 
-Every Nito call runs at a named privacy level, and the level comes with the model you pick. Frontier models run anonymized, so the provider gets your question without learning who is asking. Open-weight models go further: retention switched off upstream, stronger levels running inside attested hardware that hands back proof of what ran, and the strongest encrypting your question on your own machine before it leaves. Nito keeps neither the question nor the answer.
+Every Nito call runs at a named privacy level, and the level comes with the model you pick. Frontier models run anonymized, so the provider gets your question without learning who is asking. Open-weight models go further: retention switched off upstream, and stronger levels running inside attested hardware that hands back proof of what ran. Nito keeps neither the question nor the answer.
 
 The commands are the whole surface. In Claude Code they are `/nito:…`; in Codex they are `$nito:…`. Everything else in your session works exactly as before.
 
@@ -18,7 +18,7 @@ The commands are the whole surface. In Claude Code they are `/nito:…`; in Code
     `/nito:ask` sends your question to whichever model you pick from the Nito catalog and puts the answer in your session. Name a model per call with `--model`, or set a default once and leave it alone.
   </Card>
   <Card title="Ask without it going upstream" icon="user-secret">
-    Put a question after `/nito:private` and it goes through Nito instead. The answer lands inline, in the session you are already in. Anthropic and OpenAI never receive it, and Nito keeps no copy.
+    Put a question after `/nito:private` and it goes through Nito instead. The answer lands inline, in the session you are already in. Your harness never sends it upstream, and Nito keeps no copy.
   </Card>
   <Card title="Work in a separate session" icon="window">
     `/nito:session` opens a second session in your workspace where a model from the Nito catalog does all the work, and keeps your history so you can come back to it. Run `/nito:private` with no question and you get the same thing, disposable: nothing is saved and closing it leaves nothing behind.
@@ -34,7 +34,7 @@ The plugin sits *alongside* Claude Code or Codex rather than replacing either on
 
 ## A Privacy Level on Every Call
 
-Pick a model and you have picked its privacy level. There are four.
+Pick a model and you have picked its privacy level. The plugin offers three today, up to Confidential.
 
 <CardGroup cols={2}>
   <Card title="Anonymous">
@@ -46,9 +46,6 @@ Pick a model and you have picked its privacy level. There are four.
   <Card title="Confidential">
     The model runs inside attested hardware. Nito checks the attestation before you see the answer, and blocks the response if the check fails.
   </Card>
-  <Card title="Encrypted">
-    Your question is encrypted on your own machine against the hardware's key, so nothing in between can read it. Web search, file uploads, and tool calls are switched off at this level. Not available in the plugin yet; the plugin reaches up to Confidential today.
-  </Card>
 </CardGroup>
 
 A privacy level never silently weakens. If you ask for a stronger level than a model supports, the call is refused with a clear message rather than served at a weaker one. The full ladder is covered in [Privacy](/privacy/levels).
@@ -57,7 +54,7 @@ A privacy level never silently weakens. If you ask for a stronger level than a m
 
 `/nito:ask` is an ordinary turn in your session, so it travels upstream with the rest of your conversation like everything else you type.
 
-`/nito:private` doesn't. Your question goes through Nito instead, the answer comes back into your session, and Anthropic or OpenAI never receive either one. Nito keeps no copy.
+`/nito:private` doesn't. Your question goes through Nito instead, the answer comes back into your session, and your harness never sends either one upstream. Nito keeps no copy.
 
 It does two things depending on what follows it. A question after `/nito:private` gets answered inline. Nothing after it opens a private session that saves nothing.
 
