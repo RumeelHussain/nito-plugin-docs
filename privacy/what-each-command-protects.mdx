@@ -1,52 +1,52 @@
 ---
 title: "What Each Command Protects"
-description: "Which Nito commands keep a prompt away from your host's own provider, which do not, and exactly what each one covers."
+description: "Which Nito commands keep a question away from Anthropic and OpenAI, which do not, and exactly what each one covers."
 ---
 
-Privacy in the plugin is not one setting; different commands protect different things. This page is the command-by-command map of what leaves your host and what does not.
+Privacy in the plugin is not one setting; different commands protect different things. This page is the command-by-command map of what leaves your harness and what does not.
 
-The key distinction is the [trust boundary](/privacy/overview): your host can see some Nito prompts and not others, independent of the model's privacy tier.
+The key distinction is the [trust boundary](/privacy/overview): your harness can see some Nito prompts and not others, independent of the model's privacy level.
 
 ## At a Glance
 
-| Command | Kept from your host's own provider? | Model-tier privacy |
+| Command | Kept from your harness's own provider? | Model-level privacy |
 | :-- | :-- | :-- |
-| [`ask`](/commands/ask-and-continue) | No, it runs in your host conversation | Follows the model you choose |
+| [`ask`](/commands/ask-and-continue) | No, it runs in your harness conversation | Follows the model you choose |
 | [`private`](/commands/private) | Yes, that is its purpose | Follows the model you choose |
 | [`session`](/commands/session) | Yes, the whole session is Nito-routed | Follows the model you choose |
-| [`fusion`](/commands/fusion) | Runs on Nito; see tier-mixing note below | Least-private participant sets the tier |
+| [`fusion`](/commands/fusion) | Runs on Nito; see level-mixing note below | Least-private participant sets the level |
 | [`context`](/commands/context-and-mode) | Controls how much of your prompt's surroundings are sent | Not a model call |
 
 ## Ask
 
-`ask` runs **inside your current host conversation**. That means your host can see the `ask` prompt, the same way it sees anything else you type into that session. Its usefulness is model access: it reaches a Nito model without switching your host's model. Use it when the sensitivity of the prompt does not require keeping it from your host.
+`ask` runs **inside your current harness conversation**. That means your harness can see the `ask` prompt, the same way it sees anything else you type into that session. Its usefulness is model access: it reaches a model through Nito without switching your harness's model. Use it when the sensitivity of the prompt does not require keeping it from your harness.
 
-The Nito model's own privacy tier still applies to the call once it reaches Nito, following the model you chose.
+The Nito model's own privacy level still applies to the call once it reaches Nito, following the model you chose.
 
 ## Private
 
-`private` is the command built for the trust boundary. A `private` turn is **not sent to your host's own model provider**. Be precise about what that covers:
+`private` is the command built for the trust boundary. A `private` turn is **not sent to your harness's own model provider**. Be precise about what that covers:
 
-- **What it protects:** the turn is kept out of your host's upstream model provider.
-- **What it does not do by itself:** it is not a local sandbox and does not, on its own, stop local disk writes. A no-prompt `private` session is the incognito form that avoids persisting host transcript and prompt history; the options and their honest limits are on the [Private](/commands/private) page.
+- **What it protects:** the turn is kept out of your harness's upstream model provider.
+- **What it does not do by itself:** it is not a local sandbox and does not, on its own, stop local disk writes. A no-prompt `private` session is the incognito form that avoids persisting harness transcript and prompt history; the options and their honest limits are on the [Private](/commands/private) page.
 
-Pair `private` with a model whose tier matches how sensitive the content is: the command controls what your host sees, and the model controls the tier of the call at Nito.
+Pair `private` with a model whose level matches how sensitive the content is: the command controls what your harness sees, and the model controls the level of the call at Nito.
 
 ## Session
 
-A [`session`](/commands/session) is a whole host session powered entirely by a Nito model. Every model turn is Nito-routed rather than going to your host's own provider, for as long as the session runs. Its purpose is sustained work on a Nito model, not the throwaway secrecy of a `private` turn; the two differ on persistence, which the Session page compares directly.
+A [`session`](/commands/session) is a whole harness session powered entirely by a model through Nito. Every model turn is Nito-routed rather than going to your harness's own provider, for as long as the session runs. Its purpose is sustained work on a model through Nito, not the throwaway secrecy of a `private` turn; the two differ on persistence, which the Session page compares directly.
 
 ## Fusion
 
-[`fusion`](/commands/fusion) sends one prompt to two or three Nito models. Its privacy has one rule worth calling out: when the participants span different tiers, **the run lands at the least-private tier among them**. A single Anonymous participant pulls the whole Fusion to Anonymous. Keep every participant at the tier you need if the prompt is sensitive.
+[`fusion`](/commands/fusion) sends one prompt to two or three models in the Nito catalog. Its privacy has one rule worth calling out: when the participants span different levels, **the run lands at the least-private level among them**. A single Anonymous participant pulls the whole Fusion to Anonymous. Keep every participant at the level you need if the prompt is sensitive.
 
 ## Context
 
-[`context`](/commands/context-and-mode) is not a model call and does not change what your host sees. It controls how much of your prompt's surroundings travel with an `ask`: by default only your prompt is sent, and turning context on lets a short generated summary of the task go along. It is prompt-only by default for a reason, so treat turning it on as a deliberate choice.
+[`context`](/commands/context-and-mode) is not a model call and does not change what your harness sees. It controls how much of your prompt's surroundings travel with an `ask`: by default only your prompt is sent, and turning context on lets a short generated summary of the task go along. It is prompt-only by default for a reason, so treat turning it on as a deliberate choice.
 
 ## The Rule of Thumb
 
 Two questions, two controls:
 
-1. **Should my host see this prompt?** If not, use `private` (or a `session`), not `ask`.
-2. **How protected must the call itself be?** Choose a model at the [tier](/privacy/tiers) that matches, since [the tier follows the model](/privacy/tiers).
+1. **Should my harness see this prompt?** If not, use `private` (or a `session`), not `ask`.
+2. **How protected must the call itself be?** Choose a model at the [level](/privacy/tiers) that matches, since [the level follows the model](/privacy/tiers).

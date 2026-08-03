@@ -11,7 +11,7 @@ Software protections like encryption are good at protecting data while it is sto
 
 ## What is TEE
 
-A **Trusted Execution Environment (TEE)** is a region of a computer, enforced by the processor itself, that runs code in isolation from everything else on the machine. Code and data inside the TEE run normally, but the host operating system, the machine's owner, other programs on the same hardware, and even someone with physical access cannot read what is inside or change it. The isolation is created and policed by the silicon, not by software that the host could switch off. Think of it as a locked box welded shut at the factory: the computation happens inside, and even the person holding the box cannot open it or see in.
+A **Trusted Execution Environment (TEE)** is a region of a computer, enforced by the processor itself, that runs code in isolation from everything else on the machine. Code and data inside the TEE run normally, but the harness operating system, the machine's owner, other programs on the same hardware, and even someone with physical access cannot read what is inside or change it. The isolation is created and policed by the silicon, not by software that the harness could switch off. Think of it as a locked box welded shut at the factory: the computation happens inside, and even the person holding the box cannot open it or see in.
 
 That isolation is valuable on its own, but by itself it would still just be a stronger promise. You would have to believe that a genuine sealed box really ran your computation and that it was not quietly run somewhere ordinary instead. The second property of a TEE is what removes that leap of faith.
 
@@ -30,7 +30,7 @@ A signed receipt is only useful if it describes **your** computation and not an 
 
 ## What This Means on Nito
 
-Nito uses this pair, sealed execution plus a checkable attestation, to back its strongest privacy tier. When you make a Confidential call (by choosing a Confidential model, the tier follows the model you pick), your call runs inside one of these sealed environments, and you can fetch the attestation and verify it yourself rather than trusting a claim. That is the difference between a privacy promise and a privacy property you can confirm.
+Nito uses this pair, sealed execution plus a checkable attestation, to back its strongest privacy level. When you make a Confidential call (by choosing a Confidential model, the level follows the model you pick), your call runs inside one of these sealed environments, and you can fetch the attestation and verify it yourself rather than trusting a claim. That is the difference between a privacy promise and a privacy property you can confirm.
 
 One honest caution, which the rest of this section expands on. Producing an attestation and **fully** verifying its hardware evidence are two different jobs. Nito runs a set of baseline checks (the evidence is well-formed, the signing material is present, your fresh value is bound) and returns the raw evidence to you. The deepest hardware checks, validating the hardware quotes and certificate chains, are yours to perform on that evidence if your threat model demands them. This is why these docs say a result is **attested** and **verifiable**, and why the split matters: it lets you be the final verifier instead of trusting Nito. The assurance is real, and it is checkable, which is exactly the point.
 

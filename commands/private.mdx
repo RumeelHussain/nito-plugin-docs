@@ -1,20 +1,20 @@
 ---
 title: "Private"
-description: "The flagship command. A one-shot exchange your host's upstream never sees, or a fresh incognito session that keeps nothing."
+description: "A one-shot exchange that never reaches Anthropic or OpenAI, or a fresh incognito session that keeps nothing."
 ---
 
-`private` is the plugin's flagship. It has two behaviors depending on whether you give it a prompt:
+`private` has two behaviors, depending on whether you give it a prompt:
 
-- **With a prompt**, it runs a one-shot exchange that your host model's upstream **never sees**. The prompt and the Nito answer are kept out of the host's request, and the answer is shown back to you as a blocked turn.
+- **With a prompt**, it runs a one-shot exchange that **never reaches Anthropic or OpenAI**. The question and the answer stay out of what your harness sends, and the answer is shown back to you as a blocked turn.
 - **With no prompt**, it opens a **fresh incognito session** that keeps nothing, no prompt history, no transcript, no resume state.
 
 <Warning>
-The private guarantee depends on your host's hooks being **enabled and trusted**. If hooks are disabled, `private` cannot intercept the turn. Do not submit private data with hooks off. On Codex this is the one-time `/hooks` trust step from [Install](/get-started/install-codex).
+The private guarantee depends on your harness's hooks being **enabled and trusted**. If hooks are disabled, `private` cannot intercept the turn. Do not submit private data with hooks off. On Codex this is the one-time `/hooks` trust step from [Install](/get-started/install-codex).
 </Warning>
 
 ## One-Shot Private Prompt
 
-Give `private` a prompt and it answers from a Nito model without your host's upstream ever seeing it.
+Give `private` a prompt and it answers from a model through Nito without your harness's upstream ever seeing it.
 
 <Tabs>
   <Tab title="Claude Code">
@@ -29,7 +29,7 @@ Give `private` a prompt and it answers from a Nito model without your host's ups
   </Tab>
 </Tabs>
 
-The plugin intercepts the command before your host runs its own inference, sends a **prompt-only** request to Nito, and returns the answer labeled `Session mode: Incognito`. Your original host turn is stopped, so the prompt and answer never enter the host model's context.
+The plugin intercepts the command before your harness runs its own inference, sends a **prompt-only** request to Nito, and returns the answer labeled `Session mode: Incognito`. Your original harness turn is stopped, so the prompt and answer never enter the harness model's context.
 
 ### Options
 
@@ -40,7 +40,7 @@ The plugin intercepts the command before your host runs its own inference, sends
 | `--web-fetch` | Allow URL retrieval for the call *(Claude Code)*. |
 | `--file <path>` | Attach a local file. Repeatable. |
 
-Standard and Confidential models are supported. Encrypted models are not included in this release and are refused with a clear message.
+Anonymous, Private, and Confidential models are supported. Encrypted models are not included in this release and are refused with a clear message.
 
 ## Incognito Session (no prompt)
 
@@ -68,15 +68,15 @@ The incognito session's whole point is that it writes nothing. Two options relax
 | Option | Trade-off |
 | :-- | :-- |
 | `--ephemeral-history` | Restores up-arrow prompt recall by writing history **inside the temporary profile** for the life of the session. It is removed on a clean exit, but a crash, forced shutdown, or backup process could leave or observe those files. This is a convenience trade-off, not equivalent to the no-write default. |
-| `--skip-permissions` | Pre-approves the host's tool prompts inside the private session. It removes interactive approvals; it is **not a sandbox**. Tool file, shell, and network effects are still fully real. |
+| `--skip-permissions` | Pre-approves the harness's tool prompts inside the private session. It removes interactive approvals; it is **not a sandbox**. Tool file, shell, and network effects are still fully real. |
 | `--working-directory <path>` | Run the session in a specific directory instead of the current one. |
 
 ## What the Guarantee Actually Covers
 
 Be precise about what "private" means here, so you can rely on it correctly.
 
-- **What it protects:** the prompt and the Nito answer are kept out of your **host model's request**, so the host provider never receives them. The result is labeled so you can confirm it ran privately.
-- **What stays in the path:** your local host process, your operating system, the Nito gateway, and the selected model provider are still involved. Private removes the *host model* from the exchange, not everyone.
+- **What it protects:** the prompt and the Nito answer are kept out of your **harness model's request**, so the harness provider never receives them. The result is labeled so you can confirm it ran privately.
+- **What stays in the path:** your local harness process, your operating system, the Nito gateway, and the selected model provider are still involved. Private removes the *harness model* from the exchange, not everyone.
 - **What it depends on:** hooks must be enabled and trusted. The command stub fails closed, but with hooks off it cannot intercept the turn.
 
 The full boundary, and how to reason about it, is on [The Trust Boundary](/privacy/overview).

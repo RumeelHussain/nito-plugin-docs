@@ -1,12 +1,12 @@
 ---
 title: "Ask and Continue"
-description: "Ask a Nito model one question inside your current chat, then continue that exchange, without changing your host model."
+description: "Ask one question through Nito inside your current chat, then continue that exchange, without changing the model your harness runs."
 ---
 
-`ask` sends one prompt to a Nito model and returns the answer inside your current chat. `continue` follows up on that same exchange. Both make **at most one** Nito call and leave your host model untouched.
+`ask` sends one prompt to a model through Nito and returns the answer inside your current chat. `continue` follows up on that same exchange. Both make **at most one** Nito call and leave your harness model untouched.
 
 <Note>
-`ask` is a normal turn in your host chat, so **your host model can see the ask prompt and answer**. It is a "second opinion," not a private one. When a prompt must stay out of the host's request, use [`private`](/commands/private) instead.
+`ask` is a normal turn in your harness chat, so **your harness model can see the ask prompt and answer**. It is a "second opinion," not a private one. When a prompt must stay out of the harness's request, use [`private`](/commands/private) instead.
 </Note>
 
 ## Ask
@@ -24,7 +24,7 @@ description: "Ask a Nito model one question inside your current chat, then conti
   </Tab>
 </Tabs>
 
-The result is labeled with the environment, model, privacy tier, and context scope, for example `Nito · Hosted · MODEL-ID · private · Prompt only`.
+The result is labeled with the environment, model, privacy level, and context scope, for example `Nito · Hosted · MODEL-ID · private · Prompt only`.
 
 ### Options
 
@@ -37,9 +37,9 @@ The result is labeled with the environment, model, privacy tier, and context sco
 | `--web-fetch=off\|on` | Control URL retrieval. See [Web Fetch](/features/server-side-tools/web-fetch). |
 | `--` | End of options; everything after is the prompt. |
 
-### What the Host Can See
+### What the Harness Can See
 
-By default `ask` sends **only your prompt** to Nito, and the exchange stays in your host chat where the host model can see it. Turning [Context](/commands/context-and-mode) on lets `ask` include a short host-generated summary of the task; nothing is sent that you did not enable.
+By default `ask` sends **only your prompt** to Nito, and the exchange stays in your harness chat where the harness model can see it. Turning [Context](/commands/context-and-mode) on lets `ask` include a short harness-generated summary of the task; nothing is sent that you did not enable.
 
 ## Continue
 
@@ -59,3 +59,7 @@ By default `ask` sends **only your prompt** to Nito, and the exchange stays in y
 </Tabs>
 
 If the preceding Nito exchange is unavailable or ambiguous, `continue` does nothing and asks you to use `ask` instead. Passing `--model` overrides the model for the follow-up.
+
+## Next
+
+Pick which model answers with [Choosing a Model](/commands/choosing-a-model), or keep a question out of your harness entirely with [`private`](/commands/private).

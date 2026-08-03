@@ -20,14 +20,14 @@ By default, Nito receives **only the prompt you type**. `context` lets you opt i
   </Tab>
 </Tabs>
 
-- **`on`** lets future `ask` calls include a short, host-generated **summary** of the relevant task or conversation. It is a generated summary, not a verbatim transcript.
+- **`on`** lets future `ask` calls include a short, harness-generated **summary** of the relevant task or conversation. It is a generated summary, not a verbatim transcript.
 - **`off`** returns to prompt-only.
 - **`status`** reports the current preference.
 
 ### What Is and Is Not Sent
 
 - **By default:** only your prompt.
-- **With context on:** your prompt plus a short generated summary, for `ask` only. It does not affect Fusion, and it never changes your host's active model.
+- **With context on:** your prompt plus a short generated summary, for `ask` only. It does not affect Fusion, and it never changes your harness's active model.
 - A per-call `--history` or `--no-history` on `ask` **overrides** this preference for that call.
 
 ### Why It Is Best-Effort
@@ -49,4 +49,4 @@ The preference lives in your visible conversation state, so it is **not durable*
   </Tab>
 </Tabs>
 
-`mode` reports how the current conversation is routed. By default your conversation is in **explicit-ask mode**: your host stays primary and only reaches Nito when you run a Nito command. Fully Nito-routed work happens in a separate process you start with [`session`](/commands/session); entering or leaving that cannot switch your current conversation or move hidden state into it.
+`mode` reports how the current conversation is routed. By default your conversation is in **explicit-ask mode**: your harness stays primary and only reaches Nito when you run a Nito command. Fully Nito-routed work happens in a separate process you start with [`session`](/commands/session); entering or leaving that cannot switch your current conversation or move hidden state into it.

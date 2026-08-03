@@ -3,7 +3,7 @@ title: "Session Launchers"
 description: "Start an isolated, fully Nito-routed Claude Code or Codex session from the terminal, with a dedicated profile that leaves your normal setup untouched."
 ---
 
-`nito claude` and `nito codex` open a host session whose model is **entirely a Nito model**, from your terminal. They are the CLI form of the in-chat [`session`](/commands/session) command: the host runs normally, but every model turn goes to Nito instead of the host's own provider.
+`nito claude` and `nito codex` open a harness session whose model is **entirely a model through Nito**, from your terminal. They are the command line tool form of the in-chat [`session`](/commands/session) command: the harness runs normally, but every model turn goes to Nito instead of the harness's own provider.
 
 Each launcher runs in an **isolated profile**. Your ordinary Claude Code or Codex configuration, credentials, and history are not touched, and exiting returns you to your normal setup.
 
@@ -63,8 +63,8 @@ Both launchers require `--model`. List the certified session models available to
 nito agent models
 ```
 
-Standard and Confidential models can power a session. Encrypted models are not part of this release. See [Models](/models) for the catalog and [Privacy Tiers](/privacy/tiers) for what each tier reaches.
+Anonymous, Private, and Confidential models can power a session. Encrypted models are not part of this release. See [Models](/models) for the catalog and [Privacy Levels](/privacy/tiers) for what each level reaches.
 
 ## Relationship to the In-Chat Command
 
-`nito claude` / `nito codex` and `/nito:session` / `$nito:session` open the same kind of isolated Nito-routed session. Use the plugin command when you are already in a chat; use the CLI launcher when you want to start one from a script, an alias, or a fresh terminal.
+`nito claude` / `nito codex` and `/nito:session` / `$nito:session` open the same kind of isolated Nito-routed session. Use the plugin command when you are already in a chat; use the command line tool launcher when you want to start one from a script, an alias, or a fresh terminal.

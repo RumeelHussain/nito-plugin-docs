@@ -11,7 +11,7 @@ Two commands keep a working install healthy: `nito doctor` tells you what is wro
 nito doctor [flags]
 ```
 
-`doctor` checks your Nito installation, your stored credentials, and each host integration, then reports what passed and what needs attention. Run it first whenever a command misbehaves.
+`doctor` checks your Nito installation, your stored credentials, and each harness integration, then reports what passed and what needs attention. Run it first whenever a command misbehaves.
 
 By default it also sends a **short, billable chat request** to confirm end-to-end connectivity. That real request is the difference between "credentials look valid" and "a prompt actually reaches a model and comes back."
 
@@ -20,7 +20,7 @@ By default it also sends a **short, billable chat request** to confirm end-to-en
 | Flag | Effect |
 | :-- | :-- |
 | `--skip-smoke` | Skip the short billable chat request and run only local checks. |
-| `--repair` | Repair local Nito state and remove legacy host integrations. |
+| `--repair` | Repair local Nito state and remove legacy harness integrations. |
 
 Use `--skip-smoke` when you only want to inspect local state, or want to avoid the small charge. Use `--repair` when `doctor` reports a broken or stale integration and you want it cleaned up:
 
@@ -40,7 +40,7 @@ nito doctor --repair       # fix local state and drop legacy integrations
 nito update [flags]
 ```
 
-`update` upgrades the Nito binary through your package manager and refreshes the managed host integrations so the plugin bundle and hooks match the new version.
+`update` upgrades the Nito binary through your package manager and refreshes the managed harness integrations so the plugin bundle and hooks match the new version.
 
 ### Options
 
@@ -74,4 +74,4 @@ When something is not working, this sequence resolves most problems:
   </Step>
 </Steps>
 
-For host-specific reconnection inside a chat, see [When Tools Do Not Load in a Chat](/commands/status-and-account).
+For harness-specific reconnection inside a chat, see [When Tools Do Not Load in a Chat](/commands/status-and-account).

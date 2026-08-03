@@ -1,21 +1,21 @@
 ---
-title: "Privacy Tiers at a Glance"
-description: "The four privacy tiers in brief, how you reach each from the plugin, with links to the full Privacy section."
+title: "Privacy Levels at a Glance"
+description: "The four privacy levels in brief, how you reach each from the plugin, with links to the full Privacy section."
 ---
 
-Every model carries a privacy tier, and the tier decides how private a call to it is. This is the short version: enough to pick a tier and keep working. The full treatment is in the [Privacy](/privacy/overview) section.
+Every model carries a privacy level, and the level decides how private a call to it is. This is the short version: enough to pick a level and keep working. The full treatment is in the [Privacy](/privacy/overview) section.
 
 ## Privacy Follows the Model, Per Call
 
-In the plugin you do not set privacy once for your account. You choose it per prompt by choosing a model, because [the tier follows the model](/privacy/tiers). The same setup can send a throwaway question on a light model and a sensitive one on a Confidential model, with no account-wide switch to remember.
+In the plugin you do not set privacy once for your account. You choose it per prompt by choosing a model, because [the level follows the model](/privacy/tiers). The same setup can send a throwaway question on a light model and a sensitive one on a Confidential model, with no account-wide switch to remember.
 
-The reason to climb only as high as you need: stronger tiers narrow the set of models available and add overhead. Match the tier to the sensitivity of the call rather than maxing it out.
+The reason to climb only as high as you need: stronger levels narrow the set of models available and add overhead. Match the level to the sensitivity of the call rather than maxing it out.
 
-## The Four Tiers
+## The Four Levels
 
 From lightest to strongest:
 
-| Tier | How you reach it | What it gives you |
+| Level | How you reach it | What it gives you |
 | :-- | :-- | :-- |
 | **Anonymous** | Choose an Anonymous model | Metadata-only retention by default. Nito keeps operational metadata, not your prompt or the reply. |
 | **Private** | Choose a Private model | Everything Anonymous gives you, plus the upstream provider held to zero data retention. |
@@ -29,23 +29,23 @@ Two terms worth defining:
 
 ## It Never Silently Downgrades
 
-If a model cannot serve a call at its tier, the call **fails with a clear message** rather than dropping to a weaker tier and serving you anyway. A guarantee that quietly weakens is worse than no guarantee, so Nito refuses instead. When a call at a stronger tier succeeds, you know it was served at that tier.
+If a model cannot serve a call at its level, the call **fails with a clear message** rather than dropping to a weaker level and serving you anyway. A guarantee that quietly weakens is worse than no guarantee, so Nito refuses instead. When a call at a stronger level succeeds, you know it was served at that level.
 
 ## Anonymous vs Private vs Confidential
 
 - **Anonymous and Private** look the same to you (you just pick the model); the difference is that Private additionally holds the provider to zero data retention.
-- **Confidential** is the first tier that gives you a **proof**: Private holds the provider to a promise, while Confidential gives you an attestation you can verify yourself. See [Verify It Yourself](/privacy/tee-attestation).
+- **Confidential** is the first level that gives you a **proof**: Private holds the provider to a promise, while Confidential gives you an attestation you can verify yourself. See [Verify It Yourself](/privacy/tee-attestation).
 
 ## Related Resources
 
 <CardGroup cols={3}>
-  <Card title="The Four Tiers" icon="layer-group" href="/privacy/tiers">
-    Each tier in depth, and what it protects.
+  <Card title="The Four Levels" icon="layer-group" href="/privacy/levels">
+    Each level in depth, and what it protects.
   </Card>
   <Card title="Model List" icon="list" href="/models/all-models">
-    Which models sit at which tier.
+    Which models sit at which level.
   </Card>
   <Card title="Model ID Convention" icon="id-card" href="/models/model-id-convention">
-    How a model's name shows its tier.
+    How a model's name shows its level.
   </Card>
 </CardGroup>
