@@ -35,12 +35,12 @@ z-ai/glm-5.2:confidential    # the Confidential-tier entry
 These are two separate catalog entries. You do not invent the marker or staple it onto any model; it is part of the name of a model that offers the Confidential level, and you select that entry the same way you select any model. Choosing the `:confidential` entry runs your call in a sealed environment you can verify. The [Model List](/models/all-models) shows which models have a Confidential entry.
 
 <Note>
-The catalog also has an **Encrypted** level, but Encrypted is **not yet available through the plugin**. Today the plugin reaches up to Confidential. See [Encrypted](/privacy/tiers/encrypted).
+The catalog also has an **Encrypted** level, but Encrypted is **not yet available through the plugin**. Today the plugin reaches up to Confidential. See [Encrypted](/privacy/levels/encrypted).
 </Note>
 
 ## The Level Is Part of the Model
 
-This is the key idea: a model's privacy level is a property of the model you choose, not a separate switch you flip. The plain entry and the `:confidential` entry are different models at different levels. Because the level travels with the model, it cannot drift, and it never silently downgrades: if a model cannot serve a call at its level, the call fails with a clear message rather than dropping to something weaker. See [Level Follows the Model](/privacy/tiers).
+This is the key idea: a model's privacy level is a property of the model you choose, not a separate switch you flip. The plain entry and the `:confidential` entry are different models at different levels. Because the level travels with the model, it cannot drift, and it never silently downgrades: if a model cannot serve a call at its level, the call fails with a clear message rather than dropping to something weaker. See [Level Follows the Model](/privacy/levels).
 
 ## Logical Names, Not Backends
 
@@ -54,7 +54,7 @@ If you never set a model, the plugin uses a built-in default so your first call 
 
 - **Browse for exact IDs.** The catalog is discovered live and changes over time, so confirm an ID with [`models`](/commands/choosing-a-model) rather than pasting one from memory.
 - **A `:confidential` marker means the Confidential level.** No marker means the model's own stored level (Anonymous or Private).
-- **The level follows the model.** Pick the entry whose level matches how sensitive the call is. See [The Four Levels](/privacy/tiers).
+- **The level follows the model.** Pick the entry whose level matches how sensitive the call is. See [The Four Levels](/privacy/levels).
 
 ## Related Resources
 
@@ -62,7 +62,7 @@ If you never set a model, the plugin uses a built-in default so your first call 
   <Card title="Model List" icon="list" href="/models/all-models">
     Every current model, grouped by privacy level.
   </Card>
-  <Card title="Privacy Levels at a Glance" icon="lock" href="/models/privacy-tiers-at-a-glance">
+  <Card title="Privacy Levels at a Glance" icon="lock" href="/models/privacy-levels-at-a-glance">
     The four levels, in brief.
   </Card>
   <Card title="Choosing a Model" icon="wand-magic-sparkles" href="/models/choosing-a-model">

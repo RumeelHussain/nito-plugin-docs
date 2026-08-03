@@ -29,11 +29,11 @@ A privacy level describes how protected your prompt and the reply are while the 
 
 | The call is... | Use | Why |
 | --- | :-: | --- |
-| Low-sensitivity, internal | [Anonymous](/privacy/tiers/anonymous) | Lowest overhead, metadata-only retention by default. |
-| Sensitive, needs no provider retention | [Private](/privacy/tiers/private) | The provider retains nothing about the request. |
-| Highly sensitive, needs proof | [Confidential](/privacy/tiers/confidential) | Sealed execution you can verifiably attest. |
+| Low-sensitivity, internal | [Anonymous](/privacy/levels/anonymous) | Lowest overhead, metadata-only retention by default. |
+| Sensitive, needs no provider retention | [Private](/privacy/levels/private) | The provider retains nothing about the request. |
+| Highly sensitive, needs proof | [Confidential](/privacy/levels/confidential) | Sealed execution you can verifiably attest. |
 
-The privacy decision is independent of the model decision: pick the model for the task, then pick the level for the sensitivity. A request that cannot be served at the level you asked for fails rather than quietly downgrading to a weaker one. That refusal is a feature, not a glitch: you never silently lose the protection you asked for. See [Privacy levels](/privacy/tiers) for the full picture.
+The privacy decision is independent of the model decision: pick the model for the task, then pick the level for the sensitivity. A request that cannot be served at the level you asked for fails rather than quietly downgrading to a weaker one. That refusal is a feature, not a glitch: you never silently lose the protection you asked for. See [Privacy levels](/privacy/levels) for the full picture.
 
 ## Choosing Well
 

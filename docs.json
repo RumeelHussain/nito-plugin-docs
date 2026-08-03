@@ -53,7 +53,7 @@
             "pages": [
               "models/choosing-a-model",
               "models/all-models",
-              "models/privacy-tiers-at-a-glance",
+              "models/privacy-levels-at-a-glance",
               "models/model-families",
               "models/model-id-convention",
               "models/pricing"
@@ -77,14 +77,14 @@
           },
           {
             "group": "Privacy Tiers",
-            "root": "privacy/tiers/index",
+            "root": "privacy/levels/index",
             "icon": "layer-group",
             "expanded": true,
             "pages": [
-              "privacy/tiers/anonymous",
-              "privacy/tiers/private",
-              "privacy/tiers/confidential",
-              "privacy/tiers/encrypted"
+              "privacy/levels/anonymous",
+              "privacy/levels/private",
+              "privacy/levels/confidential",
+              "privacy/levels/encrypted"
             ]
           },
           {
@@ -308,5 +308,19 @@
   },
   "navbar": {
     "links": []
-  }
+  },
+  "redirects": [
+    {
+      "source": "/privacy/tiers",
+      "destination": "/privacy/levels"
+    },
+    {
+      "source": "/privacy/tiers/:slug",
+      "destination": "/privacy/levels/:slug"
+    },
+    {
+      "source": "/models/privacy-tiers-at-a-glance",
+      "destination": "/models/privacy-levels-at-a-glance"
+    }
+  ]
 }

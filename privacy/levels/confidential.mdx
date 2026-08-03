@@ -3,13 +3,13 @@ title: "Confidential"
 description: "Sealed execution inside a Trusted Execution Environment, with an attestation you can fetch and verify independently. Supports streaming. Chosen by picking a Confidential-level model."
 ---
 
-Confidential is the third rung of the [privacy ladder](/privacy/tiers) and the first one backed by hardware you can check. It keeps the guarantees of the levels below it and adds the one thing none of them can: your call runs inside a sealed environment the surrounding system cannot read into, and you can obtain a signed statement that proves it did.
+Confidential is the third rung of the [privacy ladder](/privacy/levels) and the first one backed by hardware you can check. It keeps the guarantees of the levels below it and adds the one thing none of them can: your call runs inside a sealed environment the surrounding system cannot read into, and you can obtain a signed statement that proves it did.
 
 ## Runs inside a TEE
 
 Confidential runs your call inside a **Trusted Execution Environment (TEE)**: a sealed environment the surrounding system cannot read into, which produces a signed **attestation** you can verify. New to the concept? Start with the [TEE primer](/privacy/tee-attestation/what-a-tee-is).
 
-That attestation is what separates Confidential from [Private](/privacy/tiers/private). Private holds the provider to zero-data-retention, but you take that on the provider's word (a promise). Confidential gives you an artifact you can independently check (a proof). What Confidential provides is attested and verifiable, and Nito's own verification is a baseline rather than full hardware verification (see below).
+That attestation is what separates Confidential from [Private](/privacy/levels/private). Private holds the provider to zero-data-retention, but you take that on the provider's word (a promise). Confidential gives you an artifact you can independently check (a proof). What Confidential provides is attested and verifiable, and Nito's own verification is a baseline rather than full hardware verification (see below).
 
 ## What Confidential Requires
 
@@ -29,7 +29,7 @@ If the model you choose does not offer Confidential, the call fails rather than 
 
 ## Streaming Works at Confidential
 
-A key reason to choose Confidential over [Encrypted](/privacy/tiers/encrypted): **streaming is supported at Confidential**. You can attest a call and still receive tokens incrementally as they are produced, which a chat interface needs to show output as it arrives. Encrypted's end-to-end encryption, by contrast, is non-streaming by design. So when you need a verifiable execution boundary together with streaming, Confidential is the rung to use.
+A key reason to choose Confidential over [Encrypted](/privacy/levels/encrypted): **streaming is supported at Confidential**. You can attest a call and still receive tokens incrementally as they are produced, which a chat interface needs to show output as it arrives. Encrypted's end-to-end encryption, by contrast, is non-streaming by design. So when you need a verifiable execution boundary together with streaming, Confidential is the rung to use.
 
 ## Fetching and Verifying the Attestation
 
@@ -43,7 +43,7 @@ Use "attested" and "verifiable" for what Confidential gives you: Nito hands you 
 
 - **Fewer backends.** Sealed execution runs on specific backends only, so Confidential reaches fewer models than Anonymous or Private, which can affect latency and availability.
 - **A proof you must use.** The attestation is only worth as much as the verification you do with it. Nito gives you a baseline and the raw evidence; full assurance comes from verifying the evidence yourself.
-- **Streaming kept, encryption not yet added.** Confidential is the strongest level that still streams. If you also need your data encrypted to the sealed environment, that is [Encrypted](/privacy/tiers/encrypted), which is non-streaming.
+- **Streaming kept, encryption not yet added.** Confidential is the strongest level that still streams. If you also need your data encrypted to the sealed environment, that is [Encrypted](/privacy/levels/encrypted), which is non-streaming.
 
 ## When to Choose Confidential
 
@@ -52,15 +52,15 @@ Choose Confidential for sensitive calls where you need to verify that a sealed e
 ## Related Resources
 
 <CardGroup cols={3}>
-  <Card title="Privacy Levels in Depth" icon="square-list" href="/privacy/tiers">
+  <Card title="Privacy Levels in Depth" icon="square-list" href="/privacy/levels">
     The four privacy levels in depth, and how each one is chosen.
   </Card>
 
-  <Card title="Private Level" icon="lock-a" href="/privacy/tiers/private">
+  <Card title="Private Level" icon="lock-a" href="/privacy/levels/private">
     Models served under an enforced zero-data-retention requirement.
   </Card>
 
-  <Card title="Encrypted Level" icon="binary-lock" href="/privacy/tiers/encrypted">
+  <Card title="Encrypted Level" icon="binary-lock" href="/privacy/levels/encrypted">
     The top level: client-side encryption to the sealed environment.
   </Card>
 

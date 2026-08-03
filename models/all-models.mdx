@@ -7,7 +7,7 @@ mode: "wide"
 The models you can reach through the plugin, grouped by privacy level. This is a **snapshot**; the catalog is discovered live and changes over time, so use [`models`](/commands/choosing-a-model) for the authoritative list on your account.
 
 <Note>
-Snapshot of **2026-07-31**. **Price /1M** is USD per one million tokens, shown as **input · output**. The **privacy level** is shown as its own section, because [the level follows the model you choose](/privacy/tiers). See [Pricing](/models/pricing) for how cost is structured.
+Snapshot of **2026-07-31**. **Price /1M** is USD per one million tokens, shown as **input · output**. The **privacy level** is shown as its own section, because [the level follows the model you choose](/privacy/levels). See [Pricing](/models/pricing) for how cost is structured.
 </Note>
 
 Capabilities in the table:
@@ -15,11 +15,11 @@ Capabilities in the table:
 - **reasoning** step-by-step thinking. See [Reasoning](/features/reasoning).
 - **vision** image input. See [Image Input](/features/multimodal/image-input).
 - **web** web search and fetch. See [Web Search](/features/server-side-tools/web-search).
-- **attestable** supports a verifiable attestation. See [The Four Levels](/privacy/tiers).
+- **attestable** supports a verifiable attestation. See [The Four Levels](/privacy/levels).
 
 ## Anonymous (19 models)
 
-Widest choice, metadata-only retention. See [Anonymous](/privacy/tiers/anonymous).
+Widest choice, metadata-only retention. See [Anonymous](/privacy/levels/anonymous).
 
 | No. | Model ID | Context | Price /1M | Capabilities |
 | :-: | :-- | :-: | :-: | :-- |
@@ -45,7 +45,7 @@ Widest choice, metadata-only retention. See [Anonymous](/privacy/tiers/anonymous
 
 ## Private (9 models)
 
-Everything Anonymous gives you, plus the upstream provider held to zero data retention. See [Private](/privacy/tiers/private).
+Everything Anonymous gives you, plus the upstream provider held to zero data retention. See [Private](/privacy/levels/private).
 
 | No. | Model ID | Context | Price /1M | Capabilities |
 | :-: | :-- | :-: | :-: | :-- |
@@ -61,7 +61,7 @@ Everything Anonymous gives you, plus the upstream provider held to zero data ret
 
 ## Confidential (9 models)
 
-Sealed execution with a verifiable attestation. Listed with a `:confidential` marker on the model name. See [Confidential](/privacy/tiers/confidential).
+Sealed execution with a verifiable attestation. Listed with a `:confidential` marker on the model name. See [Confidential](/privacy/levels/confidential).
 
 | No. | Model ID | Context | Price /1M | Capabilities |
 | :-: | :-- | :-: | :-: | :-- |
@@ -77,7 +77,7 @@ Sealed execution with a verifiable attestation. Listed with a `:confidential` ma
 
 ## Encrypted (9 models)
 
-Client-side encryption to the sealed environment, the strongest level. Listed with an `:encrypted` marker on the model name. See [Encrypted](/privacy/tiers/encrypted).
+Client-side encryption to the sealed environment, the strongest level. Listed with an `:encrypted` marker on the model name. See [Encrypted](/privacy/levels/encrypted).
 
 | No. | Model ID | Context | Price /1M | Capabilities |
 | :-: | :-- | :-: | :-: | :-- |

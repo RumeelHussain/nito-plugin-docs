@@ -3,7 +3,7 @@ title: "Anonymous"
 description: "The lightest privacy level and the default. Standard routing with metadata-only retention, on the broadest set of models."
 ---
 
-Anonymous is the first rung of the [privacy ladder](/privacy/tiers) and the one most calls use. It is the default level for every provider. It is the right choice for low-sensitivity work where you want the widest model selection and the least overhead, and where you do not need a proof that a specific sealed environment ran your call.
+Anonymous is the first rung of the [privacy ladder](/privacy/levels) and the one most calls use. It is the default level for every provider. It is the right choice for low-sensitivity work where you want the widest model selection and the least overhead, and where you do not need a proof that a specific sealed environment ran your call.
 
 ## What Anonymous Is
 
@@ -15,13 +15,13 @@ Because Anonymous is the default level across providers, it is also the broadest
 
 The guarantee at Anonymous is **metadata-only retention by default**. Nito keeps operational metadata about the call, not your prompt or the model's reply. Prompts, completions, reasoning, tool payloads, and attachment contents are never persisted, and responses are not stored. Where a chat history exists, it is stored on your side, not by Nito.
 
-What Anonymous does **not** carry is any attestation. By design, an Anonymous model carries no attestation, no sealed-execution provider, and no encryption. So Anonymous gives you a sound default retention posture, but no hardware-backed proof of where or how your call ran. If you need that proof, you climb to [Confidential](/privacy/tiers/confidential). If you need the upstream provider held to no retention at all, you move to [Private](/privacy/tiers/private).
+What Anonymous does **not** carry is any attestation. By design, an Anonymous model carries no attestation, no sealed-execution provider, and no encryption. So Anonymous gives you a sound default retention posture, but no hardware-backed proof of where or how your call ran. If you need that proof, you climb to [Confidential](/privacy/levels/confidential). If you need the upstream provider held to no retention at all, you move to [Private](/privacy/levels/private).
 
 ## How to Select Anonymous
 
 You select Anonymous by picking a model whose level is Anonymous. There is no privacy flag on your command: the level follows the model. Browse the catalog with the `models` command to see each model's privacy reach, then set the one you want with `model` or `--model`.
 
-If a model's level is Private instead, picking it lands you in [Private](/privacy/tiers/private), because the model's own level decides which of the two you get. A model's privacy reach is shown when you browse, so you can confirm the level before you set it.
+If a model's level is Private instead, picking it lands you in [Private](/privacy/levels/private), because the model's own level decides which of the two you get. A model's privacy reach is shown when you browse, so you can confirm the level before you set it.
 
 ## Trade-offs
 
@@ -44,15 +44,15 @@ Reach for Anonymous when the request is low-sensitivity and you want speed, choi
     Browse models and set the one you want.
   </Card>
 
-  <Card title="Privacy Levels in Depth" icon="cubes-stacked" href="/privacy/tiers">
+  <Card title="Privacy Levels in Depth" icon="cubes-stacked" href="/privacy/levels">
     The four privacy levels in depth, and how the level follows the model.
   </Card>
 
-  <Card title="Private Level" icon="phone-circle" href="/privacy/tiers/private">
+  <Card title="Private Level" icon="phone-circle" href="/privacy/levels/private">
     Privately served models with the upstream provider held to zero data retention.<br />
   </Card>
 
-  <Card title="Confidential Level" icon="phone-circle" href="/privacy/tiers/confidential">
+  <Card title="Confidential Level" icon="phone-circle" href="/privacy/levels/confidential">
     Sealed execution with an attestation you can fetch and verify.
   </Card>
 
