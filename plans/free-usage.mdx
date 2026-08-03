@@ -7,7 +7,7 @@ You can use the plugin without a paid plan. Free accounts get a monthly allowanc
 
 ## The Allowance
 
-Free accounts get **10 requests per UTC calendar month**. The allowance is shared, so a request from Claude Code and a request from Codex draw from the same pool.
+Free accounts get **10 requests per UTC calendar month**: an [`ask`](/commands/ask-and-continue) or an inline [`private`](/commands/private) question, on a set of **select models**. The allowance is shared, so a request from Claude Code and a request from Codex draw from the same pool.
 
 <Note>
 Your remaining count and the exact reset time are on your [status card](/plans/checking-usage). That card is the live source; nothing else is.
@@ -15,7 +15,7 @@ Your remaining count and the exact reset time are on your [status card](/plans/c
 
 ## What Counts as a Request
 
-A request is a call that reaches a model. An [`ask`](/commands/ask-and-continue) and a [`private`](/commands/private) question each count once.
+A request is an [`ask`](/commands/ask-and-continue) or an inline [`private`](/commands/private) question that reaches one of the select free-tier models. Each counts once. Full [sessions](/commands/session) are not part of the free allowance.
 
 Commands that do not call a model do not count. Browsing the catalog with [`models`](/commands/choosing-a-model), checking [`status`](/commands/status-and-account), setting a default with `model`, and opening the [`help`](/commands/command-index) menu are all free and unmetered.
 
